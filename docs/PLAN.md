@@ -2,7 +2,9 @@
 
 A spelling and grammar web app for Year 1 to Year 6 (ages 5 to 11), built from the *Weekly Vocabulary Tests: Y1 to Y6* lists. Parents install it on a phone, tablet or computer. There's no login, no account and no data leaves the device.
 
-The playable mockup is in [`mockup/`](../mockup). Open `mockup/index.html` in a browser, or see the preview link in the README.
+The playable mockup is in [`mockup/`](../mockup). Open `mockup/index.html` in a browser, or see the preview link in the README. It's built mobile-first: on a phone it works like an app, with a bottom tab bar and full-screen games.
+
+**Version 2 of this plan** adds ideas borrowed from Times Tables Rock Stars (section 6) and a dedicated mobile version (section 10).
 
 ---
 
@@ -89,6 +91,15 @@ The parent can move the current week or year at any time in the Grown-ups area, 
 | **Homophone Hero** | Homophone weeks | A sentence with a gap; pick *their / there / they're*. A wrong answer shows how the other word is used | Grammar in context, which is where homophones are learned |
 | **Friday Test** | All | Dictation with the on-screen keyboard. Marked at the end with a gentle letter-by-letter check | The real outcome measure, matching the paper test |
 
+### Added in version 2
+
+| Mode | Years | How it plays | Why it works |
+|---|---|---|---|
+| **Smart practice** | All | 10 words picked across every unlocked week, weighted towards words the child gets wrong or hasn't tried. Mixes Spot the Spelling, Missing Letters and Word Jumble | Adaptive practice. Words come back until they're secure, not just in the week they were taught |
+| **Speed round** | Y2–6 best | 60 seconds: tap the correct spelling from 3, as many times as possible. Sets the child's **Speller status** | Builds instant recognition of the correct spelling. A personal-best target is very motivating |
+| **Bubble Battle** | All | A 60-second race against 3 computer rivals who play at about the child's speed. Live race lanes show positions | The thrill of live competition, with no strangers and no internet needed |
+| **Word map** | All | A heat map with one square per word for the whole year, coloured secure, getting there, tricky or not tried. Tap a square to hear the word | Children see their progress at a glance, and it leads straight into "Practise my tricky words" |
+
 ### More ideas for later
 
 | Idea | Years | What it is |
@@ -101,7 +112,8 @@ The parent can move the current week or year at any time in the Grown-ups area, 
 | **Speedy Burst** | Y4–6 | Timed version of Spot the Spelling against the child's own best time. Off by default, never compared with others |
 | **Boss Battle** | All | A Friday test framed as a friendly monster that loses a health bar for each right word |
 | **Trace It** | Y1 | Trace letters with a finger to build handwriting and letter formation |
-| **Two-Player Pass and Play** | All | Siblings take turns on one device. Cooperative, not competitive |
+| **Two-Player Pass and Play** | All | Siblings take turns on one device, as a duel version of Bubble Battle |
+| **Seasonal events** | All | A themed fortnight (for example "Spooky Spellings") with a special sticker and hat. Content ships with app updates, so no server is needed |
 | **Word of the Day** | Y4–6 | One subject word (*photosynthesis*, *democracy*) with meaning, sentence and a quick quiz. Builds vocabulary, not only spelling |
 | **Story Time** | Y1–3 | A short illustrated story using the week's words. Tap a word to hear it |
 
@@ -109,9 +121,27 @@ The parent can move the current week or year at any time in the Grown-ups area, 
 
 ## 6. Gamification
 
-**What the mockup does**
+### Ideas borrowed from Times Tables Rock Stars
+
+Times Tables Rock Stars (TTRS) is the times-tables app many UK primary schools use. Families will recognise how it works, and children are already motivated by it. We borrow its **mechanics**, not its rock-music theme, names or art. Vocabursters keeps its own bubble world and characters.
+
+| TTRS idea | Vocabursters version | Notes |
+|---|---|---|
+| Speed test that sets a "Rock Status" title | **Speed round** sets a **Speller status**: Bubble Blower → Fizzer → Popper → Splasher → Burster → Supersonic → Word Wizard → Spelling Legend | Based on seconds per right answer in 60 seconds. The next level always shows how many right answers it needs |
+| Certificates for reaching a new status | **Certificate** card on level-up, kept in the Me tab | The full app can print them from the parent zone |
+| Coins per right answer, spent on avatar items | **Coins** (1 per right answer, bonuses for tests, personal bests and battles), spent in the **shop** on hats, glasses, extras and backgrounds for the Burster pet | No real money, ever. Buying needs two taps so children don't spend by accident |
+| Heat maps of each fact for children and teachers | **Word map** heat map in the child's app and the parent zone | Tap a square to hear the word |
+| Live multiplayer games and leaderboards | **Bubble Battle** against computer rivals, plus a **family leaderboard** of players on the same device (coins this week, resets on Monday) | No online play with strangers. That keeps the no-login, no-data promise and the Children's Code simple |
+| Questions that adapt to each child | **Smart practice** picks words from the child's own history | Uses the same per-word box as bounce-back words |
+| Apps for phones and tablets | **Mobile version** (section 10) | Installable web app now. App-store versions via Capacitor are optional |
+
+**What we do differently from TTRS:** there are no accounts or school logins, nothing about the child goes online, and timed games can be switched off by a parent. Speed suits some children and stresses others, so all the learning works without a timer.
+
+### What the mockup does
 
 - **Stars:** 1 to 3 per game per week, based on the share of words right first time. Finishing always earns at least 1 star.
+- **Coins and the shop:** see the table above. 14 items in 4 slots, from 15 to 120 coins.
+- **Speller status, certificates and Bubble Battle:** see the table above.
 - **Burster pet:** a creature that hatches from an egg and grows through 5 stages as stars add up. New colours unlock along the way.
 - **Sticker book:** 36 stickers per year, one per week, earned by finishing the Friday test. Each year has a theme (animals, sea, space, nature, food, sport).
 - **Spelling trail:** 36 stops per year showing scores and stars, with "This week" highlighted.
@@ -121,10 +151,10 @@ The parent can move the current week or year at any time in the Grown-ups area, 
 **What we avoid on purpose**
 
 - **Streaks that punish a missed day.** They cause guilt and nagging. The weekly goal resets quietly.
-- **Leaderboards against other children.** Children compare with their own past scores only.
+- **Leaderboards against children outside the family.** Children compare with their own past scores, computer rivals and, if they choose, brothers and sisters on the same device.
 - **Variable-reward loot boxes**, timers that pressure, "come back or your pet will be sad" notifications, and anything bought with money.
 - **Harsh failure sounds or red crosses on a first try.** Wrong answers get a soft sound and "Nearly! Try again".
-- **Rewards for speed over accuracy.**
+- **Rewards for speed over accuracy in the learning games.** Speed only counts in the optional Speed round and Bubble Battle, and a parent can turn both off in Settings ("Timed games").
 
 ---
 
@@ -201,8 +231,11 @@ device state    { profiles: [ { id, name, avatar, year, week, kb, pet,
                                 stars: { "<y>-<w>": { learn, burst, missing, spot, scramble, homophone, test } },
                                 tests: [ { y, w, score, total, missed[], date } ],
                                 words: { "<word>": { r, x, box, last } },   // right, wrong, Leitner box
-                                review: [ "<word>" ], goal: { key, done } } ],
-                  settings: { font, size, rate, voice, sfx, calm, breakMins, capitals } }
+                                review: [ "<word>" ], goal: { key, done },
+                                coins, owned: [ "<itemId>" ], wear: { hat, eyes, neck, bg },
+                                speed: { best, top, runs: [ { date, n, avg } ], reached: { "<statusIndex>": date } },
+                                battles: { played, won }, wk: { key, coins } } ],   // wk = coins this week, for the family board
+                  settings: { font, size, rate, voice, sfx, calm, breakMins, capitals, timed } }
 ```
 
 **Spelling engine** (in the mockup, to be ported to TypeScript with unit tests)
@@ -217,7 +250,51 @@ device state    { profiles: [ { id, name, avatar, year, week, kb, pet,
 
 ---
 
-## 10. How parents install it
+## 10. The mobile version
+
+Most children will use Vocabursters on a parent's phone or a family tablet, so the app is designed for phones first. There are two ways to deliver it, and the first is already built.
+
+### A. Installable web app (built in the mockup; recommended for launch)
+
+The same code gives a different layout by screen size:
+
+| | Phone (under 760px wide) | Tablet and computer |
+|---|---|---|
+| Navigation | **Bottom tab bar** (Home, Practise, Battle, Word map, Me) within thumb reach, clear of the iPhone home bar | The same five tabs as a floating bar at the top |
+| Games | **Full screen**: no tab bar or header, just the progress bar and a ✕ button | Centred, up to 760px wide |
+| Keyboard | **Docked to the bottom of the screen** like a real phone keyboard, with the Check/Next button above it | Under the question |
+| Feedback | Sounds plus a **short vibration** for right and wrong answers (Android; iPhone browsers don't allow vibration) | Sounds |
+
+Other mobile details:
+- Safe areas for notches and the home bar.
+- No double-tap zoom on game buttons.
+- Pull-to-refresh is disabled so a swipe can't reload mid-game.
+- Pop-up messages sit above the tab bar.
+- The browser scrolls focused buttons clear of the tab bar.
+- Dark mode follows the phone.
+- Pinch-zoom still works for accessibility.
+
+It installs from the browser (section 11) and works offline. Tested at iPhone size (390 × 844), iPad size (820 × 1180) and desktop size, in light and dark mode.
+
+### B. App Store and Google Play versions (optional, Phase 2)
+
+Some parents expect to find an app in the store, as they do for TTRS. The repo now includes a **Capacitor** setup (`package.json`, `capacitor.config.json`) that wraps the same web app in native iOS and Android shells. No rewrite is needed.
+
+- `npm install`, then `npm run android` or `npm run ios`. This needs Android Studio, or Xcode on a Mac.
+- `npx cap add android` was run here and generates a working Android project with the app inside. It has **not** been compiled or run on a device, because this environment has no Android SDK.
+- **Speech on Android:** Android's built-in web view doesn't support the browser speech API the mockup uses. The Android app needs recorded audio (planned anyway) or a native text-to-speech plugin such as `@capacitor-community/text-to-speech`. iOS does support it.
+- **Fonts and audio** must be bundled in the app so it works offline; the mockup loads fonts from Google.
+- **Store rules for children's apps:**
+  - Apple's *Kids Category*: no third-party analytics or adverts, and a parental gate before any external link or purchase.
+  - Google Play's *Families Policy* (and optionally *Teacher Approved*).
+  - The no-data design already meets the hardest parts of both.
+- **Costs:** the Apple Developer Program is $99 a year and Google Play has a one-off $25 fee. Every update goes through store review, which the web app avoids.
+
+**Recommendation:** launch as the installable web app. Add store versions in Phase 2 if parents ask for them, once recorded audio removes the Android speech problem.
+
+---
+
+## 11. How parents install it
 
 1. Go to the web address (a short, memorable domain, plus a QR code on a printable flyer).
 2. **iPhone/iPad:** Safari → Share → *Add to Home Screen*. **Android:** Chrome → ⋮ → *Install app*. **Computer:** the install icon in the address bar. The app shows these steps, and on Android and computers it can show an **Install** button.
@@ -226,7 +303,7 @@ device state    { profiles: [ { id, name, avatar, year, week, kb, pet,
 
 ---
 
-## 11. Content pipeline
+## 12. Content pipeline
 
 1. `data/words.json` is the single source of truth (already done).
 2. Add an example sentence for **every** word (182 of 1,338 done, covering all homophone and apostrophe weeks). Rules: 6 to 12 words, the word appears exactly once, the vocabulary suits the year, UK spelling, culturally neutral, no brands.
@@ -238,18 +315,18 @@ device state    { profiles: [ { id, name, avatar, year, week, kb, pet,
 
 ---
 
-## 12. Roadmap
+## 13. Roadmap
 
 | Phase | What | Rough size |
 |---|---|---|
-| **0. Mockup** (done) | Clickable prototype with every game working on real data for all 6 years, the parent zone, stickers and the pet | — |
-| **1. MVP** | Port to Vite + TypeScript. IndexedDB storage. Workbox offline. Self-hosted fonts. Sentences for every word. Unit tests for the spelling engine. Accessibility audit. Hosting and domain. Privacy notice | 4–6 weeks for one developer |
-| **2. Quality** | Recorded British voice. Illustrated avatars and pet (commissioned, original). Teacher content review. Word Builder and Rule Sorter. Spaced review of earlier weeks | 4–6 weeks |
+| **0. Mockup** (done) | Clickable prototype with every game working on real data for all 6 years, the parent zone, stickers and the pet. Version 2 adds coins and shop, Speller status, Speed round, Bubble Battle, Word map, Smart practice and the mobile layout | — |
+| **1. MVP** | Port to Vite + TypeScript. IndexedDB storage. Workbox offline. Self-hosted fonts. Sentences for every word. Unit tests for the spelling engine. Accessibility audit. Testing on real phones (cheap Android, older iPhone, iPad). Hosting and domain. Privacy notice | 5–7 weeks for one developer |
+| **2. Quality** | Recorded British voice. Illustrated avatars, pet and shop items (commissioned, original). Teacher content review. Word Builder and Rule Sorter. Spaced review of earlier weeks. **App Store and Google Play versions** via Capacitor, if wanted | 6–8 weeks |
 | **3. Delight** | Sentence Doctor, Word Class Detective, Apostrophe Factory, Boss Battle, Trace It. More pet accessories. Optional backup by QR code between devices | Ongoing |
 
 ---
 
-## 13. Measuring success without tracking
+## 14. Measuring success without tracking
 
 There are no analytics, so success shows up on the device and in conversations with families:
 
@@ -259,7 +336,7 @@ There are no analytics, so success shows up on the device and in conversations w
 
 ---
 
-## 14. Decisions for you
+## 15. Decisions for you
 
 1. **Name and web address.** "Vocabursters" is used as the working name.
 2. **Voice:** pay for recorded audio in Phase 2 (recommended), or rely on device voices.
@@ -267,11 +344,14 @@ There are no analytics, so success shows up on the device and in conversations w
 4. **Free, or a one-off paid version** for parents. Paid would need a purchase flow outside the child screens and a grown-ups check.
 5. **Who reviews the content:** a teacher you know, or a paid reviewer.
 6. **The Y6 W21 word list** (see section 2).
+7. **App stores:** web app only at launch (recommended), or App Store and Google Play versions too (section 10).
+8. **Timed games on or off by default.** The mockup has them on, and a parent can switch them off.
+9. **Family leaderboard:** keep it, or make it opt-in per player. Some families prefer siblings not to compare.
 
 ---
 
-## 15. About the mockup
+## 16. About the mockup
 
-**Working:** player profiles; the 36-week trail for each year with locking; all 7 game modes on the real word lists for every week of every year; stars, the pet, the sticker book and the weekly goal; bounce-back words; reading aloud with the device voice; sound effects; the custom keyboard (and a physical keyboard); the parent zone (progress, players, settings, printable test, install steps, backup/restore); brain-break reminders; light and dark mode; calm mode; font and text-size options; installable PWA with an offline service worker (`mockup/index.html`).
+**Working:** the phone layout (bottom tabs, full-screen games, docked keyboard, vibration) and tablet/desktop layout (top tabs); player profiles; the 36-week trail for each year with locking; all 7 weekly game modes on the real word lists for every week of every year; Smart practice; the Speed round with Speller status and certificates; Bubble Battle against computer rivals; the Word map heat map; coins and a 14-item shop; the family leaderboard; stars, the pet, the sticker book and the weekly goal; bounce-back words; reading aloud with the device voice; sound effects; the custom keyboard (and a physical keyboard); the parent zone (progress, players, settings, printable test, install steps, backup/restore); brain-break reminders; light and dark mode; calm mode; font and text-size options; installable PWA with an offline service worker (`mockup/index.html`).
 
-**Simulated or simplified:** the example player "Mia" has made-up history so the screens aren't empty (delete her in Grown-ups → Players). Emoji stand in for commissioned illustrations. Only 182 of the 1,338 words have example sentences (all words in homophone and apostrophe weeks, plus Year 1 weeks 1–4). The grown-ups check is basic. Printing works from `mockup/index.html` but not inside the hosted preview, which blocks printing.
+**Simulated or simplified:** the example players "Mia" (Year 3) and "Leo" (Year 1) have made-up history so the screens aren't empty (delete them in Grown-ups → Players). Bubble Battle rivals are computer players, not real children. The native app shells are set up but not compiled. Emoji stand in for commissioned illustrations. Only 182 of the 1,338 words have example sentences (all words in homophone and apostrophe weeks, plus Year 1 weeks 1–4). The grown-ups check is basic. Printing works from `mockup/index.html` but not inside the hosted preview, which blocks printing.

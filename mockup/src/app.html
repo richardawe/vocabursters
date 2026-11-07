@@ -247,11 +247,103 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 .overlay { position: fixed; inset: 0; background: color-mix(in srgb, var(--ink) 45%, transparent); display: grid; place-items: center; padding: 16px; z-index: 50; }
 .modal { background: var(--surface); border-radius: 24px; border: 3px solid var(--ink); padding: 24px; width: min(100%, 420px); display: grid; gap: 14px; text-align: center; }
-.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--ground); padding: 12px 20px; border-radius: 14px; font-weight: 700; z-index: 60; max-width: calc(100% - 32px); text-align: center; }
+.toast { pointer-events: none; position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--ground); padding: 12px 20px; border-radius: 14px; font-weight: 700; z-index: 60; max-width: calc(100% - 32px); text-align: center; }
 .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 40; }
 .confetti i { position: absolute; top: -20px; width: 10px; height: 14px; border-radius: 3px; animation: fall 1.8s ease-in forwards; }
 @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+
+/* App shell: bottom tab bar on phones, top pill nav on tablets and computers */
+body { touch-action: manipulation; overscroll-behavior-y: none; }
+.shell.tabbed { padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)); }
+.shell.full { padding-block: 10px 28px; }
+.tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--surface); border-top: 2px solid var(--ink); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); padding-left: max(6px, env(safe-area-inset-left, 0px)); padding-right: max(6px, env(safe-area-inset-right, 0px)); }
+.tab { display: grid; justify-items: center; align-content: center; gap: 2px; min-height: 58px; border: 0; background: none; border-radius: 14px; font-family: var(--font-display); font-weight: 600; font-size: .78rem; color: var(--ink-soft); cursor: pointer; padding: 4px 2px; }
+.tab svg { width: 26px; height: 26px; }
+.tab[aria-current="page"] { color: var(--ink); background: var(--sun-soft); }
+@media (min-width: 760px) {
+  .tabbar { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 10px); bottom: auto; width: fit-content; margin: 10px auto 0; border: 2px solid var(--ink); border-radius: 20px; grid-template-columns: repeat(5, auto); gap: 4px; padding: 6px; box-shadow: 0 4px 0 var(--ink); }
+  .tab { grid-auto-flow: column; gap: 8px; font-size: 1rem; padding: 6px 16px; min-height: 50px; }
+  .tab svg { width: 22px; height: 22px; }
+  .shell.tabbed { padding-bottom: 48px; }
+}
+.dock { display: grid; justify-items: center; gap: 12px; width: 100%; }
+@media (max-width: 759px) {
+  html:has(.tabbar) { scroll-padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }
+  .shell.full:has(.dock) { min-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); grid-template-rows: auto auto 1fr; padding-bottom: 0; }
+  .stage:has(> .dock) { display: flex; flex-direction: column; align-items: center; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .stage > .dock { margin-top: auto; }
+  body:has(.tabbar) .toast { bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
+  .dock { position: sticky; bottom: 0; z-index: 5; background: var(--surface); padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 2px solid var(--line); }
+  .stage { padding-bottom: 0; }
+  .stage > :last-child:not(.dock) { margin-bottom: 18px; }
+  h1 { font-size: 1.75rem; }
+}
+.stage { -webkit-user-select: none; user-select: none; }
+.coin { width: 1.15em; height: 1.15em; vertical-align: -.2em; flex: none; }
+.chip.coin-chip { border-color: var(--sun); }
+.hero-card { display: grid; gap: 6px; text-align: left; padding: 18px; border-radius: 22px; border: 3px solid var(--ink); background: var(--sun-soft); box-shadow: 0 5px 0 var(--ink); cursor: pointer; }
+.hero-card:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--ink); }
+.hero-card .pattern { font-family: var(--font-word); font-size: 1.6rem; }
+.hero-card .btn { justify-self: start; pointer-events: none; }
+.mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.mini-grid > * { text-align: left; }
+button.panel { cursor: pointer; font: inherit; color: inherit; }
+.status { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--ink); color: var(--ground); font-family: var(--font-display); font-weight: 800; border: 0; }
+.status.none { background: var(--surface-2); color: var(--ink-soft); }
+button.status { cursor: pointer; }
+.cert { border: 6px double var(--sun); background: var(--surface); border-radius: 18px; padding: 20px; text-align: center; display: grid; gap: 4px; width: min(100%, 420px); }
+.cert .cert-status { font-family: var(--font-display); font-weight: 800; font-size: 2rem; color: var(--coral); }
+.coins-won { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; display: flex; gap: 8px; align-items: center; }
+.options.three { grid-template-columns: 1fr; }
+.timer i { background: var(--sky); transition: width .1s linear; }
+.timer i.low { background: var(--coral); }
+.countdown .count { font-family: var(--font-display); font-weight: 800; font-size: 7rem; line-height: 1; color: var(--coral); }
+.race { display: grid; gap: 6px; width: 100%; }
+.lane { display: grid; grid-template-columns: 40px 1fr 34px; gap: 8px; align-items: center; }
+.lane .track { position: relative; height: 26px; background: var(--surface-2); border-radius: 999px; border: 2px solid var(--line); overflow: hidden; }
+.lane .fill { position: absolute; inset: 0 auto 0 0; background: var(--sky-soft); border-right: 3px solid var(--sky); transition: width .3s; }
+.lane.you .track { border-color: var(--ink); }
+.lane.you .fill { background: var(--sun-soft); border-color: var(--sun); }
+.lane .nm { position: relative; padding-left: 10px; font-size: .8rem; font-weight: 700; line-height: 22px; }
+.lane .sc, .pod .sc { font-family: var(--font-display); font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; }
+.pet-lane, .pet-rival { width: 40px; height: 40px; }
+.pet-rival { width: 72px; height: 72px; }
+.rivals { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.rival { display: grid; justify-items: center; gap: 2px; }
+.podium { display: grid; gap: 8px; width: min(100%, 420px); }
+.pod { display: grid; grid-template-columns: 28px 40px 1fr auto; gap: 10px; align-items: center; padding: 8px 12px; border-radius: 14px; background: var(--surface-2); text-align: left; }
+.pod.you { background: var(--sun-soft); outline: 2px solid var(--sun); }
+.pod .pl, .board .pl { font-family: var(--font-display); font-weight: 800; }
+.board { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.board li { display: grid; grid-template-columns: 24px 36px 1fr auto; gap: 10px; align-items: center; padding: 8px 12px; border-radius: 12px; background: var(--surface-2); }
+.board li.you { background: var(--sun-soft); }
+.board .av { font-size: 1.5rem; }
+.battle-hero { display: grid; gap: 14px; justify-items: center; text-align: center; padding: 22px 16px; border-radius: 24px; border: 3px solid var(--ink); background: radial-gradient(circle at 50% 0%, var(--sky-soft), var(--surface)); }
+.heat { display: grid; gap: 6px; }
+.heat-row { display: grid; grid-template-columns: 38px 1fr; gap: 6px; align-items: center; }
+.heat-row .wk { font-size: .75rem; font-weight: 700; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.heat-cells { display: flex; flex-wrap: wrap; gap: 4px; }
+.hc { width: 26px; height: 26px; border-radius: 7px; border: 2px solid var(--line); background: var(--surface-2); cursor: pointer; padding: 0; display: inline-block; }
+.hc.h1 { background: var(--coral); border-color: var(--coral); }
+.hc.h2 { background: var(--sun); border-color: var(--sun); }
+.hc.h3 { background: var(--leaf); border-color: var(--leaf); }
+.hc.sel { outline: 3px solid var(--ink); outline-offset: 1px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: .9rem; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend .hc { width: 18px; height: 18px; cursor: default; }
+.hinfo { min-height: 1.6em; font-weight: 700; }
+.me-card { grid-template-columns: auto 1fr; align-items: center; gap: 18px; }
+.me-pet { width: 180px; max-width: 100%; }
+.me-pet .pet { width: 100%; height: auto; }
+@media (max-width: 520px) { .me-card { grid-template-columns: 1fr; justify-items: center; text-align: center; } .me-card .row { justify-content: center; } }
+.shop { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.item { display: grid; justify-items: center; gap: 4px; padding: 10px; border-radius: 18px; border: 2px solid var(--line); background: var(--surface); cursor: pointer; }
+.item svg { width: 92px; height: 92px; }
+.item.wearing { border-color: var(--leaf); background: var(--leaf-soft); }
+.item.asking { border-color: var(--ink); background: var(--sun-soft); }
+.item .price { font-weight: 700; display: inline-flex; gap: 4px; align-items: center; font-size: .95rem; }
 
 @media print {
   body { background: #fff; }
@@ -434,15 +526,23 @@ function misspellings(word, n, avoid) {
 
 /* ---------- state ---------- */
 const KEY = "vocabursters.v1";
-const DEFAULT_SETTINGS = { font: "andika", size: 1, rate: 0.85, voice: "", sfx: true, calm: false, breakMins: 20, capitals: "gentle" };
+const DEFAULT_SETTINGS = { font: "andika", size: 1, rate: 0.85, voice: "", sfx: true, calm: false, breakMins: 20, capitals: "gentle", timed: true };
 let S;
-function newProfile(name, avatar, year, week) {
-  return { id: "p" + Date.now().toString(36) + rand(1e5), name, avatar, year, week, pet: "sun", stars: {}, tests: [], words: {}, review: [], kb: year <= 2 ? "abc" : "qwerty", goal: { key: weekKey(), done: 0 }, example: false, created: Date.now() };
+function upgrade(p) {
+  p.coins = p.coins || 0; p.owned = p.owned || []; p.wear = p.wear || {};
+  p.speed = p.speed || { best: null, top: -1, runs: [], reached: {} };
+  p.battles = p.battles || { played: 0, won: 0 };
+  if (!p.wk || p.wk.key !== weekKey()) p.wk = { key: weekKey(), coins: 0 };
+  return p;
 }
+function newProfile(name, avatar, year, week) {
+  return upgrade({ id: "p" + Date.now().toString(36) + rand(1e5), name, avatar, year, week, pet: "sun", stars: {}, tests: [], words: {}, review: [], kb: year <= 2 ? "abc" : "qwerty", goal: { key: weekKey(), done: 0 }, example: false, created: Date.now() });
+}
+function earn(p, n) { if (!n) return; upgrade(p); p.coins += n; p.wk.coins += n; }
 function seed() {
+  const day = 864e5, now = Date.now();
   const p = newProfile("Mia", "🦊", 3, 5);
   p.example = true; p.pet = "leaf";
-  const day = 864e5, now = Date.now();
   p.stars = { "3-1": { learn: 3, burst: 3, spot: 2, test: 3 }, "3-2": { learn: 2, missing: 3, scramble: 2, test: 2 }, "3-3": { burst: 3, spot: 3, missing: 3, test: 3 }, "3-4": { learn: 2, scramble: 1, test: 2 }, "3-5": { burst: 2 } };
   p.tests = [
     { y: 3, w: 1, score: 9, total: 10, missed: ["clothes"], date: now - 28 * day },
@@ -451,12 +551,25 @@ function seed() {
     { y: 3, w: 4, score: 7, total: 10, missed: ["misspell", "misbehave", "reappear"], date: now - 7 * day }
   ];
   p.review = ["misspell", "misbehave", "reappear"];
-  p.words = { clothes: { r: 1, x: 2, box: 2 }, Christmas: { r: 1, x: 2, box: 2 }, parents: { r: 2, x: 1, box: 2 }, misspell: { r: 0, x: 3, box: 1 }, misbehave: { r: 1, x: 2, box: 1 }, reappear: { r: 1, x: 1, box: 1 }, disappear: { r: 3, x: 1, box: 3 } };
+  p.words = { would: { r: 3, x: 0, box: 4 }, who: { r: 3, x: 0, box: 4 }, whole: { r: 2, x: 0, box: 3 }, any: { r: 2, x: 0, box: 3 }, many: { r: 2, x: 0, box: 3 }, busy: { r: 1, x: 1, box: 2 }, people: { r: 2, x: 0, box: 3 }, water: { r: 3, x: 0, box: 4 }, again: { r: 2, x: 0, box: 3 },
+    clothes: { r: 1, x: 2, box: 2 }, half: { r: 2, x: 0, box: 3 }, money: { r: 2, x: 0, box: 3 }, Christmas: { r: 1, x: 2, box: 2 }, parents: { r: 2, x: 1, box: 2 }, beautiful: { r: 1, x: 1, box: 2 }, sugar: { r: 2, x: 0, box: 3 },
+    unhappy: { r: 3, x: 0, box: 4 }, unfair: { r: 2, x: 0, box: 3 }, untidy: { r: 2, x: 0, box: 3 }, disappear: { r: 3, x: 1, box: 3 }, disobey: { r: 1, x: 1, box: 2 }, dislike: { r: 2, x: 0, box: 3 },
+    misspell: { r: 0, x: 3, box: 1 }, misbehave: { r: 1, x: 2, box: 1 }, reappear: { r: 1, x: 1, box: 1 }, mistake: { r: 2, x: 0, box: 3 }, refresh: { r: 2, x: 0, box: 3 }, rebuild: { r: 1, x: 0, box: 2 } };
   p.goal = { key: weekKey(), done: 1 };
-  return { v: 1, profiles: [p], active: null, settings: { ...DEFAULT_SETTINGS } };
+  p.coins = 85; p.owned = ["party", "shades", "bg-bubbles"]; p.wear = { hat: "party", eyes: "shades", bg: "bg-bubbles" };
+  p.speed = { best: 4.3, top: 3, runs: [{ date: now - 3 * day, n: 12, avg: 5 }, { date: now - day, n: 14, avg: 4.3 }], reached: { 0: now - 12 * day, 1: now - 10 * day, 2: now - 6 * day, 3: now - day } };
+  p.battles = { played: 4, won: 1 }; p.wk = { key: weekKey(), coins: 38 };
+  const q = newProfile("Leo", "🐸", 1, 3);
+  q.example = true;
+  q.stars = { "1-1": { burst: 3, test: 3 }, "1-2": { burst: 2, spot: 3, test: 2 }, "1-3": { learn: 2 } };
+  q.tests = [{ y: 1, w: 1, score: 5, total: 5, missed: [], date: now - 9 * day }, { y: 1, w: 2, score: 4, total: 5, missed: ["hen"], date: now - 2 * day }];
+  q.review = ["hen"];
+  q.words = { cat: { r: 3, x: 0, box: 3 }, sit: { r: 2, x: 1, box: 2 }, map: { r: 2, x: 0, box: 2 }, pin: { r: 2, x: 0, box: 2 }, dad: { r: 3, x: 0, box: 4 }, dog: { r: 2, x: 0, box: 2 }, cup: { r: 3, x: 0, box: 2 }, hen: { r: 1, x: 2, box: 1 }, sun: { r: 2, x: 0, box: 2 }, red: { r: 1, x: 1, box: 2 } };
+  q.coins = 24; q.owned = ["bowtie"]; q.wear = { neck: "bowtie" }; q.battles = { played: 1, won: 0 }; q.wk = { key: weekKey(), coins: 24 };
+  return { v: 1, profiles: [p, q], active: null, settings: { ...DEFAULT_SETTINGS } };
 }
 function load() {
-  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && Array.isArray(s.profiles)) { s.settings = { ...DEFAULT_SETTINGS, ...(s.settings || {}) }; return s; } } catch (e) { }
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && Array.isArray(s.profiles)) { s.settings = { ...DEFAULT_SETTINGS, ...(s.settings || {}) }; s.profiles.forEach(upgrade); return s; } } catch (e) { }
   return seed();
 }
 function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }
@@ -467,6 +580,37 @@ const weekData = (y, w) => yearData(y).weeks.find(x => x.week === w);
 const starsOf = (p, y, w) => p.stars[y + "-" + w] || {};
 const totalStars = p => Object.values(p.stars).reduce((a, o) => a + Object.values(o).reduce((b, n) => b + n, 0), 0);
 const petStage = n => PET_STAGES.reduce((s, st, i) => n >= st.need ? i : s, 0);
+const WORD_FOCUS = {};
+DATA.years.forEach(y => y.weeks.forEach(wk => wk.words.forEach(w => { if (!WORD_FOCUS[w]) WORD_FOCUS[w] = wk.focus; })));
+const focusOf = w => R.focus || WORD_FOCUS[w] || "";
+
+/* Speller status: set by the 60-second Speed round (average seconds per right answer) */
+const STATUSES = [
+  { name: "Bubble Blower", under: Infinity }, { name: "Fizzer", under: 8 }, { name: "Popper", under: 6 }, { name: "Splasher", under: 4.5 },
+  { name: "Burster", under: 3.5 }, { name: "Supersonic", under: 2.8 }, { name: "Word Wizard", under: 2.2 }, { name: "Spelling Legend", under: 1.7 }
+];
+function statusOf(p) { const b = p.speed && p.speed.best; if (!b) return null; let s = 0; STATUSES.forEach((x, i) => { if (b < x.under) s = i; }); return s; }
+const statusBadge = p => { const si = statusOf(p); return si === null ? '<span class="status none">No speller status yet</span>' : `<span class="status">⚡ ${STATUSES[si].name}</span>`; };
+function nextStatusHint(p) {
+  const si = statusOf(p);
+  if (si === STATUSES.length - 1) return '<p class="muted small-text">Top status! Keep your speed up.</p>';
+  if (si === null) return '<p class="muted small-text">Get 5 or more right in a Speed round to get your first status.</p>';
+  const nx = STATUSES[si + 1];
+  return `<p class="muted small-text">Get <b>${Math.floor(60 / nx.under) + 1}</b> right in one Speed round to become a <b>${nx.name}</b>.</p>`;
+}
+function poolWords(p) {
+  let words = yearData(p.year).weeks.filter(w => w.week <= p.week).flatMap(w => w.words);
+  if (words.length < 20 && p.year > 1) words = words.concat(yearData(p.year - 1).weeks.flatMap(w => w.words));
+  if (words.length < 15) words = words.concat(yearData(p.year).weeks.filter(w => w.week <= Math.min(36, p.week + 2)).flatMap(w => w.words));
+  return uniq(words);
+}
+function heatLevel(s) { if (!s || !(s.r + s.x)) return 0; if (s.box >= 4 || (s.r >= 2 && s.x === 0)) return 3; if (s.x > s.r || (s.box === 1 && s.x > 0)) return 1; return 2; }
+const HEAT_NAMES = ["Not tried yet", "Tricky", "Getting there", "Secure"];
+const trickyWords = p => Object.keys(p.words).filter(w => heatLevel(p.words[w]) === 1);
+function smartWords(p, n = 10) {
+  return poolWords(p).map(w => { const s = p.words[w]; const pri = !s ? 2.5 : (6 - (s.box || 1)) + (s.x > s.r ? 2 : 0); return { w, k: pri + Math.random() * 1.5 }; })
+    .sort((a, b) => b.k - a.k).slice(0, n).map(x => x.w);
+}
 
 /* ---------- speech + sound ---------- */
 const TTS = { ok: "speechSynthesis" in window, voices: [] };
@@ -498,39 +642,66 @@ function tone(freqs, dur = .1, type = "sine", vol = .07) {
     freqs.forEach((f, i) => { const o = AC.createOscillator(), g = AC.createGain(); o.type = type; o.frequency.value = f; g.gain.setValueAtTime(vol, t + i * dur); g.gain.exponentialRampToValueAtTime(.001, t + i * dur + dur); o.connect(g).connect(AC.destination); o.start(t + i * dur); o.stop(t + i * dur + dur + .02); });
   } catch (e) { }
 }
-const sfx = { pop: () => tone([620, 930], .06), good: () => tone([523, 659, 784], .09), oops: () => tone([330, 280], .11, "triangle", .045), win: () => tone([523, 659, 784, 1047], .12), tap: () => tone([440], .04, "sine", .03) };
+const buzz = pattern => { if (!S.settings.sfx) return; try { navigator.vibrate && navigator.vibrate(pattern); } catch (e) { } };
+const COIN = '<svg class="coin" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="#FFC53D" stroke="#9A6A00" stroke-width="2"/><path d="M10 5.5v9" stroke="#9A6A00" stroke-width="2" stroke-linecap="round"/></svg>';
+const sfx = { pop: () => { tone([620, 930], .06); buzz(8); }, good: () => { tone([523, 659, 784], .09); buzz(15); }, oops: () => { tone([330, 280], .11, "triangle", .045); buzz([30, 40, 30]); }, win: () => tone([523, 659, 784, 1047], .12), tap: () => tone([440], .04, "sine", .03) };
 function announce(t) { const l = $("#live"); l.textContent = ""; setTimeout(() => { l.textContent = t; }, 30); }
 let toastT;
 function toast(msg) { let t = $(".toast"); if (!t) { t = document.createElement("div"); t.className = "toast"; t.setAttribute("role", "status"); document.body.appendChild(t); } t.textContent = msg; clearTimeout(toastT); toastT = setTimeout(() => t.remove(), 2600); }
 const speakBtn = (text, label = "Hear it") => `<button class="speak" data-say="${esc(text)}" aria-label="${esc(label)}">${SPEAKER}</button>`;
 const starRow = (n, max = 3) => `<span class="stars" aria-label="${n} of ${max} stars">${Array.from({ length: max }, (_, i) => `<span class="star-glyph ${i < n ? "" : "off"}">★</span>`).join("")}</span>`;
 
-/* ---------- pet art ---------- */
-function petSVG(stage, color, cls = "pet") {
-  const c = (PET_COLORS.find(x => x.id === color) || PET_COLORS[0]).c, ink = "#17304A";
-  if (stage === 0) return `<svg class="${cls}" viewBox="0 0 200 200" role="img" aria-label="An egg"><ellipse cx="100" cy="112" rx="58" ry="72" fill="${c}" stroke="${ink}" stroke-width="5"/><path d="M58 100l18 12 16-14 16 14 18-12 16 10" fill="none" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/><circle cx="80" cy="70" r="8" fill="#fff" opacity=".7"/></svg>`;
-  const extra = [
-    "",
-    `<path d="M52 150q48 22 96 0l-6 22H58z" fill="#fff" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/>`,
-    `<path d="M40 120q-22-6-20-26M160 120q22-6 20-26" stroke="${ink}" stroke-width="6" fill="none" stroke-linecap="round"/>`,
-    `<path d="M48 110L20 175h60zM152 110l28 65h-60z" fill="#E8463A" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/>`,
-    `<path d="M66 52l10-26 14 18 10-24 10 24 14-18 10 26z" fill="#FFC53D" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/>`
-  ];
-  const size = [0, 46, 54, 58, 60][stage];
-  return `<svg class="${cls}" viewBox="0 0 200 200" role="img" aria-label="Your Burster">${stage >= 3 ? extra[3] : ""}${stage === 2 ? extra[2] : ""}
+/* ---------- pet art + shop items ---------- */
+const INK = "#17304A";
+const st4 = `stroke="${INK}" stroke-width="4" stroke-linejoin="round"`, st3 = `stroke="${INK}" stroke-width="3" stroke-linejoin="round"`;
+const starPts = (cx, cy, r) => Array.from({ length: 10 }, (_, i) => { const a = Math.PI / 5 * i - Math.PI / 2, rr = i % 2 ? r * .45 : r; return (cx + rr * Math.cos(a)).toFixed(1) + "," + (cy + rr * Math.sin(a)).toFixed(1); }).join(" ");
+const ITEMS = [
+  { id: "party", slot: "hat", name: "Party hat", price: 15 }, { id: "bobble", slot: "hat", name: "Bobble hat", price: 30 },
+  { id: "tophat", slot: "hat", name: "Top hat", price: 60 }, { id: "wizard", slot: "hat", name: "Wizard hat", price: 120 },
+  { id: "shades", slot: "eyes", name: "Sunglasses", price: 20 }, { id: "specs", slot: "eyes", name: "Round specs", price: 25 }, { id: "stars", slot: "eyes", name: "Star glasses", price: 50 },
+  { id: "bowtie", slot: "neck", name: "Bow tie", price: 20 }, { id: "scarf", slot: "neck", name: "Stripy scarf", price: 35 }, { id: "medal", slot: "neck", name: "Gold medal", price: 80 },
+  { id: "bg-bubbles", slot: "bg", name: "Bubbles", price: 25 }, { id: "bg-stars", slot: "bg", name: "Starry night", price: 40 }, { id: "bg-rainbow", slot: "bg", name: "Rainbow", price: 60 }, { id: "bg-sea", slot: "bg", name: "Under the sea", price: 90 }
+];
+const ART = {
+  party: T => `<path d="M84 ${T + 8}L100 ${T - 34}L116 ${T + 8}z" fill="#FF7A5C" ${st4}/><path d="M91 ${T - 10}h18" stroke="#fff" stroke-width="4"/><circle cx="100" cy="${T - 36}" r="6" fill="#FFC53D" ${st3}/>`,
+  bobble: T => `<path d="M70 ${T + 10}q30-52 60 0z" fill="#58A9F2" ${st4}/><rect x="66" y="${T + 3}" width="68" height="13" rx="6.5" fill="#fff" ${st3}/><circle cx="100" cy="${T - 26}" r="9" fill="#fff" ${st3}/>`,
+  tophat: T => `<rect x="80" y="${T - 36}" width="40" height="42" rx="4" fill="#26364d" ${st3}/><rect x="80" y="${T - 8}" width="40" height="7" fill="#E8463A"/><rect x="64" y="${T + 2}" width="72" height="9" rx="4.5" fill="#26364d" ${st3}/>`,
+  wizard: T => `<path d="M64 ${T + 10}L104 ${T - 54}L136 ${T + 10}z" fill="#7B5BD6" ${st4}/><polygon points="${starPts(98, T - 12, 7)}" fill="#FFC53D"/><circle cx="114" cy="${T - 30}" r="3.5" fill="#FFC53D"/><circle cx="84" cy="${T}" r="3" fill="#FFC53D"/>`,
+  shades: () => `<rect x="63" y="93" width="35" height="22" rx="9" fill="${INK}"/><rect x="102" y="93" width="35" height="22" rx="9" fill="${INK}"/><path d="M96 101h8" stroke="${INK}" stroke-width="4"/><path d="M70 99h9M109 99h9" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/>`,
+  specs: () => `<circle cx="82" cy="104" r="16" fill="#fff" fill-opacity=".15" stroke="${INK}" stroke-width="4"/><circle cx="118" cy="104" r="16" fill="#fff" fill-opacity=".15" stroke="${INK}" stroke-width="4"/><path d="M98 101h4" stroke="${INK}" stroke-width="4"/>`,
+  stars: () => `<polygon points="${starPts(82, 104, 18)}" fill="#FFC53D" fill-opacity=".85" ${st3}/><polygon points="${starPts(118, 104, 18)}" fill="#FFC53D" fill-opacity=".85" ${st3}/><circle cx="84" cy="106" r="5" fill="${INK}"/><circle cx="120" cy="106" r="5" fill="${INK}"/>`,
+  bowtie: N => `<path d="M100 ${N}l-20-11v22zM100 ${N}l20-11v22z" fill="#E8463A" ${st3}/><circle cx="100" cy="${N}" r="5" fill="#E8463A" ${st3}/>`,
+  scarf: N => `<path d="M64 ${N - 8}q36 16 72 0v13q-36 16-72 0z" fill="#3CC777" ${st3}/><path d="M116 ${N + 4}l4 28h13l-3-30z" fill="#3CC777" ${st3}/><path d="M80 ${N - 2}v12M98 ${N + 1}v12M124 ${N + 12}h8" stroke="#fff" stroke-width="4"/>`,
+  medal: N => `<path d="M84 ${N - 12}l16 22 16-22" fill="none" stroke="#2E8BE0" stroke-width="7"/><circle cx="100" cy="${N + 20}" r="13" fill="#FFC53D" ${st3}/><polygon points="${starPts(100, N + 20, 7)}" fill="#fff"/>`,
+  "bg-bubbles": () => `<rect width="200" height="200" rx="44" fill="#DCEFFF"/>${[[30, 40, 14], [168, 52, 10], [40, 160, 9], [170, 150, 16], [150, 24, 6], [22, 100, 6]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" fill-opacity=".6" stroke="#7FC1EE" stroke-width="3"/>`).join("")}`,
+  "bg-stars": () => `<rect width="200" height="200" rx="44" fill="#22305E"/>${[[30, 36, 8], [166, 44, 6], [44, 160, 5], [172, 140, 9], [120, 20, 4], [18, 96, 4]].map(([x, y, r]) => `<polygon points="${starPts(x, y, r)}" fill="#FFE08A"/>`).join("")}`,
+  "bg-rainbow": () => `<rect width="200" height="200" rx="44" fill="#EAF7FF"/>${["#FF7A5C", "#FFC53D", "#3CC777", "#58A9F2"].map((c, i) => `<path d="M${14 + i * 12} 196a${86 - i * 12} ${86 - i * 12} 0 0 1 ${172 - i * 24} 0" fill="none" stroke="${c}" stroke-width="11"/>`).join("")}`,
+  "bg-sea": () => `<rect width="200" height="200" rx="44" fill="#BFE9F2"/><path d="M0 160q25-14 50 0t50 0 50 0 50 0v40H0z" fill="#58A9F2"/><path d="M150 60l18-10v20z" fill="#FF7A5C"/><ellipse cx="140" cy="60" rx="14" ry="9" fill="#FF7A5C"/><circle cx="30" cy="40" r="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="40" cy="22" r="3" fill="none" stroke="#fff" stroke-width="2"/>`
+};
+function petSVG(stage, color, cls = "pet", wear = {}) {
+  const c = (PET_COLORS.find(x => x.id === color) || PET_COLORS[0]).c, ink = INK;
+  const bg = wear.bg && ART[wear.bg] ? ART[wear.bg]() : "";
+  if (stage === 0) return `<svg class="${cls}" viewBox="0 0 200 200" role="img" aria-label="An egg">${bg}<ellipse cx="100" cy="112" rx="58" ry="72" fill="${c}" stroke="${ink}" stroke-width="5"/><path d="M58 100l18 12 16-14 16 14 18-12 16 10" fill="none" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/><circle cx="80" cy="70" r="8" fill="#fff" opacity=".7"/>${wear.hat ? ART[wear.hat](44) : ""}</svg>`;
+  const size = [0, 46, 54, 58, 60][stage], T = Math.round(118 - .675 * size), N = Math.round(118 + .55 * size);
+  return `<svg class="${cls}" viewBox="0 0 200 200" role="img" aria-label="Your Burster">${bg}
+    ${stage >= 3 ? `<path d="M48 110L20 175h60zM152 110l28 65h-60z" fill="#E8463A" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/>` : ""}
+    ${stage === 2 ? `<path d="M40 120q-22-6-20-26M160 120q22-6 20-26" stroke="${ink}" stroke-width="6" fill="none" stroke-linecap="round"/>` : ""}
     <path d="M${100 - size} 118c0-${size * .9} ${size * 2} -${size * .9} ${size * 2} 0s-14 ${size * .95} -${size} ${size * .95}-${size}-${size * .15}-${size}-${size * .95}z" fill="${c}" stroke="${ink}" stroke-width="5"/>
     <circle cx="82" cy="104" r="11" fill="#fff" stroke="${ink}" stroke-width="3"/><circle cx="118" cy="104" r="11" fill="#fff" stroke="${ink}" stroke-width="3"/>
     <circle cx="84" cy="106" r="5" fill="${ink}"/><circle cx="120" cy="106" r="5" fill="${ink}"/>
     <path d="M86 130q14 12 28 0" stroke="${ink}" stroke-width="4" fill="none" stroke-linecap="round"/>
     <circle cx="70" cy="124" r="6" fill="#FF8FA3" opacity=".7"/><circle cx="130" cy="124" r="6" fill="#FF8FA3" opacity=".7"/>
-    ${stage === 1 ? extra[1] : ""}${stage === 4 ? extra[4] : ""}</svg>`;
+    ${stage === 1 ? `<path d="M52 150q48 22 96 0l-6 22H58z" fill="#fff" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/>` : ""}
+    ${wear.neck && ART[wear.neck] ? ART[wear.neck](N) : ""}${wear.eyes && ART[wear.eyes] ? ART[wear.eyes]() : ""}
+    ${wear.hat && ART[wear.hat] ? ART[wear.hat](T) : stage === 4 ? `<path d="M66 52l10-26 14 18 10-24 10 24 14-18 10 26z" fill="#FFC53D" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/>` : ""}</svg>`;
 }
 
-/* ---------- routing ---------- */
+/* ---------- routing + app shell ---------- */
 let R = { screen: "profiles" };
-let KB = null;
+let KB = null, TIMER = null;
+function stopTimer() { if (TIMER) { clearInterval(TIMER); TIMER = null; } }
 function later(fn, ms) { const r = R; setTimeout(() => { if (R === r) fn(); }, ms); }
-function go(screen, extra = {}) { if (TTS.ok) try { speechSynthesis.cancel(); } catch (e) { } KB = null; R = { screen, ...extra }; render(); window.scrollTo(0, 0); }
+function go(screen, extra = {}) { stopTimer(); const tt = document.querySelector(".toast"); if (tt) tt.remove(); if (TTS.ok) try { speechSynthesis.cancel(); } catch (e) { } KB = null; R = { screen, ...extra }; render(); window.scrollTo(0, 0); }
 function applySettings() {
   const st = S.settings, root = document.documentElement;
   const fonts = { andika: '"Andika", "Trebuchet MS", system-ui, sans-serif', lexend: '"Lexend", "Trebuchet MS", system-ui, sans-serif', atkinson: '"Atkinson Hyperlegible", "Trebuchet MS", system-ui, sans-serif' };
@@ -539,22 +710,38 @@ function applySettings() {
   root.style.setProperty("--text-scale", st.size);
   document.body.classList.toggle("calm-off", !st.calm);
 }
+const ic = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const TABS = [
+  ["map", "Home", ic('<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>')],
+  ["practise", "Practise", ic('<path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/>')],
+  ["battle", "Battle", ic('<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>')],
+  ["wordmap", "Word map", ic('<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>')],
+  ["pet", "Me", ic('<circle cx="12" cy="9" r="5"/><path d="M3 21c1.5-4 5-6 9-6s7.5 2 9 6"/>')]
+];
+const FULL_SCREENS = new Set(["profiles", "addPlayer", "parent", "play", "rush"]);
+const TAB_OF = { map: "map", week: "practise", practise: "practise", battle: "battle", wordmap: "wordmap", pet: "pet" };
+function tabbar() {
+  if (!me() || FULL_SCREENS.has(R.screen)) return "";
+  const cur = TAB_OF[R.screen];
+  return `<nav class="tabbar no-print" aria-label="Main">${TABS.map(([id, l, svg]) => `<button class="tab" data-go="${id}" ${cur === id ? 'aria-current="page"' : ""}>${svg}<span>${l}</span></button>`).join("")}</nav>`;
+}
 function topbar() {
   const p = me(); if (!p) return "";
   const n = totalStars(p);
   return `<header class="topbar no-print">
     <button class="who" data-go="profiles" aria-label="Switch player"><span class="av">${p.avatar}</span><b>${esc(p.name)}</b></button>
     <span class="spacer"></span>
-    <span class="chip star"><span class="star-glyph">★</span> ${n}</span>
-    <button class="icon-btn" data-go="pet" aria-label="My Burster and stickers">${petSVG(petStage(n), p.pet, "pet-mini")}</button>
-    <button class="icon-btn" data-go="map" aria-label="Year map">⌂</button>
+    <span class="chip star" aria-label="${n} stars"><span class="star-glyph">★</span> ${n}</span>
+    <button class="chip coin-chip" data-go="pet" aria-label="${p.coins} coins. Open the shop">${COIN} ${p.coins}</button>
   </header>`;
 }
 function render() {
   applySettings();
   if (!["profiles", "addPlayer", "parent"].includes(R.screen) && !me()) R = { screen: "profiles" };
+  if (me()) upgrade(me());
   const fn = SCREENS[R.screen] || SCREENS.profiles;
-  app.innerHTML = `<div class="shell">${R.screen === "profiles" || R.screen === "addPlayer" || R.screen === "parent" ? "" : topbar()}${fn()}</div>`;
+  const full = FULL_SCREENS.has(R.screen);
+  app.innerHTML = `${tabbar()}<div class="shell ${full ? "full" : "tabbed"}">${full ? "" : topbar()}${fn()}</div>`;
   (AFTER[R.screen] || (() => { }))();
 }
 
@@ -606,29 +793,31 @@ AFTER.addPlayer = () => {
 
 SCREENS.map = () => {
   const p = me(); if (!p) return SCREENS.profiles();
-  const yd = yearData(p.year);
+  const yd = yearData(p.year), wk = weekData(p.year, p.week);
   if (p.goal.key !== weekKey()) p.goal = { key: weekKey(), done: 0 };
   const g = Math.min(p.goal.done, 3), C = 2 * Math.PI * 26;
-  const stops = yd.weeks.map(wk => {
-    const st = starsOf(p, p.year, wk.week), n = Object.values(st).reduce((a, b) => a + b, 0);
-    const test = p.tests.filter(t => t.y === p.year && t.w === wk.week).pop();
-    const cls = wk.week > p.week ? "locked" : wk.week === p.week ? "now" : test ? "done" : "";
-    return `<button class="stop ${cls}" data-week="${wk.week}" aria-label="Week ${wk.week}: ${esc(wk.focus)}${cls === "locked" ? ", locked" : ""}">
-      <span class="dot">${wk.week}</span>
-      <span class="mini">${cls === "locked" ? '<span aria-hidden="true">🔒</span>' : wk.week === p.week ? '<span class="now-badge">This week</span>' : test ? `${test.score}/${test.total}` : n ? `<span class="star-glyph">★</span>${n}` : ""}</span></button>`;
+  const stops = yd.weeks.map(w => {
+    const st = starsOf(p, p.year, w.week), n = Object.values(st).reduce((a, b) => a + b, 0);
+    const test = p.tests.filter(t => t.y === p.year && t.w === w.week).pop();
+    const cls = w.week > p.week ? "locked" : w.week === p.week ? "now" : test ? "done" : "";
+    return `<button class="stop ${cls}" data-week="${w.week}" aria-label="Week ${w.week}: ${esc(w.focus)}${cls === "locked" ? ", locked" : ""}">
+      <span class="dot">${w.week}</span>
+      <span class="mini">${cls === "locked" ? '<span aria-hidden="true">🔒</span>' : w.week === p.week ? '<span class="now-badge">This week</span>' : test ? `${test.score}/${test.total}` : n ? `<span class="star-glyph">★</span>${n}` : ""}</span></button>`;
   }).join("");
   return `<section class="yearhead">
       <p class="eyebrow">Year ${p.year} · ${yd.wordsPerWeek} words a week</p>
-      <div class="heading-row"><h1>Spelling trail</h1>${speakBtn(`Year ${p.year} spelling trail. Tap this week's stop to play.`)}</div>
+      <div class="heading-row"><h1>Hi ${esc(p.name)}!</h1>${speakBtn(`Hi ${p.name}! This week is ${wk.focus.replace(/-/g, " ")}. Tap the yellow card to play.`)}</div>
     </section>
-    <section class="row">
-      <div class="panel goal" style="flex:1 1 260px">
+    <button class="hero-card" id="thisweek"><span class="eyebrow">This week · Week ${p.week}</span><b class="pattern">${esc(wk.focus)}</b><span class="muted small-text">${wk.words.slice(0, 5).map(esc).join(", ")}${wk.words.length > 5 ? " …" : ""}</span><span class="btn primary small" aria-hidden="true">Play this week ▶</span></button>
+    <section class="mini-grid">
+      <div class="panel goal">
         <svg class="ring" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" style="stroke:var(--line)" stroke-width="8"/><circle cx="32" cy="32" r="26" fill="none" style="stroke:var(--leaf)" stroke-width="8" stroke-linecap="round" stroke-dasharray="${C * g / 3} ${C}" transform="rotate(-90 32 32)"/><text x="32" y="38" text-anchor="middle" font-size="17" font-weight="700" style="fill:var(--ink)">${g}/3</text></svg>
         <div><b>Weekly goal</b><p class="muted small-text">${g >= 3 ? "Goal reached this week. Brilliant!" : `Play ${3 - g} more game${3 - g === 1 ? "" : "s"} this week.`}</p></div>
       </div>
-      ${p.review.length ? `<button class="panel" style="flex:1 1 260px;text-align:left;cursor:pointer;border-color:var(--sun)" id="bounce"><b>Bounce-back words (${p.review.length})</b><span class="muted small-text">Words to try again from last time: ${p.review.slice(0, 4).map(esc).join(", ")}${p.review.length > 4 ? "…" : ""}</span></button>` : ""}
+      <button class="panel" id="statuscard"><b>Speller status</b>${statusBadge(p)}<span class="muted small-text">${S.settings.timed ? "Do a 60-second Speed round to level up." : "Timed games are switched off."}</span></button>
+      ${p.review.length ? `<button class="panel" style="border-color:var(--sun)" id="bounce"><b>Bounce-back words (${p.review.length})</b><span class="muted small-text">Words to try again: ${p.review.slice(0, 4).map(esc).join(", ")}${p.review.length > 4 ? "…" : ""}</span></button>` : ""}
     </section>
-    <section class="trail" aria-label="Weeks">${stops}</section>
+    <section class="stack"><h2>Spelling trail</h2><div class="trail" aria-label="Weeks">${stops}</div></section>
     <div class="row"><button class="btn plain small" data-gate="parent">🔒 Grown-ups</button></div>`;
 };
 AFTER.map = () => {
@@ -638,7 +827,9 @@ AFTER.map = () => {
     if (w > p.week) { toast("This week is locked. A grown-up can unlock it in the Grown-ups area."); sfx.oops(); return; }
     sfx.tap(); go("week", { y: p.year, w });
   });
-  const bb = $("#bounce"); if (bb) bb.onclick = () => startRound("test", { y: p.year, w: p.week, words: p.review.slice(0, 10), bounce: true });
+  $("#thisweek").onclick = () => { sfx.tap(); go("week", { y: p.year, w: p.week }); };
+  $("#statuscard").onclick = () => S.settings.timed ? startRush("speed") : go("pet");
+  const bb = $("#bounce"); if (bb) bb.onclick = () => startRound("test", { words: p.review.slice(0, 10), bounce: true });
 };
 
 const ACTS = [
@@ -657,7 +848,7 @@ SCREENS.week = () => {
   const hasHomo = homophoneWords(wk.words).length >= 3;
   const acts = ACTS.filter(a => a.id !== "homophone" || hasHomo);
   const test = p.tests.filter(t => t.y === R.y && t.w === R.w).pop();
-  return `<div class="row"><button class="btn small plain" data-go="map">← Trail</button></div>
+  return `<div class="row"><button class="btn small plain" data-go="practise">← Practise</button></div>
   <section class="focus-card">
     <p class="eyebrow">Year ${R.y} · Week ${R.w}</p>
     <div class="heading-row"><h1 class="pattern">${esc(wk.focus)}</h1>${speakBtn(`This week: ${wk.focus.replace(/-/g, " ")}. Tap a word to hear it.`)}</div>
@@ -674,23 +865,31 @@ AFTER.week = () => {
 };
 
 /* ---------- rounds ---------- */
-function startRound(act, { y, w, words, bounce }) {
+function startRound(act, { y, w, words, bounce, smart } = {}) {
+  const p = me();
+  y = y || p.year; w = w || p.week;
   const wk = weekData(y, w);
   let list = words ? [...words] : [...wk.words];
   if (act === "homophone") list = homophoneWords(list);
-  if (act === "test" && !bounce) { const p = me(); list = [...list, ...p.review.filter(x => !list.includes(x)).slice(0, 3)]; }
+  if (act === "test" && !bounce && !smart) list = [...list, ...p.review.filter(x => !list.includes(x)).slice(0, 3)];
+  list = uniq(list);
   if (!list.length) { toast("No words to practise here yet."); return; }
-  list = act === "learn" ? list : shuffle(list);
-  go("play", { act, y, w, bounce: !!bounce, focus: wk.focus, words: list, i: 0, firstTry: [], tries: 0, answers: [], phase: "look", typed: "", t0: Date.now() });
+  if (act !== "learn") list = shuffle(list);
+  const acts = smart ? list.map((_, i) => ["spot", "missing", "scramble"][i % 3]) : null;
+  const free = !!(bounce || smart);
+  go("play", { act: smart ? "smart" : act, acts, y, w, bounce: !!bounce, smart: !!smart, free, focus: free ? null : wk.focus, words: list, i: 0, firstTry: [], tries: 0, answers: [], phase: "look", typed: "", t0: Date.now() });
 }
+const startSmart = words => startRound("spot", { words: words || smartWords(me()), smart: true });
+const curAct = () => R.acts ? R.acts[R.i] : R.act;
 function playHead() {
-  const a = ACTS.find(x => x.id === R.act);
+  const a = ACTS.find(x => x.id === curAct());
   const pct = Math.round(R.i / R.words.length * 100);
+  const label = R.bounce ? "Bounce-back words" : R.smart ? "Smart practice · " + a.name : a.name + " · Week " + R.w;
   return `<div class="playhead"><button class="icon-btn" id="quit" aria-label="Stop playing">✕</button><div class="progress" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div><span class="chip">${Math.min(R.i + 1, R.words.length)}/${R.words.length}</span></div>
-  <p class="eyebrow" style="text-align:center">${R.bounce ? "Bounce-back words" : esc(a.name) + " · Week " + R.w}</p>`;
+  <p class="eyebrow" style="text-align:center">${esc(label)}</p>`;
 }
 function afterPlayCommon() {
-  $("#quit").onclick = () => R.bounce ? go("map") : go("week", { y: R.y, w: R.w });
+  $("#quit").onclick = () => R.free ? go("practise") : go("week", { y: R.y, w: R.w });
 }
 function markWord(word, ok) {
   const p = me(), s = p.words[word] || (p.words[word] = { r: 0, x: 0, box: 1 });
@@ -711,8 +910,8 @@ function finishRound() {
   const stars = acc >= .9 ? 3 : acc >= .6 ? 2 : 1;
   const key = R.y + "-" + R.w;
   let gained = 0;
-  if (!R.bounce) { const st = p.stars[key] || (p.stars[key] = {}); gained = Math.max(0, stars - (st[R.act] || 0)); st[R.act] = Math.max(st[R.act] || 0, stars); }
-  else { const st = p.stars["bounce"] || (p.stars["bounce"] = { n: 0 }); st.n++; gained = 1; }
+  if (!R.free) { const st = p.stars[key] || (p.stars[key] = {}); gained = Math.max(0, stars - (st[R.act] || 0)); st[R.act] = Math.max(st[R.act] || 0, stars); }
+  else { const st = p.stars.extra || (p.stars.extra = { n: 0 }); st.n++; gained = 1; }
   if (p.goal.key !== weekKey()) p.goal = { key: weekKey(), done: 0 };
   p.goal.done++;
   let sticker = null, unlocked = false;
@@ -720,14 +919,16 @@ function finishRound() {
     const missed = R.answers.filter(a => !a.ok).map(a => a.word);
     R.answers.forEach(a => { const s = p.words[a.word]; if (s) s.box = a.ok ? Math.min(5, (s.box || 1) + 1) : 1; });
     p.review = uniq([...p.review.filter(w => !R.answers.some(a => a.ok && a.word === w)), ...missed]);
-    if (!R.bounce) {
+    if (!R.free) {
       p.tests.push({ y: R.y, w: R.w, score: correct, total, missed, date: Date.now() });
       sticker = stickerFor(R.y, R.w);
       if (R.y === p.year && R.w === p.week && p.week < 36) { p.week++; unlocked = true; }
     }
   }
+  const coins = correct + (R.act === "test" && !R.free ? 5 : 0);
+  earn(p, coins);
   save();
-  go("results", { act: R.act, y: R.y, w: R.w, bounce: R.bounce, correct, total, stars, gained, answers: R.answers, sticker, unlocked });
+  go("results", { act: R.act, y: R.y, w: R.w, bounce: R.bounce, smart: R.smart, free: R.free, correct, total, stars, gained, coins, answers: R.answers, sticker, unlocked });
 }
 
 /* ---------- keyboard ---------- */
@@ -795,16 +996,16 @@ function highlighted(word, focus) {
 /* ---------- game screens ---------- */
 SCREENS.play = () => {
   const word = R.words[R.i];
-  return playHead() + (PLAY[R.act] || PLAY.spot).html(word);
+  return playHead() + (PLAY[curAct()] || PLAY.spot).html(word);
 };
-AFTER.play = () => { afterPlayCommon(); const word = R.words[R.i]; (PLAY[R.act] || PLAY.spot).bind(word); };
+AFTER.play = () => { afterPlayCommon(); const word = R.words[R.i]; (PLAY[curAct()] || PLAY.spot).bind(word); };
 const PLAY = {};
 
 PLAY.learn = {
   html: w => {
     if (R.phase === "look") return `<section class="stage">
       <p class="prompt">Look and say ${speakBtn(w)}</p>
-      <div class="bigword">${highlighted(w, R.focus)}</div>
+      <div class="bigword">${highlighted(w, focusOf(w))}</div>
       ${SENT[w] ? `<p class="sentence">${esc(SENT[w])}</p>` : ""}
       <p class="muted small-text">The yellow part is the tricky bit. Say the word out loud and spell it.</p>
       <button class="btn primary" id="cover">Cover it and write</button></section>`;
@@ -812,8 +1013,8 @@ PLAY.learn = {
       <p class="prompt">Now write it ${speakBtn(w)}</p>
       <div class="cover">Hidden!</div>
       ${typedHTML()}
-      ${keyboardHTML([w])}
-      <button class="btn primary" id="submit" ${R.typed ? "" : "disabled"}>Check</button></section>`;
+      <div class="dock">${keyboardHTML([w])}
+      <button class="btn primary" id="submit" ${R.typed ? "" : "disabled"}>Check</button></div></section>`;
     const c = compareSpelling(R.typed, w), d = diffParts(R.typed, w);
     return `<section class="stage">
       <p class="feedback ${c.ok ? "good" : "try"}">${c.ok ? pick(["Brilliant!", "Spot on!", "You got it!", "Super spelling!"]) : R.tries >= 1 ? "Good try. Here it is." : "Nearly! Let's look again."}</p>
@@ -872,7 +1073,7 @@ PLAY.burst = {
 PLAY.missing = {
   html: w => {
     if (!R.m || R.m.word !== w) {
-      const p = findPattern(w, R.focus), ans = w.slice(p.start, p.start + p.len);
+      const p = findPattern(w, focusOf(w)), ans = w.slice(p.start, p.start + p.len);
       const rebuilt = a => (w.slice(0, p.start) + a + w.slice(p.start + p.len)).toLowerCase() === w.toLowerCase();
       const opts = shuffle([ans, ...altsFor(ans).filter(a => !rebuilt(a))]).slice(0, 4);
       if (!opts.includes(ans)) opts[0] = ans;
@@ -979,8 +1180,8 @@ PLAY.test = {
       <p class="prompt">Word ${R.i + 1}: listen and spell ${speakBtn(w, "Hear the word again")}</p>
       ${SENT[w] ? `<p class="sentence">${sentenceWithGap(w)}</p>` : `<p class="muted">Tap the speaker to hear the word again.</p>`}
       ${typedHTML()}
-      ${keyboardHTML(R.words)}
-      <div class="row center"><button class="btn primary" id="submit" ${R.typed ? "" : "disabled"}>${R.i + 1 < R.words.length ? "Next word" : "Finish test"}</button></div>
+      <div class="dock">${keyboardHTML(R.words)}
+      <button class="btn primary" id="submit" ${R.typed ? "" : "disabled"}>${R.i + 1 < R.words.length ? "Next word" : "Finish test"}</button></div>
     </section>`,
   bind: w => {
     sayWord(w);
@@ -995,7 +1196,7 @@ PLAY.test = {
   }
 };
 
-/* ---------- results, pet ---------- */
+/* ---------- results ---------- */
 SCREENS.results = () => {
   const p = me(), n = totalStars(p), st = petStage(n), next = PET_STAGES[st + 1];
   const list = R.act === "test" ? `<div class="check-list">${R.answers.map(a => { const d = diffParts(a.typed, a.word); return `<div class="check-item ${a.ok ? "ok" : "no"}"><span class="mk">${a.ok ? "✓" : "✗"}</span><div>${a.ok ? `<div class="w">${esc(a.word)}</div>${a.capital ? '<span class="muted small-text">Check the capital letter</span>' : ""}` : `<span class="muted small-text">You wrote</span><div class="w">${d.attempt}</div><span class="muted small-text">Correct spelling</span><div class="w">${d.target}</div>`}</div></div>`; }).join("")}</div>` : "";
@@ -1004,20 +1205,21 @@ SCREENS.results = () => {
     <div class="bigstars">${starRow(R.stars)}</div>
     <h1>${R.stars === 3 ? "Superstar!" : R.stars === 2 ? "Great work!" : "Well done for trying!"}</h1>
     <p class="muted" style="font-size:1.15rem">${R.act === "test" ? `You scored <b>${R.correct} out of ${R.total}</b>.` : `${R.correct} of ${R.total} right first time.`} ${R.gained ? `+${R.gained} new star${R.gained > 1 ? "s" : ""}.` : ""}</p>
+    ${R.coins ? `<p class="coins-won">${COIN} +${R.coins} coins</p>` : ""}
     ${R.sticker ? `<div class="row center"><span class="sticker-won" aria-hidden="true">${R.sticker}</span><div style="text-align:left"><b>New sticker!</b><p class="muted small-text">It's in your sticker book.</p></div></div>` : ""}
     ${R.unlocked ? `<p><b>Week ${me().week} is now unlocked.</b></p>` : ""}
     ${missed ? `<p class="muted">The ${missed === 1 ? "word you missed is" : `${missed} words you missed are`} saved as bounce-back words for next time.</p>` : ""}
     ${list}
-    <div class="row center">${petSVG(st, p.pet, "pet-mini")}<span class="muted small-text">${next ? `${next.need - n} more stars until ${next.name}` : "Your Burster is a legend!"}</span></div>
+    <div class="row center">${petSVG(st, p.pet, "pet-lane", p.wear)}<span class="muted small-text">${next ? `${next.need - n} more stars until ${next.name}` : "Your Burster is a legend!"}</span></div>
     <div class="row center">
       <button class="btn" id="again">Play again</button>
-      <button class="btn primary" id="back">${R.bounce ? "Back to trail" : "Choose another game"}</button>
+      <button class="btn primary" id="back">${R.free ? "Back to practice" : "Choose another game"}</button>
     </div></section>`;
 };
 AFTER.results = () => {
   if (R.stars >= 2) { sfx.win(); confetti(); }
-  $("#again").onclick = () => startRound(R.act, { y: R.y, w: R.w, words: R.bounce ? me().review.slice(0, 10) : undefined, bounce: R.bounce });
-  $("#back").onclick = () => R.bounce ? go("map") : go("week", { y: R.y, w: R.w });
+  $("#again").onclick = () => R.smart ? startSmart() : startRound(R.act, { y: R.y, w: R.w, words: R.bounce ? me().review.slice(0, 10) : undefined, bounce: R.bounce });
+  $("#back").onclick = () => R.free ? go("practise") : go("week", { y: R.y, w: R.w });
 };
 function confetti() {
   if (S.settings.calm || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -1027,26 +1229,256 @@ function confetti() {
   document.body.appendChild(box); setTimeout(() => box.remove(), 2600);
 }
 
+/* ---------- practise hub ---------- */
+SCREENS.practise = () => {
+  const p = me(), wk = weekData(p.year, p.week), tricky = trickyWords(p);
+  const cards = [
+    { id: "pweek", g: "W" + p.week, cls: "g-missing", t: "This week's games", b: `Week ${p.week}: ${esc(wk.focus)}` },
+    { id: "psmart", g: "★?", cls: "g-learn", t: "Smart practice", b: "10 words picked for you from every week so far" },
+    S.settings.timed && { id: "pspeed", g: "60s", cls: "g-burst", t: "Speed round", b: "Spot the right spelling, fast. Sets your Speller status" },
+    p.review.length && { id: "pbounce", g: "↺", cls: "g-scramble", t: `Bounce-back words (${p.review.length})`, b: "Words from last time to try again" },
+    tricky.length >= 3 && { id: "ptricky", g: "!", cls: "g-scramble", t: "Tricky words", b: `${tricky.length} words from your Word map to work on` },
+    { id: "ptest", g: "★", cls: "g-test", t: "Friday test", b: `Spell all ${wk.words.length} words for week ${p.week}` }
+  ].filter(Boolean);
+  return `<section class="yearhead"><p class="eyebrow">Year ${p.year}</p><div class="heading-row"><h1>Practise</h1>${speakBtn("Practise. Smart practice picks the words you need most. The speed round sets your speller status.")}</div></section>
+    <div class="acts">${cards.map(c => `<button class="act" id="${c.id}"><span class="glyph ${c.cls}" aria-hidden="true">${c.g}</span><b>${c.t}</b><span class="blurb">${c.b}</span></button>`).join("")}</div>`;
+};
+AFTER.practise = () => {
+  const p = me(), on = (id, fn) => { const b = $("#" + id); if (b) b.onclick = () => { sfx.tap(); fn(); }; };
+  on("pweek", () => go("week", { y: p.year, w: p.week }));
+  on("psmart", () => startSmart());
+  on("pspeed", () => startRush("speed"));
+  on("pbounce", () => startRound("test", { words: p.review.slice(0, 10), bounce: true }));
+  on("ptricky", () => startSmart(shuffle(trickyWords(p)).slice(0, 10)));
+  on("ptest", () => startRound("test", { y: p.year, w: p.week }));
+};
+
+/* ---------- timed games: Speed round + Bubble Battle ---------- */
+const RIVALS = [
+  { name: "Fizz", color: "coral", wear: { hat: "party" } }, { name: "Pip", color: "sky", wear: { eyes: "specs" } }, { name: "Zoom", color: "grape", wear: { hat: "wizard" } },
+  { name: "Dot", color: "leaf", wear: { neck: "bowtie" } }, { name: "Bo", color: "sun", wear: { eyes: "shades" } }, { name: "Nova", color: "sky", wear: { hat: "bobble" } }
+];
+function startRush(mode) {
+  const p = me();
+  if (!S.settings.timed) { toast("Timed games are switched off in the Grown-ups area."); return; }
+  const base = Math.max(1.6, p.speed.best || ({ 1: 7, 2: 6, 3: 5, 4: 4.6, 5: 4.3, 6: 4 })[p.year]);
+  const bots = mode === "battle" ? shuffle(RIVALS).slice(0, 3).map(b => ({ ...b, score: 0, rate: base * (0.75 + Math.random() * 0.6), acc: 0.82 + Math.random() * 0.13, next: 0 })) : [];
+  go("rush", { mode, phase: "ready", bots, pool: shuffle(poolWords(p)), qi: 0, correct: 0, wrong: 0, q: null, dur: 60000 });
+}
+function rushQuestion() {
+  const w = R.pool[R.qi % R.pool.length]; R.qi++;
+  R.q = { word: w, opts: shuffle([w, ...misspellings(w, 2, [])]), locked: false };
+}
+function lanesHTML() {
+  const p = me(), all = [{ name: "You", score: R.correct, you: true, color: p.pet, wear: p.wear }, ...R.bots];
+  const max = Math.max(12, ...all.map(x => x.score));
+  return `<div class="race" aria-label="Race">${all.map((x, i) => `<div class="lane ${x.you ? "you" : ""}">${petSVG(2, x.color, "pet-lane", x.wear)}<div class="track"><i class="fill" data-lane="${i}" style="width:${x.score / max * 100}%"></i><span class="nm">${esc(x.name)}</span></div><b class="sc" data-lsc="${i}">${x.score}</b></div>`).join("")}</div>`;
+}
+function updateLanes() {
+  const all = [R.correct, ...R.bots.map(b => b.score)], max = Math.max(12, ...all);
+  all.forEach((n, i) => { const f = $(`[data-lane="${i}"]`); if (f) f.style.width = n / max * 100 + "%"; const t = $(`[data-lsc="${i}"]`); if (t) t.textContent = n; });
+}
+function rushTick() {
+  if (R.screen !== "rush" || R.phase !== "go") return stopTimer();
+  const now = performance.now(), left = Math.max(0, R.dur - (now - R.t0));
+  R.bots.forEach(b => { while (now >= b.next) { if (Math.random() < b.acc) b.score++; b.next += b.rate * 1000 * (0.6 + Math.random() * 0.8); } });
+  const bar = $("#tbar"); if (bar) { bar.style.width = left / R.dur * 100 + "%"; bar.classList.toggle("low", left < 10000); }
+  const tt = $("#ttext"); if (tt) tt.textContent = Math.ceil(left / 1000) + "s";
+  if (R.mode === "battle") updateLanes();
+  if (left <= 0) finishRush();
+}
+function finishRush() {
+  stopTimer();
+  const p = me(), n = R.correct;
+  R.phase = "done";
+  let coins = n;
+  if (R.mode === "speed") {
+    if (n >= 5) {
+      const avg = +(R.dur / 1000 / n).toFixed(2);
+      p.speed.runs = [...p.speed.runs, { date: Date.now(), n, avg }].slice(-20);
+      if (!p.speed.best || avg < p.speed.best) { p.speed.best = avg; R.newBest = true; coins += 5; }
+    }
+    const si = statusOf(p);
+    if (si !== null && si > p.speed.top) { for (let k = p.speed.top + 1; k <= si; k++) p.speed.reached[k] = Date.now(); p.speed.top = si; R.levelUp = si; coins += 10; }
+  } else {
+    R.place = 1 + R.bots.filter(b => b.score > n).length;
+    coins += [10, 6, 3, 1][R.place - 1];
+    p.battles.played++; if (R.place === 1) p.battles.won++;
+  }
+  R.coins = coins; earn(p, coins);
+  if (p.goal.key !== weekKey()) p.goal = { key: weekKey(), done: 0 };
+  p.goal.done++;
+  save(); render();
+  if (R.levelUp != null || R.place === 1 || R.newBest) { sfx.win(); confetti(); }
+}
+const certificateHTML = (p, si) => `<div class="cert"><p class="eyebrow">Certificate</p><h2>${esc(p.name)}</h2><p>is now a</p><p class="cert-status">${STATUSES[si].name}</p><p class="muted small-text">Vocabursters speller status · ${new Date(p.speed.reached[si] || Date.now()).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</p></div>`;
+SCREENS.rush = () => {
+  const p = me(), speed = R.mode === "speed";
+  if (R.phase === "ready") return `<div class="row"><button class="btn small plain" id="rback">← Back</button></div>
+    <section class="stage">
+      ${speed ? `<p class="eyebrow">Speed round</p><h1>How fast can you spot it?</h1><p class="sentence">You have 60 seconds. Tap the correct spelling as fast as you can. Your speed sets your Speller status.</p>${statusBadge(p)}${nextStatusHint(p)}`
+      : `<p class="eyebrow">Bubble Battle</p><h1>Race the rivals!</h1><div class="rivals">${R.bots.map(b => `<div class="rival">${petSVG(2, b.color, "pet-rival", b.wear)}<b>${b.name}</b></div>`).join("")}</div><p class="sentence">60 seconds. Every right spelling moves you forward. Can you beat ${R.bots.map(b => b.name).join(", ").replace(/, ([^,]*)$/, " and $1")}?</p>`}
+      <button class="btn primary" id="rstart">Start</button>
+      <p class="muted small-text">Words come from every week you've unlocked.</p></section>`;
+  if (R.phase === "count") return `<section class="stage countdown"><p class="prompt">Get ready…</p><div class="count" aria-live="assertive">${R.count}</div></section>`;
+  if (R.phase === "done") return rushResults();
+  const q = R.q, left = Math.max(0, R.dur - (performance.now() - R.t0)), homo = SENT[q.word] && HOMO[q.word];
+  return `<div class="playhead"><button class="icon-btn" id="quit" aria-label="Stop">✕</button><div class="progress timer"><i id="tbar" class="${left < 10000 ? "low" : ""}" style="width:${left / R.dur * 100}%"></i></div><span class="chip" id="ttext">${Math.ceil(left / 1000)}s</span></div>
+    ${speed ? `<div class="row center"><span class="chip">✓ ${R.correct} right</span>${statusBadge(p)}</div>` : lanesHTML()}
+    <section class="stage">
+      <p class="prompt">${homo ? "Which word fits?" : "Tap the correct spelling"} ${speakBtn(q.word)}</p>
+      ${homo ? `<p class="sentence">${sentenceWithGap(q.word)}</p>` : ""}
+      <div class="options three">${q.opts.map(o => `<button class="opt" data-ro="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+    </section>`;
+};
+function rushResults() {
+  const p = me();
+  if (R.mode === "speed") return `<section class="stage">
+      <p class="eyebrow">Speed round</p>
+      <h1>${R.correct} right in 60 seconds!</h1>
+      <p class="muted">${R.correct >= 5 ? `That's ${(60 / R.correct).toFixed(1)} seconds a word.` : "Get 5 or more right to set your Speller status."}${R.wrong ? ` ${R.wrong} wrong.` : ""}</p>
+      ${R.newBest ? "<p><b>New personal best!</b></p>" : ""}
+      ${R.levelUp != null ? certificateHTML(p, R.levelUp) : statusBadge(p)}
+      ${nextStatusHint(p)}
+      <p class="coins-won">${COIN} +${R.coins} coins</p>
+      <div class="row center"><button class="btn" id="ragain">Go again</button><button class="btn primary" id="rdone">Done</button></div></section>`;
+  const all = [{ name: p.name + " (you)", score: R.correct, you: true, color: p.pet, wear: p.wear }, ...R.bots].sort((a, b) => b.score - a.score || (b.you ? 1 : 0) - (a.you ? 1 : 0));
+  return `<section class="stage">
+      <p class="eyebrow">Bubble Battle</p>
+      <h1>${["You won!", "2nd place!", "3rd place!", "4th place. Good try!"][R.place - 1]}</h1>
+      <div class="podium">${all.map((x, i) => `<div class="pod ${x.you ? "you" : ""}"><span class="pl">${i + 1}</span>${petSVG(2, x.color, "pet-lane", x.wear)}<b>${esc(x.name)}</b><span class="sc">${x.score}</span></div>`).join("")}</div>
+      <p class="coins-won">${COIN} +${R.coins} coins</p>
+      <p class="muted small-text">Battles won: ${p.battles.won} of ${p.battles.played}</p>
+      <div class="row center"><button class="btn" id="ragain">Battle again</button><button class="btn primary" id="rdone">Done</button></div></section>`;
+}
+AFTER.rush = () => {
+  const back = () => go(R.mode === "speed" ? "practise" : "battle");
+  if (R.phase === "ready") {
+    $("#rback").onclick = back;
+    $("#rstart").onclick = () => {
+      R.phase = "count"; R.count = 3; render(); sfx.tap();
+      const r = R;
+      TIMER = setInterval(() => {
+        if (R !== r) return stopTimer();
+        R.count--;
+        if (R.count > 0) { render(); sfx.tap(); return; }
+        stopTimer(); R.phase = "go"; R.t0 = performance.now();
+        R.bots.forEach(b => b.next = R.t0 + b.rate * 1000 * (0.6 + Math.random() * 0.8));
+        rushQuestion(); render(); sfx.good();
+        TIMER = setInterval(rushTick, 100);
+      }, 800);
+    };
+    return;
+  }
+  if (R.phase === "done") { $("#ragain").onclick = () => startRush(R.mode); $("#rdone").onclick = back; return; }
+  if (R.phase !== "go") return;
+  $("#quit").onclick = back;
+  $$("[data-ro]").forEach(b => b.onclick = () => {
+    if (R.q.locked || R.phase !== "go") return;
+    const ok = b.dataset.ro === R.q.word;
+    markWord(R.q.word, ok);
+    if (ok) { R.correct++; sfx.pop(); rushQuestion(); render(); return; }
+    R.wrong++; R.q.locked = true; sfx.oops(); b.classList.add("wrong");
+    const right = $$("[data-ro]").find(x => x.dataset.ro === R.q.word); if (right) right.classList.add("right");
+    later(() => { if (R.phase !== "go") return; rushQuestion(); render(); }, 650);
+  });
+};
+
+/* ---------- battle hub ---------- */
+SCREENS.battle = () => {
+  const p = me();
+  const head = `<section class="yearhead"><p class="eyebrow">Battle</p><div class="heading-row"><h1>Bubble Battle</h1>${speakBtn("Bubble Battle. Race three rival Bursters for sixty seconds. Every right spelling moves you forward.")}</div></section>`;
+  if (!S.settings.timed) return head + `<section class="panel"><p>Timed games are switched off by a grown-up. Try <b>Smart practice</b> instead. It has no timer.</p><div class="row"><button class="btn primary" data-go="practise">Go to Practise</button></div></section>`;
+  const fam = [...S.profiles].map(upgrade).sort((a, b) => b.wk.coins - a.wk.coins);
+  return head + `<section class="battle-hero">
+      <div class="rivals">${RIVALS.slice(0, 3).map(b => `<div class="rival">${petSVG(2, b.color, "pet-rival", b.wear)}<b>${b.name}</b></div>`).join("")}</div>
+      <p>Race 3 rival Bursters for 60 seconds.<br>Every right spelling moves you forward.</p>
+      <button class="btn primary" id="bstart">Start a battle</button>
+      <p class="muted small-text">Rivals play at about your speed, so every race is close.</p>
+    </section>
+    <section class="row"><span class="chip">🏆 Won ${p.battles.won} of ${p.battles.played}</span>${statusBadge(p)}</section>
+    ${S.profiles.length > 1 ? `<section class="panel"><h3>Family leaderboard</h3><p class="muted small-text">Coins earned this week by players on this device. It starts again every Monday.</p>
+      <ol class="board">${fam.map((x, i) => `<li class="${x.id === p.id ? "you" : ""}"><span class="pl">${i + 1}</span><span class="av" aria-hidden="true">${x.avatar}</span><b>${esc(x.name)}</b><span class="sc">${COIN} ${x.wk.coins}</span></li>`).join("")}</ol></section>` : ""}`;
+};
+AFTER.battle = () => { const b = $("#bstart"); if (b) b.onclick = () => startRush("battle"); };
+
+/* ---------- word map (heat map) ---------- */
+function heatHTML(p, y) {
+  const counts = [0, 0, 0, 0];
+  const rows = yearData(y).weeks.map(wk => `<div class="heat-row"><span class="wk">W${wk.week}</span><div class="heat-cells">${wk.words.map(w => { const l = heatLevel(p.words[w]); counts[l]++; return `<button class="hc h${l}" data-hw="${esc(w)}" aria-label="${esc(w)}: ${HEAT_NAMES[l]}" title="${esc(w)}"></button>`; }).join("")}</div></div>`).join("");
+  const legend = `<div class="legend">${[3, 2, 1, 0].map(l => `<span><i class="hc h${l}" aria-hidden="true"></i>${HEAT_NAMES[l]} <b>${counts[l]}</b></span>`).join("")}</div>`;
+  return { legend, grid: `<div class="heat">${rows}</div>` };
+}
+function bindHeat() {
+  $$("[data-hw]").forEach(b => b.onclick = () => {
+    const w = b.dataset.hw, s = me() && S.profiles.find(x => x.id === (R.screen === "parent" ? R.child : S.active)).words[w];
+    $$(".hc.sel").forEach(x => x.classList.remove("sel")); b.classList.add("sel");
+    const info = $("#hinfo"); if (info) info.innerHTML = `<b>${esc(w)}</b> · ${HEAT_NAMES[heatLevel(s)]}${s ? ` · right ${s.r}, wrong ${s.x}` : ""}`;
+    sayWord(w, false);
+  });
+}
+SCREENS.wordmap = () => {
+  const p = me(), y = R.y || p.year, h = heatHTML(p, y), tricky = trickyWords(p);
+  return `<section class="yearhead"><p class="eyebrow">Word map</p><div class="heading-row"><h1>My words</h1>${speakBtn("Your word map. Green words are secure. Yellow words are getting there. Red words are tricky. Tap a square to hear the word.")}</div>
+      <p class="muted">Every word in Year ${y}, one square each. Tap a square to hear it.</p></section>
+    <div class="choice">${[1, 2, 3, 4, 5, 6].map(v => `<button aria-pressed="${v === y}" data-hy="${v}">Y${v}</button>`).join("")}</div>
+    ${h.legend}
+    <p id="hinfo" class="hinfo" aria-live="polite">Tap a square</p>
+    <section class="panel">${h.grid}</section>
+    ${tricky.length >= 3 ? `<div class="row"><button class="btn primary" id="htricky">Practise my ${tricky.length} tricky words</button></div>` : ""}`;
+};
+AFTER.wordmap = () => {
+  $$("[data-hy]").forEach(b => b.onclick = () => { R.y = +b.dataset.hy; render(); });
+  bindHeat();
+  const t = $("#htricky"); if (t) t.onclick = () => startSmart(shuffle(trickyWords(me())).slice(0, 10));
+};
+
+/* ---------- me: Burster, shop, certificates, stickers ---------- */
 SCREENS.pet = () => {
   const p = me(), n = totalStars(p), st = petStage(n), stage = PET_STAGES[st], next = PET_STAGES[st + 1];
   const pct = next ? Math.round((n - stage.need) / (next.need - stage.need) * 100) : 100;
-  const yd = yearData(p.year);
-  const got = new Set(p.tests.filter(t => t.y === p.year).map(t => t.w));
-  return `<section class="panel pet-wrap">
-      ${petSVG(st, p.pet)}
-      <h1>${stage.name}</h1>
-      <p class="muted">${stage.say}</p>
-      <div class="meter" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>
-      <p class="small-text">${next ? `<b>${n}</b> stars. ${next.need - n} more to become a ${next.name}.` : `<b>${n}</b> stars. Top level reached!`}</p>
-      <div class="swatches" role="group" aria-label="Burster colour">${PET_COLORS.map(c => `<button class="swatch ${p.pet === c.id ? "sel" : ""}" style="background:${c.c}" data-col="${c.id}" ${n < c.need ? "disabled" : ""} aria-label="${c.id}${n < c.need ? `, unlocks at ${c.need} stars` : ""}"></button>`).join("")}</div>
+  const yd = yearData(p.year), got = new Set(p.tests.filter(t => t.y === p.year).map(t => t.w));
+  const tab = R.shop || "hat";
+  const slots = [["hat", "Hats"], ["eyes", "Glasses"], ["neck", "Extras"], ["bg", "Backgrounds"], ["color", "Colours"]];
+  const item = it => {
+    const owned = p.owned.includes(it.id), wearing = p.wear[it.slot] === it.id, asking = R.buy === it.id;
+    return `<button class="item ${wearing ? "wearing" : ""} ${asking ? "asking" : ""}" data-item="${it.id}">${petSVG(Math.max(1, st), p.pet, "", { ...p.wear, [it.slot]: it.id })}<b>${it.name}</b><span class="price">${wearing ? "Wearing ✓" : owned ? "Wear it" : asking ? `Buy for ${it.price}?` : `${COIN} ${it.price}`}</span></button>`;
+  };
+  const certs = Object.keys(p.speed.reached).map(Number).sort((a, b) => a - b);
+  return `<section class="panel me-card">
+      <div class="me-pet">${petSVG(st, p.pet, "pet", p.wear)}</div>
+      <div class="stack"><p class="eyebrow">${stage.name}</p><h1>${esc(p.name)}</h1>${statusBadge(p)}
+        <div class="row"><span class="chip coin-chip">${COIN} ${p.coins} coins</span><span class="chip star"><span class="star-glyph">★</span> ${n}</span></div>
+        <div class="meter" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>
+        <p class="small-text">${next ? `${next.need - n} more stars to become a ${next.name}.` : "Top level reached!"}</p></div>
     </section>
+    <section class="stack">
+      <div class="heading-row"><h2>Shop</h2>${speakBtn("The shop. You earn coins for every word you get right. Spend them on things for your Burster.")}</div>
+      <p class="muted small-text">Earn coins for every word you get right. Nothing here costs real money.</p>
+      <div class="tabs" role="tablist">${slots.map(([id, l]) => `<button role="tab" aria-selected="${tab === id}" data-shop="${id}">${l}</button>`).join("")}</div>
+      ${tab === "color" ? `<div class="swatches" role="group" aria-label="Burster colour">${PET_COLORS.map(c => `<button class="swatch ${p.pet === c.id ? "sel" : ""}" style="background:${c.c}" data-col="${c.id}" ${n < c.need ? "disabled" : ""} aria-label="${c.id}${n < c.need ? `, unlocks at ${c.need} stars` : ""}"></button>`).join("")}</div><p class="muted small-text">New colours unlock with stars.</p>`
+      : `<div class="shop">${ITEMS.filter(i => i.slot === tab).map(item).join("")}</div>`}
+    </section>
+    <section class="stack"><h2>Certificates</h2>${certs.length ? `<div class="row">${certs.map(k => `<button class="status" data-cert="${k}">⚡ ${STATUSES[k].name}</button>`).join("")}</div><div id="certbox"></div>` : `<p class="muted">Do a Speed round to earn your first certificate.</p>`}</section>
     <section class="stack">
       <div class="heading-row"><h2>Year ${p.year} sticker book</h2>${speakBtn("Your sticker book. Finish a Friday test to win that week's sticker.")}</div>
       <p class="muted">${got.size} of ${yd.weeks.length} stickers. Finish a Friday test to win that week's sticker.</p>
       <div class="stickerbook">${yd.weeks.map(wk => `<div class="sticker ${got.has(wk.week) ? "got" : ""}" aria-label="Week ${wk.week} ${got.has(wk.week) ? "sticker" : "empty"}">${got.has(wk.week) ? stickerFor(p.year, wk.week) : ""}<small>${wk.week}</small></div>`).join("")}</div>
     </section>`;
 };
-AFTER.pet = () => { $$("[data-col]").forEach(b => b.onclick = () => { me().pet = b.dataset.col; save(); render(); }); };
+AFTER.pet = () => {
+  const p = me();
+  $$("[data-shop]").forEach(b => b.onclick = () => { R.shop = b.dataset.shop; R.buy = null; render(); });
+  $$("[data-col]").forEach(b => b.onclick = () => { p.pet = b.dataset.col; save(); render(); });
+  $$("[data-cert]").forEach(b => b.onclick = () => { $("#certbox").innerHTML = certificateHTML(p, +b.dataset.cert); });
+  $$("[data-item]").forEach(b => b.onclick = () => {
+    const it = ITEMS.find(x => x.id === b.dataset.item);
+    if (p.owned.includes(it.id)) { p.wear[it.slot] = p.wear[it.slot] === it.id ? null : it.id; R.buy = null; sfx.tap(); save(); render(); return; }
+    if (p.coins < it.price) { toast(`You need ${it.price - p.coins} more coins. Keep spelling!`); sfx.oops(); return; }
+    if (R.buy !== it.id) { R.buy = it.id; sfx.tap(); render(); return; }
+    p.coins -= it.price; p.owned.push(it.id); p.wear[it.slot] = it.id; R.buy = null; save(); sfx.win(); toast(`${it.name} bought!`); render();
+  });
+};
 
 /* ---------- grown-ups ---------- */
 function gate(onPass) {
@@ -1088,12 +1520,14 @@ const PARENT = {
       <div class="row" style="justify-content:space-between"><h2>${p.avatar} ${esc(p.name)}</h2>${p.example ? '<span class="tag">Example data</span>' : ""}</div>
       <div class="row">
         <span class="chip">Year ${p.year}</span><span class="chip">Week ${p.week} of 36</span><span class="chip star"><span class="star-glyph">★</span> ${totalStars(p)}</span>${avg !== null ? `<span class="chip">Average test score ${avg}%</span>` : ""}
+        <span class="chip coin-chip">${COIN} ${p.coins}</span>${statusBadge(p)}${p.speed.best ? `<span class="chip">Best speed ${p.speed.best}s a word</span>` : ""}<span class="chip">Battles won ${p.battles.won}/${p.battles.played}</span>
       </div>
       <div class="row"><span class="lbl">Current week</span>
         <button class="btn small" data-wk="-1" aria-label="Previous week">−</button><span class="chip">Week ${p.week}</span><button class="btn small" data-wk="1" aria-label="Next week">＋</button>
         <span class="muted small-text">Weeks after this stay locked for the child.</span></div>
       <div class="field"><span class="lbl">This week: ${esc(weekData(p.year, p.week).focus)}</span><span class="muted">${weekData(p.year, p.week).words.map(esc).join(", ")}</span></div>
     </section>
+    <section class="panel"><h3>Word map, Year ${p.year}</h3>${(() => { const h = heatHTML(p, p.year); return h.legend + '<p id="hinfo" class="hinfo">Tap a square to see the word.</p>' + h.grid; })()}</section>
     <section class="panel"><h3>Test scores</h3>${tests.length ? `<div class="table-wrap"><table><thead><tr><th>Week</th><th>Focus</th><th>Score</th><th>Missed</th><th>Date</th></tr></thead><tbody>${tests.map(t => `<tr><td class="num">Y${t.y} W${t.w}</td><td>${esc(weekData(t.y, t.w).focus)}</td><td class="num"><b>${t.score}</b>/${t.total}</td><td>${t.missed.map(esc).join(", ") || "None"}</td><td class="num">${new Date(t.date).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted">No Friday tests yet. Scores appear here after each test.</p>`}</section>
     <section class="panel"><h3>Tricky words</h3>${tricky.length ? `<div class="table-wrap"><table><thead><tr><th>Word</th><th>Right</th><th>Wrong</th></tr></thead><tbody>${tricky.map(([w, s]) => `<tr><td><b>${esc(w)}</b></td><td class="num">${s.r}</td><td class="num">${s.x}</td></tr>`).join("")}</tbody></table></div>` : `<p class="muted">No tricky words yet.</p>`}
       <p class="muted small-text">Bounce-back words (re-tested next week, as the paper tests suggest): ${p.review.length ? p.review.map(esc).join(", ") : "none"}.</p></section>`;
@@ -1116,6 +1550,7 @@ const PARENT = {
       <div class="field"><span class="lbl">Capital letters</span><div class="choice"><button aria-pressed="${st.capitals === "gentle"}" data-cap="gentle">Gentle: remind, still count as right</button><button aria-pressed="${st.capitals === "strict"}" data-cap="strict">Strict: must match</button></div></div>
       ${sw("sfx", "Sound effects", "Pops and chimes. Words are still read aloud when this is off.")}
       ${sw("calm", "Calm mode", "Stops bubbles bobbing, pulses and confetti. Good for children who find motion distracting.")}
+      ${sw("timed", "Timed games", "The 60-second Speed round and Bubble Battle. Turn off if time pressure upsets your child.")}
       <div class="field"><span class="lbl">Brain break reminder</span><div class="choice">${[[0, "Off"], [10, "10 min"], [15, "15 min"], [20, "20 min"], [30, "30 min"]].map(([k, l]) => `<button aria-pressed="${st.breakMins === k}" data-brk="${k}">${l}</button>`).join("")}</div></div>
     </section>`;
   },
@@ -1149,6 +1584,7 @@ const PARENT = {
     </section>`
 };
 AFTER.parent = () => {
+  bindHeat();
   $$("[data-tab]").forEach(b => b.onclick = () => { R.tab = b.dataset.tab; R.confirm = null; R.restore = false; render(); });
   $$("[data-child]").forEach(b => b.onclick = () => { R.child = b.dataset.child; R.py = R.pw = null; render(); });
   $$("[data-wk]").forEach(b => b.onclick = () => { const p = S.profiles.find(x => x.id === R.child); p.week = Math.max(1, Math.min(36, p.week + +b.dataset.wk)); save(); render(); });

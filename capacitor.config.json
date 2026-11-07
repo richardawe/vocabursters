@@ -1,0 +1,8 @@
+{
+  "appId": "app.vocabursters.spelling",
+  "appName": "Vocabursters",
+  "webDir": "mockup",
+  "backgroundColor": "#E6F3EF",
+  "android": { "allowMixedContent": false },
+  "ios": { "contentInset": "never" }
+}

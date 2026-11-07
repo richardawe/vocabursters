@@ -2,7 +2,7 @@
 
 A spelling and grammar web app for Year 1 to Year 6 (ages 5 to 11), built from the *Weekly Vocabulary Tests: Y1 to Y6* lists. Parents install it on a phone, tablet or computer. There's no login, no account and no data leaves the device.
 
-The playable mockup is in [`mockup/`](../mockup). Open `mockup/index.html` in a browser, or see the preview link in the README. It's built mobile-first: on a phone it works like an app, with a bottom tab bar and full-screen games.
+**The app is live at https://richardawe.github.io/vocabursters/** (source in [`app/`](../app), built by `scripts/build.py`, deployed to GitHub Pages on every push). It started as a mockup and is now the version families use. It's built mobile-first: on a phone it works like an app, with a bottom tab bar and full-screen games.
 
 **Version 2 of this plan** adds ideas borrowed from Times Tables Rock Stars (section 6) and a dedicated mobile version (section 10).
 
@@ -164,7 +164,7 @@ Times Tables Rock Stars (TTRS) is the times-tables app many UK primary schools u
 - Every instruction and every word has a speaker button. A child who can't read can still play.
 - Words are read in a British English voice where the device has one, at a slower default speed (adjustable).
 - The test reads word, sentence, word, as the PDF tells parents to do.
-- **For production:** record the 1,338 words and sentences with a real voice actor. Device voices vary a lot, and some mispronounce words or sound robotic. Device speech stays as the fallback.
+- **Recorded voice (done):** all 1,338 words and every example sentence are recorded with Kokoro's British voice, so every child hears the same clear pronunciation. Words spelt the same but said differently are fixed by hand (for example *lead* the metal). The clips are about 40 kbps MP3, a few KB each. Device speech stays as the fallback.
 
 **The on-screen keyboard**
 - A custom keyboard means **no autocorrect, predictive text or spell-check giving the answer away**. This is the most important integrity feature.
@@ -202,7 +202,7 @@ The app is for children, so it should meet the **UK Age Appropriate Design Code 
 - The **grown-ups check** (a multiplication question) protects settings, deletion and backup. Before launch, consider a stronger check such as "type the number in words", since many Year 5–6 children can do the multiplication.
 - A short, plain-English privacy notice in the app and on the website.
 - If analytics are ever wanted, use an opt-in, cookieless, aggregate-only tool, and only after a Data Protection Impact Assessment.
-- **Self-host the fonts** in production. Loading Google Fonts sends the device's IP address to Google. The mockup loads them from Google only for convenience.
+- **Fonts are self-hosted (done).** The app never contacts Google Fonts, so no device IP addresses are sent to a third party, and the fonts work offline.
 - Set a strict Content Security Policy and serve over HTTPS.
 
 ---
@@ -254,7 +254,7 @@ device state    { profiles: [ { id, name, avatar, year, week, kb, pet,
 
 Most children will use Vocabursters on a parent's phone or a family tablet, so the app is designed for phones first. There are two ways to deliver it, and the first is already built.
 
-### A. Installable web app (built in the mockup; recommended for launch)
+### A. Installable web app (live on GitHub Pages)
 
 The same code gives a different layout by screen size:
 
@@ -282,15 +282,15 @@ Some parents expect to find an app in the store, as they do for TTRS. The repo n
 
 - `npm install`, then `npm run android` or `npm run ios`. This needs Android Studio, or Xcode on a Mac.
 - `npx cap add android` was run here and generates a working Android project with the app inside. It has **not** been compiled or run on a device, because this environment has no Android SDK.
-- **Speech on Android:** Android's built-in web view doesn't support the browser speech API the mockup uses. The Android app needs recorded audio (planned anyway) or a native text-to-speech plugin such as `@capacitor-community/text-to-speech`. iOS does support it.
-- **Fonts and audio** must be bundled in the app so it works offline; the mockup loads fonts from Google.
+- **Speech on Android:** Android's built-in web view doesn't support the browser speech API, but words and sentences now use the recorded Kokoro voice, which plays everywhere. Only the spoken instructions would need a native text-to-speech plugin.
+- **Fonts and audio** are already bundled in `dist/`, so the native shells work offline.
 - **Store rules for children's apps:**
   - Apple's *Kids Category*: no third-party analytics or adverts, and a parental gate before any external link or purchase.
   - Google Play's *Families Policy* (and optionally *Teacher Approved*).
   - The no-data design already meets the hardest parts of both.
 - **Costs:** the Apple Developer Program is $99 a year and Google Play has a one-off $25 fee. Every update goes through store review, which the web app avoids.
 
-**Recommendation:** launch as the installable web app. Add store versions in Phase 2 if parents ask for them, once recorded audio removes the Android speech problem.
+**Recommendation:** launch as the installable web app (now live). The recorded voice has removed the Android speech problem, so store versions only need building and submitting if parents ask for them.
 
 ---
 
@@ -308,10 +308,10 @@ Some parents expect to find an app in the store, as they do for TTRS. The repo n
 1. `data/words.json` is the single source of truth (already done).
 2. Add an example sentence for **every** word (182 of 1,338 done, covering all homophone and apostrophe weeks). Rules: 6 to 12 words, the word appears exactly once, the vocabulary suits the year, UK spelling, culturally neutral, no brands.
 3. A teacher reviews the word lists against the DfE appendix, and reviews sentences and the generated distractors.
-4. Record audio for each word and sentence (word on its own, then the sentence). Name files by a stable word ID.
+4. Record audio for each word and sentence with `scripts/generate_voice.py` (Kokoro, done for all current content; re-run after adding words, and only new clips are recorded). Files are named by a hash of the word.
 5. Later: a short child-friendly meaning for the Y4–6 subject words, for Word of the Day.
 
-`scripts/build_mockup.py` already shows the pattern: the content files are inlined into the app at build time.
+`scripts/build.py` follows this pattern: the content files are inlined into the app at build time.
 
 ---
 
@@ -336,22 +336,27 @@ There are no analytics, so success shows up on the device and in conversations w
 
 ---
 
-## 15. Decisions for you
+## 15. Decisions
 
-1. **Name and web address.** "Vocabursters" is used as the working name.
-2. **Voice:** pay for recorded audio in Phase 2 (recommended), or rely on device voices.
-3. **Strict or gentle capitals** as the default for the test. The mockup defaults to gentle (counted right, with a reminder).
-4. **Free, or a one-off paid version** for parents. Paid would need a purchase flow outside the child screens and a grown-ups check.
-5. **Who reviews the content:** a teacher you know, or a paid reviewer.
-6. **The Y6 W21 word list** (see section 2).
-7. **App stores:** web app only at launch (recommended), or App Store and Google Play versions too (section 10).
+**Decided (November 2026)**
+
+1. **Name:** Vocabursters. Web address: https://richardawe.github.io/vocabursters/ (GitHub Pages, deployed on every push).
+2. **Voice:** recorded with **Kokoro** (open-source, Apache 2.0), British voice `bf_emma`, for every word and example sentence. Device voices are only a fallback, and still read instructions that contain a child's name.
+3. **Capital letters:** gentle. A wrong capital counts as right, with a reminder. Parents can switch to strict in Settings.
+4. **Price:** free.
+5. **Content:** word lists and sentences have been checked, so the lists ship as they are (including Y6 W21).
+6. **Delivery:** an installable web app from GitHub Pages, working on all devices.
+
+**Still open**
+
+7. **App stores:** add App Store and Google Play versions later, or stay web-only (section 10).
 8. **Timed games on or off by default.** The mockup has them on, and a parent can switch them off.
 9. **Family leaderboard:** keep it, or make it opt-in per player. Some families prefer siblings not to compare.
 
 ---
 
-## 16. About the mockup
+## 16. Current status
 
-**Working:** the phone layout (bottom tabs, full-screen games, docked keyboard, vibration) and tablet/desktop layout (top tabs); player profiles; the 36-week trail for each year with locking; all 7 weekly game modes on the real word lists for every week of every year; Smart practice; the Speed round with Speller status and certificates; Bubble Battle against computer rivals; the Word map heat map; coins and a 14-item shop; the family leaderboard; stars, the pet, the sticker book and the weekly goal; bounce-back words; reading aloud with the device voice; sound effects; the custom keyboard (and a physical keyboard); the parent zone (progress, players, settings, printable test, install steps, backup/restore); brain-break reminders; light and dark mode; calm mode; font and text-size options; installable PWA with an offline service worker (`mockup/index.html`).
+**Working:** the phone layout (bottom tabs, full-screen games, docked keyboard, vibration) and tablet/desktop layout (top tabs); player profiles; the 36-week trail for each year with locking; all 7 weekly game modes on the real word lists for every week of every year; Smart practice; the Speed round with Speller status and certificates; Bubble Battle against computer rivals; the Word map heat map; coins and a 14-item shop; the family leaderboard; stars, the pet, the sticker book and the weekly goal; bounce-back words; the recorded Kokoro voice for every word and sentence, downloadable for offline use, with the device voice as a fallback; sound effects; the custom keyboard (and a physical keyboard); the parent zone (progress, players, settings, printable test, install steps, backup/restore); brain-break reminders; light and dark mode; calm mode; font and text-size options; an installable PWA on GitHub Pages with an offline service worker, self-hosted fonts and automatic updates.
 
-**Simulated or simplified:** the example players "Mia" (Year 3) and "Leo" (Year 1) have made-up history so the screens aren't empty (delete them in Grown-ups → Players). Bubble Battle rivals are computer players, not real children. The native app shells are set up but not compiled. Emoji stand in for commissioned illustrations. Only 182 of the 1,338 words have example sentences (all words in homophone and apostrophe weeks, plus Year 1 weeks 1–4). The grown-ups check is basic. Printing works from `mockup/index.html` but not inside the hosted preview, which blocks printing.
+**Simplified:** the app starts with no players. Example players "Mia" and "Leo" (with made-up history) appear only if a parent taps *Look around with example players*, and can be deleted in Grown-ups → Players. Bubble Battle rivals are computer players, not real children. The native app shells are set up but not compiled. Emoji stand in for commissioned illustrations. Only 182 of the 1,338 words have example sentences (all words in homophone and apostrophe weeks, plus Year 1 weeks 1–4). The grown-ups check is basic. Printing works in the app but not inside the claude.ai preview, which blocks printing.

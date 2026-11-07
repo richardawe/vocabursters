@@ -1,11 +1,11 @@
 {
   "name": "vocabursters",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "Weekly spelling games for Year 1 to Year 6. PWA first, with optional native app shells via Capacitor.",
+  "description": "Free weekly spelling games for Year 1 to Year 6. Installable web app (PWA) with optional native shells via Capacitor.",
   "scripts": {
-    "build": "python3 scripts/build_mockup.py",
-    "serve": "python3 -m http.server -d mockup 8000",
+    "build": "python3 scripts/build.py",
+    "serve": "python3 scripts/build.py && python3 -m http.server -d dist 8000",
     "cap:sync": "npm run build && cap sync",
     "android": "npm run cap:sync && cap open android",
     "ios": "npm run cap:sync && cap open ios"

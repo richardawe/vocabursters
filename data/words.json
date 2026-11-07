@@ -1,0 +1,1128 @@
+{
+ "title": "Weekly Vocabulary Tests: Y1 to Y6",
+ "source": "Weekly_Vocabulary_Tests_Y1_to_Y6.pdf (compiled by a parent, Nov 2026). Based on the National Curriculum in England spelling appendix; check unusual words against the official DfE appendix.",
+ "years": [
+  {
+   "year": 1,
+   "wordsPerWeek": 5,
+   "intro": "Year 1 builds from simple phonics sounds to the 45 common exception words, then spelling patterns and suffixes.",
+   "weeks": [
+    {
+     "week": 1,
+     "focus": "Short vowels a, i",
+     "words": ["cat", "sit", "map", "pin", "dad"]
+    },
+    {
+     "week": 2,
+     "focus": "Short vowels o, u, e",
+     "words": ["dog", "cup", "hen", "sun", "red"]
+    },
+    {
+     "week": 3,
+     "focus": "Double letters ff, ll, ss",
+     "words": ["off", "bell", "hill", "kiss", "mess"]
+    },
+    {
+     "week": 4,
+     "focus": "ck",
+     "words": ["duck", "sock", "kick", "back", "neck"]
+    },
+    {
+     "week": 5,
+     "focus": "sh",
+     "words": ["ship", "shop", "fish", "shed", "dish"]
+    },
+    {
+     "week": 6,
+     "focus": "ch",
+     "words": ["chip", "chop", "chin", "much", "rich"]
+    },
+    {
+     "week": 7,
+     "focus": "th",
+     "words": ["thin", "thick", "this", "that", "bath"]
+    },
+    {
+     "week": 8,
+     "focus": "ng, nk",
+     "words": ["ring", "song", "king", "bank", "pink"]
+    },
+    {
+     "week": 9,
+     "focus": "Common exception words 1",
+     "words": ["the", "a", "do", "to", "of"]
+    },
+    {
+     "week": 10,
+     "focus": "Common exception words 2",
+     "words": ["said", "are", "were", "was", "is"]
+    },
+    {
+     "week": 11,
+     "focus": "Common exception words 3",
+     "words": ["his", "has", "you", "your", "they"]
+    },
+    {
+     "week": 12,
+     "focus": "Common exception words 4",
+     "words": ["be", "he", "me", "she", "we"]
+    },
+    {
+     "week": 13,
+     "focus": "Common exception words 5",
+     "words": ["no", "go", "so", "by", "my"]
+    },
+    {
+     "week": 14,
+     "focus": "Common exception words 6",
+     "words": ["here", "there", "where", "love", "come"]
+    },
+    {
+     "week": 15,
+     "focus": "Common exception words 7",
+     "words": ["some", "one", "once", "ask", "friend"]
+    },
+    {
+     "week": 16,
+     "focus": "Common exception words 8",
+     "words": ["school", "put", "push", "pull", "full"]
+    },
+    {
+     "week": 17,
+     "focus": "Common exception words 9",
+     "words": ["house", "our", "today", "says", "I"]
+    },
+    {
+     "week": 18,
+     "focus": "ai, ay",
+     "words": ["rain", "train", "tail", "day", "play"]
+    },
+    {
+     "week": 19,
+     "focus": "ee, ea",
+     "words": ["tree", "feet", "sleep", "sea", "read"]
+    },
+    {
+     "week": 20,
+     "focus": "igh, y, ie",
+     "words": ["night", "light", "right", "fly", "pie"]
+    },
+    {
+     "week": 21,
+     "focus": "oa, ow, oe",
+     "words": ["boat", "coat", "road", "snow", "toe"]
+    },
+    {
+     "week": 22,
+     "focus": "oo (long), ew",
+     "words": ["moon", "food", "spoon", "new", "grew"]
+    },
+    {
+     "week": 23,
+     "focus": "oo (short)",
+     "words": ["book", "look", "foot", "good", "wood"]
+    },
+    {
+     "week": 24,
+     "focus": "ar",
+     "words": ["car", "farm", "park", "dark", "star"]
+    },
+    {
+     "week": 25,
+     "focus": "or, aw",
+     "words": ["corn", "fork", "storm", "saw", "paw"]
+    },
+    {
+     "week": 26,
+     "focus": "er, ir, ur",
+     "words": ["her", "bird", "girl", "turn", "nurse"]
+    },
+    {
+     "week": 27,
+     "focus": "ow, ou",
+     "words": ["cow", "town", "out", "cloud", "shout"]
+    },
+    {
+     "week": 28,
+     "focus": "oi, oy",
+     "words": ["coin", "oil", "boy", "toy", "enjoy"]
+    },
+    {
+     "week": 29,
+     "focus": "Split digraph a-e",
+     "words": ["cake", "make", "name", "game", "gate"]
+    },
+    {
+     "week": 30,
+     "focus": "Split digraphs i-e, o-e",
+     "words": ["bike", "time", "five", "home", "nose"]
+    },
+    {
+     "week": 31,
+     "focus": "Split digraphs u-e, e-e",
+     "words": ["cube", "tube", "June", "these", "theme"]
+    },
+    {
+     "week": 32,
+     "focus": "Plurals -s, -es",
+     "words": ["dogs", "cats", "boxes", "dishes", "wishes"]
+    },
+    {
+     "week": 33,
+     "focus": "Suffix -ing",
+     "words": ["jumping", "playing", "helping", "going", "singing"]
+    },
+    {
+     "week": 34,
+     "focus": "Suffix -ed",
+     "words": ["jumped", "played", "helped", "looked", "called"]
+    },
+    {
+     "week": 35,
+     "focus": "Suffixes -er, -est, un-",
+     "words": ["taller", "fastest", "unhappy", "unkind", "undo"]
+    },
+    {
+     "week": 36,
+     "focus": "Days of the week",
+     "words": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    }
+   ]
+  },
+  {
+   "year": 2,
+   "wordsPerWeek": 8,
+   "intro": "Year 2 covers the spelling rules in the Y2 programme of study, homophones and the Y2 common exception words. Exception words not reached here (would, who, whole, any, many, clothes, busy, people, water, again, half, money, parents, Christmas) are revised in Y3 weeks 1 and 2.",
+   "weeks": [
+    {
+     "week": 1,
+     "focus": "Y1 exception words revision",
+     "words": ["said", "were", "they", "there", "where", "friend", "school", "house"]
+    },
+    {
+     "week": 2,
+     "focus": "/dʒ/ spelt ge, dge",
+     "words": ["page", "huge", "cage", "bridge", "edge", "badge", "fudge", "judge"]
+    },
+    {
+     "week": 3,
+     "focus": "/dʒ/ spelt g, j",
+     "words": ["giant", "magic", "giraffe", "gentle", "energy", "jelly", "jumper", "jungle"]
+    },
+    {
+     "week": 4,
+     "focus": "/s/ spelt c",
+     "words": ["city", "ice", "mice", "face", "fence", "circle", "pencil", "space"]
+    },
+    {
+     "week": 5,
+     "focus": "kn, gn",
+     "words": ["knock", "knee", "knife", "know", "knot", "gnat", "gnaw", "knit"]
+    },
+    {
+     "week": 6,
+     "focus": "wr",
+     "words": ["write", "wrong", "wrap", "wrist", "wrote", "wreck", "wrinkle", "wriggle"]
+    },
+    {
+     "week": 7,
+     "focus": "-le",
+     "words": ["table", "apple", "bottle", "little", "middle", "candle", "puzzle", "bubble"]
+    },
+    {
+     "week": 8,
+     "focus": "-el",
+     "words": ["camel", "tunnel", "squirrel", "travel", "towel", "tinsel", "funnel", "jewel"]
+    },
+    {
+     "week": 9,
+     "focus": "-al, -il",
+     "words": ["metal", "pedal", "capital", "hospital", "animal", "pencil", "fossil", "nostril"]
+    },
+    {
+     "week": 10,
+     "focus": "-y as /aɪ/",
+     "words": ["cry", "fly", "dry", "try", "reply", "July", "sky", "spy"]
+    },
+    {
+     "week": 11,
+     "focus": "Plurals after y (-ies)",
+     "words": ["flies", "tries", "replies", "copies", "babies", "carries", "puppies", "ladies"]
+    },
+    {
+     "week": 12,
+     "focus": "-ed, -ing after y",
+     "words": ["copied", "copying", "carried", "carrying", "tried", "trying", "hurried", "hurrying"]
+    },
+    {
+     "week": 13,
+     "focus": "-er, -est after y",
+     "words": ["happier", "happiest", "angrier", "angriest", "funnier", "funniest", "prettier", "prettiest"]
+    },
+    {
+     "week": 14,
+     "focus": "-ing, -ed, -er after e",
+     "words": ["hiking", "hiked", "hiker", "nicer", "shining", "baking", "joked", "smiled"]
+    },
+    {
+     "week": 15,
+     "focus": "Doubling the consonant",
+     "words": ["patting", "patted", "humming", "hummed", "dropping", "dropped", "running", "runner"]
+    },
+    {
+     "week": 16,
+     "focus": "a before l, ll",
+     "words": ["all", "ball", "call", "walk", "talk", "always", "small", "fall"]
+    },
+    {
+     "week": 17,
+     "focus": "/ʌ/ spelt o",
+     "words": ["other", "mother", "brother", "nothing", "Monday", "month", "glove", "oven"]
+    },
+    {
+     "week": 18,
+     "focus": "/i:/ spelt -ey",
+     "words": ["key", "donkey", "monkey", "chimney", "valley", "turkey", "honey", "money"]
+    },
+    {
+     "week": 19,
+     "focus": "/ɒ/ after w, qu",
+     "words": ["want", "watch", "wander", "quantity", "squash", "wasp", "swan", "wash"]
+    },
+    {
+     "week": 20,
+     "focus": "/ɜ:/ spelt or after w",
+     "words": ["word", "work", "worm", "world", "worth", "worse", "worst", "worry"]
+    },
+    {
+     "week": 21,
+     "focus": "/ɔ:/ spelt ar after w",
+     "words": ["war", "warm", "towards", "swarm", "warn", "award", "reward", "warden"]
+    },
+    {
+     "week": 22,
+     "focus": "/ʒ/ spelt s",
+     "words": ["television", "treasure", "usual", "measure", "pleasure", "vision", "decision", "leisure"]
+    },
+    {
+     "week": 23,
+     "focus": "-ment, -ness",
+     "words": ["enjoyment", "payment", "statement", "amazement", "kindness", "sadness", "darkness", "happiness"]
+    },
+    {
+     "week": 24,
+     "focus": "-ful, -less",
+     "words": ["careful", "playful", "helpful", "cheerful", "careless", "hopeless", "endless", "harmless"]
+    },
+    {
+     "week": 25,
+     "focus": "-ly",
+     "words": ["sadly", "slowly", "quickly", "gently", "happily", "usually", "completely", "finally"]
+    },
+    {
+     "week": 26,
+     "focus": "Contractions",
+     "words": ["can't", "didn't", "hasn't", "couldn't", "it's", "I'll", "we're", "they're"]
+    },
+    {
+     "week": 27,
+     "focus": "Possessive apostrophe",
+     "words": ["girl's", "boy's", "dog's", "mum's", "children's", "teacher's", "cat's", "baby's"]
+    },
+    {
+     "week": 28,
+     "focus": "Homophones 1",
+     "words": ["there", "their", "here", "hear", "see", "sea", "one", "won"]
+    },
+    {
+     "week": 29,
+     "focus": "Homophones 2",
+     "words": ["to", "too", "blue", "blew", "night", "knight", "no", "know"]
+    },
+    {
+     "week": 30,
+     "focus": "Homophones 3",
+     "words": ["be", "bee", "flour", "flower", "quite", "quiet", "bare", "bear"]
+    },
+    {
+     "week": 31,
+     "focus": "Common exception words A",
+     "words": ["door", "floor", "poor", "because", "find", "kind", "mind", "behind"]
+    },
+    {
+     "week": 32,
+     "focus": "Common exception words B",
+     "words": ["child", "children", "wild", "climb", "most", "only", "both", "old"]
+    },
+    {
+     "week": 33,
+     "focus": "Common exception words C",
+     "words": ["cold", "gold", "hold", "told", "every", "everybody", "even", "great"]
+    },
+    {
+     "week": 34,
+     "focus": "Common exception words D",
+     "words": ["break", "steak", "pretty", "beautiful", "after", "fast", "last", "past"]
+    },
+    {
+     "week": 35,
+     "focus": "Common exception words E",
+     "words": ["father", "class", "grass", "pass", "plant", "path", "bath", "hour"]
+    },
+    {
+     "week": 36,
+     "focus": "Common exception words F",
+     "words": ["move", "prove", "improve", "sure", "sugar", "eye", "could", "should"]
+    }
+   ]
+  },
+  {
+   "year": 3,
+   "wordsPerWeek": 10,
+   "intro": "Year 3 opens with leftover Y2 exception words, then prefixes, suffixes and tricky sounds, then the Y3/4 statutory list, then homophones and apostrophes.",
+   "weeks": [
+    {
+     "week": 1,
+     "focus": "Y2 exception words revision 1",
+     "words": ["would", "who", "whole", "any", "many", "clothes", "busy", "people", "water", "again"]
+    },
+    {
+     "week": 2,
+     "focus": "Y2 exception words revision 2",
+     "words": ["half", "money", "parents", "Christmas", "because", "beautiful", "children", "improve", "sugar", "eye"]
+    },
+    {
+     "week": 3,
+     "focus": "Prefixes un-, dis-",
+     "words": ["unhappy", "unfair", "unlock", "untidy", "disappear", "disagree", "dislike", "disobey", "disconnect", "distrust"]
+    },
+    {
+     "week": 4,
+     "focus": "Prefixes mis-, re-",
+     "words": ["mislead", "misbehave", "mistake", "misspell", "redo", "refresh", "return", "reappear", "rebuild", "replay"]
+    },
+    {
+     "week": 5,
+     "focus": "Prefixes in-, il-, im-, ir-",
+     "words": ["inactive", "incorrect", "illegal", "illegible", "impossible", "impatient", "immature", "irregular", "irresponsible", "invisible"]
+    },
+    {
+     "week": 6,
+     "focus": "Prefixes sub-, inter-, super-, anti-, auto-",
+     "words": ["submarine", "subheading", "interact", "international", "supermarket", "supersonic", "anticlockwise", "antifreeze", "automatic", "autograph"]
+    },
+    {
+     "week": 7,
+     "focus": "Suffix -ly",
+     "words": ["slowly", "happily", "angrily", "simply", "humbly", "basically", "comically", "actually", "accidentally", "occasionally"]
+    },
+    {
+     "week": 8,
+     "focus": "Suffix -ous",
+     "words": ["dangerous", "famous", "enormous", "nervous", "curious", "serious", "various", "mountainous", "humorous", "poisonous"]
+    },
+    {
+     "week": 9,
+     "focus": "Suffix -tion",
+     "words": ["action", "section", "station", "nation", "fraction", "invention", "direction", "collection", "education", "position"]
+    },
+    {
+     "week": 10,
+     "focus": "Suffix -sion",
+     "words": ["division", "television", "confusion", "decision", "collision", "invasion", "explosion", "conclusion", "vision", "revision"]
+    },
+    {
+     "week": 11,
+     "focus": "Suffixes -ssion, -cian",
+     "words": ["expression", "discussion", "impression", "permission", "possession", "magician", "musician", "electrician", "physician", "politician"]
+    },
+    {
+     "week": 12,
+     "focus": "Suffixes -ure, -sure",
+     "words": ["creature", "feature", "picture", "mixture", "nature", "adventure", "treasure", "measure", "pleasure", "furniture"]
+    },
+    {
+     "week": 13,
+     "focus": "/k/ spelt ch",
+     "words": ["school", "chemist", "chorus", "character", "chaos", "echo", "scheme", "mechanic", "anchor", "ache"]
+    },
+    {
+     "week": 14,
+     "focus": "/ʃ/ spelt ch",
+     "words": ["chef", "chalet", "machine", "brochure", "parachute", "moustache", "sachet", "chute", "chauffeur", "charade"]
+    },
+    {
+     "week": 15,
+     "focus": "/s/ spelt sc",
+     "words": ["science", "scene", "discipline", "fascinate", "crescent", "scissors", "muscle", "descend", "ascend", "scenery"]
+    },
+    {
+     "week": 16,
+     "focus": "/eɪ/ spelt ei, eigh, ey",
+     "words": ["vein", "weigh", "eight", "neighbour", "they", "obey", "grey", "reign", "sleigh", "freight"]
+    },
+    {
+     "week": 17,
+     "focus": "Endings -gue, -que",
+     "words": ["league", "tongue", "antique", "unique", "plague", "vague", "catalogue", "dialogue", "technique", "mosque"]
+    },
+    {
+     "week": 18,
+     "focus": "Statutory list 1",
+     "words": ["accident", "actual", "address", "answer", "appear", "arrive", "believe", "bicycle", "breath", "breathe"]
+    },
+    {
+     "week": 19,
+     "focus": "Statutory list 2",
+     "words": ["build", "busy", "business", "calendar", "caught", "centre", "century", "certain", "circle", "complete"]
+    },
+    {
+     "week": 20,
+     "focus": "Statutory list 3",
+     "words": ["consider", "continue", "decide", "describe", "different", "difficult", "disappear", "early", "earth", "eight"]
+    },
+    {
+     "week": 21,
+     "focus": "Statutory list 4",
+     "words": ["enough", "exercise", "experience", "experiment", "extreme", "famous", "favourite", "February", "forward", "fruit"]
+    },
+    {
+     "week": 22,
+     "focus": "Statutory list 5",
+     "words": ["grammar", "group", "guard", "guide", "heard", "heart", "height", "history", "imagine", "increase"]
+    },
+    {
+     "week": 23,
+     "focus": "Statutory list 6",
+     "words": ["important", "interest", "island", "knowledge", "learn", "length", "library", "material", "medicine", "mention"]
+    },
+    {
+     "week": 24,
+     "focus": "Statutory list 7",
+     "words": ["minute", "natural", "naughty", "notice", "occasion", "often", "opposite", "ordinary", "particular", "peculiar"]
+    },
+    {
+     "week": 25,
+     "focus": "Statutory list 8",
+     "words": ["perhaps", "popular", "position", "possess", "possible", "potatoes", "pressure", "probably", "promise", "purpose"]
+    },
+    {
+     "week": 26,
+     "focus": "Statutory list 9",
+     "words": ["quarter", "question", "recent", "regular", "reign", "remember", "sentence", "separate", "special", "straight"]
+    },
+    {
+     "week": 27,
+     "focus": "Statutory list 10",
+     "words": ["strange", "strength", "suppose", "surprise", "therefore", "though", "although", "thought", "through", "various"]
+    },
+    {
+     "week": 28,
+     "focus": "Statutory list 11 and tricky words",
+     "words": ["weight", "woman", "women", "calendar", "February", "library", "separate", "strength", "naughty", "purpose"]
+    },
+    {
+     "week": 29,
+     "focus": "Homophones 1",
+     "words": ["brake", "break", "grate", "great", "eight", "ate", "weight", "wait", "medal", "meddle"]
+    },
+    {
+     "week": 30,
+     "focus": "Homophones 2",
+     "words": ["heard", "herd", "led", "lead", "mail", "male", "main", "mane", "meat", "meet"]
+    },
+    {
+     "week": 31,
+     "focus": "Homophones 3",
+     "words": ["peace", "piece", "plain", "plane", "rain", "reign", "scene", "seen", "sight", "site"]
+    },
+    {
+     "week": 32,
+     "focus": "Homophones 4",
+     "words": ["son", "sun", "tail", "tale", "whether", "weather", "which", "witch", "wear", "where"]
+    },
+    {
+     "week": 33,
+     "focus": "Apostrophes: one owner",
+     "words": ["girl's", "boy's", "dog's", "teacher's", "baby's", "farmer's", "princess's", "James's", "lady's", "child's"]
+    },
+    {
+     "week": 34,
+     "focus": "Apostrophes: many owners",
+     "words": ["girls'", "boys'", "dogs'", "teachers'", "babies'", "farmers'", "ladies'", "children's", "women's", "men's"]
+    },
+    {
+     "week": 35,
+     "focus": "Contractions",
+     "words": ["can't", "won't", "shouldn't", "wouldn't", "they've", "we've", "you'll", "she'd", "who's", "what's"]
+    },
+    {
+     "week": 36,
+     "focus": "Year 3 revision mix",
+     "words": ["answer", "caught", "certain", "February", "island", "minute", "occasion", "special", "strange", "thought"]
+    }
+   ]
+  },
+  {
+   "year": 4,
+   "wordsPerWeek": 10,
+   "intro": "Year 4 revises the Y3/4 statutory list, then extends suffixes, prefixes, Greek and Latin roots, homophones and subject vocabulary.",
+   "weeks": [
+    {
+     "week": 1,
+     "focus": "Statutory list revision A to C",
+     "words": ["accidentally", "actually", "address", "answer", "appear", "believe", "breathe", "business", "calendar", "caught"]
+    },
+    {
+     "week": 2,
+     "focus": "Statutory list revision D to H",
+     "words": ["describe", "difficult", "disappear", "enough", "exercise", "experience", "extreme", "February", "forward", "height"]
+    },
+    {
+     "week": 3,
+     "focus": "Statutory list revision I to O",
+     "words": ["imagine", "increase", "island", "knowledge", "library", "material", "medicine", "minute", "naughty", "occasionally"]
+    },
+    {
+     "week": 4,
+     "focus": "Statutory list revision P to Z",
+     "words": ["particular", "peculiar", "perhaps", "potatoes", "probably", "quarter", "separate", "strength", "strange", "though"]
+    },
+    {
+     "week": 5,
+     "focus": "Suffix -ation",
+     "words": ["information", "adoration", "sensation", "preparation", "admiration", "exploration", "imagination", "organisation", "celebration", "conversation"]
+    },
+    {
+     "week": 6,
+     "focus": "Endings -ious",
+     "words": ["glorious", "furious", "obvious", "envious", "victorious", "mysterious", "hilarious", "previous", "luxurious", "religious"]
+    },
+    {
+     "week": 7,
+     "focus": "Suffix -ly after -le and -ic",
+     "words": ["gently", "simply", "possibly", "terribly", "horribly", "comically", "historically", "tragically", "dramatically", "frantically"]
+    },
+    {
+     "week": 8,
+     "focus": "Suffixes -ful, -less, -ness, -ment",
+     "words": ["thankful", "wonderful", "beautiful", "fearless", "thoughtless", "restless", "fitness", "illness", "agreement", "argument"]
+    },
+    {
+     "week": 9,
+     "focus": "Prefixes anti-, auto-, bi-, tri-",
+     "words": ["antibiotic", "antisocial", "autobiography", "automobile", "bicycle", "biplane", "bilingual", "triangle", "tricycle", "triplet"]
+    },
+    {
+     "week": 10,
+     "focus": "Prefixes trans-, tele-, micro-",
+     "words": ["transport", "transfer", "translate", "telephone", "television", "telescope", "microphone", "microscope", "microwave", "microchip"]
+    },
+    {
+     "week": 11,
+     "focus": "Prefixes sub-, super-, inter-",
+     "words": ["subtract", "subway", "submerge", "supervisor", "supersonic", "superhero", "interrupt", "internet", "intercity", "interval"]
+    },
+    {
+     "week": 12,
+     "focus": "Greek roots -graph, -ology",
+     "words": ["photograph", "autograph", "paragraph", "biology", "zoology", "geology", "technology", "apology", "psychology", "mythology"]
+    },
+    {
+     "week": 13,
+     "focus": "Latin roots -port, -scribe",
+     "words": ["import", "export", "report", "portable", "airport", "describe", "prescribe", "subscribe", "scribble", "inscription"]
+    },
+    {
+     "week": 14,
+     "focus": "Silent letters",
+     "words": ["knight", "castle", "listen", "whistle", "island", "debt", "doubt", "autumn", "column", "solemn"]
+    },
+    {
+     "week": 15,
+     "focus": "Double consonants",
+     "words": ["accident", "address", "appear", "arrive", "assist", "collect", "committee", "correct", "recommend", "success"]
+    },
+    {
+     "week": 16,
+     "focus": "-ough sounds",
+     "words": ["through", "rough", "tough", "enough", "cough", "trough", "though", "although", "plough", "dough"]
+    },
+    {
+     "week": 17,
+     "focus": "-aught, -ought",
+     "words": ["caught", "taught", "daughter", "naughty", "bought", "fought", "thought", "brought", "sought", "ought"]
+    },
+    {
+     "week": 18,
+     "focus": "Homophones 1",
+     "words": ["accept", "except", "affect", "effect", "advice", "advise", "practice", "practise", "past", "passed"]
+    },
+    {
+     "week": 19,
+     "focus": "Homophones 2",
+     "words": ["berry", "bury", "bawl", "ball", "cereal", "serial", "father", "farther", "guessed", "guest"]
+    },
+    {
+     "week": 20,
+     "focus": "Homophones 3",
+     "words": ["whose", "who's", "they're", "their", "there", "wood", "would", "aloud", "allowed", "missed"]
+    },
+    {
+     "week": 21,
+     "focus": "Word families",
+     "words": ["sign", "signal", "signature", "design", "nation", "national", "nationality", "international", "nature", "natural"]
+    },
+    {
+     "week": 22,
+     "focus": "Word families: -de to -sion",
+     "words": ["decide", "decision", "divide", "division", "explode", "explosion", "collide", "collision", "invade", "invasion"]
+    },
+    {
+     "week": 23,
+     "focus": "Plurals -f, -fe to -ves",
+     "words": ["leaves", "wolves", "knives", "shelves", "loaves", "lives", "wives", "halves", "thieves", "scarves"]
+    },
+    {
+     "week": 24,
+     "focus": "Plurals -o and irregular",
+     "words": ["potatoes", "tomatoes", "heroes", "echoes", "volcanoes", "children", "women", "mice", "teeth", "geese"]
+    },
+    {
+     "week": 25,
+     "focus": "Adverbs",
+     "words": ["suddenly", "finally", "usually", "eventually", "meanwhile", "afterwards", "towards", "otherwise", "nearby", "instead"]
+    },
+    {
+     "week": 26,
+     "focus": "Geography words",
+     "words": ["climate", "continent", "country", "desert", "environment", "equator", "mountain", "river", "volcano", "coastline"]
+    },
+    {
+     "week": 27,
+     "focus": "Science words",
+     "words": ["habitat", "predator", "prey", "insulator", "conductor", "circuit", "vibration", "evaporate", "condense", "temperature"]
+    },
+    {
+     "week": 28,
+     "focus": "History words",
+     "words": ["ancient", "Roman", "empire", "invasion", "settlement", "Viking", "Saxon", "archaeologist", "civilisation", "monarch"]
+    },
+    {
+     "week": 29,
+     "focus": "Maths words",
+     "words": ["multiply", "divide", "fraction", "decimal", "perimeter", "quadrilateral", "symmetry", "angle", "parallel", "diagonal"]
+    },
+    {
+     "week": 30,
+     "focus": "Statutory list mix 1",
+     "words": ["February", "library", "separate", "strength", "guard", "guide", "height", "medicine", "opposite", "probably"]
+    },
+    {
+     "week": 31,
+     "focus": "Apostrophes",
+     "words": ["its", "it's", "your", "you're", "whose", "who's", "can't", "I'd", "children's", "teachers'"]
+    },
+    {
+     "week": 32,
+     "focus": "Endings -able, -ible (preview)",
+     "words": ["adorable", "comfortable", "enjoyable", "valuable", "possible", "terrible", "horrible", "visible", "flexible", "sensible"]
+    },
+    {
+     "week": 33,
+     "focus": "Endings -ant, -ent (preview)",
+     "words": ["important", "elegant", "distant", "instant", "different", "absent", "innocent", "accident", "excellent", "silent"]
+    },
+    {
+     "week": 34,
+     "focus": "Statutory list mix 2",
+     "words": ["mention", "minute", "natural", "ordinary", "particular", "peculiar", "popular", "promise", "purpose", "straight"]
+    },
+    {
+     "week": 35,
+     "focus": "Statutory list mix 3",
+     "words": ["actually", "calendar", "centre", "century", "certain", "complete", "consider", "continue", "describe", "extreme"]
+    },
+    {
+     "week": 36,
+     "focus": "Statutory list mix 4",
+     "words": ["enough", "exercise", "experience", "experiment", "grammar", "history", "imagine", "increase", "knowledge", "quarter"]
+    }
+   ]
+  },
+  {
+   "year": 5,
+   "wordsPerWeek": 10,
+   "intro": "Year 5 teaches the Y5/6 spelling patterns and homophones first, then the first 50 words of the Y5/6 statutory list (weeks 19 to 23), then word origins and subject vocabulary.",
+   "weeks": [
+    {
+     "week": 1,
+     "focus": "Y3/4 tricky words 1",
+     "words": ["February", "library", "separate", "strength", "special", "straight", "perhaps", "probably", "whether", "weight"]
+    },
+    {
+     "week": 2,
+     "focus": "Y3/4 tricky words 2",
+     "words": ["experiment", "experience", "important", "interest", "island", "knowledge", "naughty", "occasion", "quarter", "recent"]
+    },
+    {
+     "week": 3,
+     "focus": "Endings -cious, -tious",
+     "words": ["precious", "delicious", "vicious", "suspicious", "ferocious", "ambitious", "cautious", "fictitious", "infectious", "nutritious"]
+    },
+    {
+     "week": 4,
+     "focus": "Endings -cial, -tial",
+     "words": ["special", "social", "official", "artificial", "racial", "facial", "crucial", "initial", "essential", "partial"]
+    },
+    {
+     "week": 5,
+     "focus": "Endings -ant, -ance, -ancy",
+     "words": ["observant", "hesitant", "tolerant", "substance", "distance", "importance", "assistance", "elegance", "tolerance", "vacancy"]
+    },
+    {
+     "week": 6,
+     "focus": "Endings -ent, -ence, -ency",
+     "words": ["innocent", "decent", "frequent", "confident", "absence", "patience", "presence", "science", "urgency", "fluency"]
+    },
+    {
+     "week": 7,
+     "focus": "Endings -able, -ably",
+     "words": ["adorable", "adorably", "considerable", "considerably", "enjoyable", "reliable", "reliably", "comfortable", "comfortably", "valuable"]
+    },
+    {
+     "week": 8,
+     "focus": "Endings -ible, -ibly",
+     "words": ["possible", "possibly", "horrible", "horribly", "terrible", "terribly", "visible", "visibly", "sensible", "sensibly"]
+    },
+    {
+     "week": 9,
+     "focus": "Adding endings to -fer words",
+     "words": ["referring", "referred", "preferring", "preferred", "transferring", "transferred", "offering", "offered", "suffering", "suffered"]
+    },
+    {
+     "week": 10,
+     "focus": "ie and ei after c",
+     "words": ["receive", "deceive", "conceive", "perceive", "ceiling", "receipt", "achieve", "believe", "field", "niece"]
+    },
+    {
+     "week": 11,
+     "focus": "Exceptions to ie and ei",
+     "words": ["neighbour", "weigh", "weird", "protein", "seize", "caffeine", "height", "eight", "foreign", "leisure"]
+    },
+    {
+     "week": 12,
+     "focus": "-ough words",
+     "words": ["bought", "thought", "ought", "brought", "fought", "cough", "trough", "plough", "borough", "thorough"]
+    },
+    {
+     "week": 13,
+     "focus": "Silent letters",
+     "words": ["doubt", "debt", "island", "whistle", "muscle", "solemn", "rhyme", "rhythm", "lightning", "queue"]
+    },
+    {
+     "week": 14,
+     "focus": "Hyphens",
+     "words": ["co-operate", "co-ordinate", "re-enter", "re-elect", "non-stop", "anti-clockwise", "ex-captain", "self-aware", "well-known", "twenty-five"]
+    },
+    {
+     "week": 15,
+     "focus": "Homophones 1",
+     "words": ["aisle", "isle", "aloud", "allowed", "altar", "alter", "ascent", "assent", "bridal", "bridle"]
+    },
+    {
+     "week": 16,
+     "focus": "Homophones 2",
+     "words": ["cereal", "serial", "cheque", "check", "queue", "cue", "draft", "draught", "desert", "dessert"]
+    },
+    {
+     "week": 17,
+     "focus": "Homophones 3",
+     "words": ["guessed", "guest", "morning", "mourning", "past", "passed", "principal", "principle", "profit", "prophet"]
+    },
+    {
+     "week": 18,
+     "focus": "Homophones 4",
+     "words": ["stationary", "stationery", "steal", "steel", "wary", "weary", "who's", "whose", "tide", "tied"]
+    },
+    {
+     "week": 19,
+     "focus": "Statutory list 1",
+     "words": ["accommodate", "accompany", "according", "achieve", "aggressive", "amateur", "ancient", "apparent", "appreciate", "attached"]
+    },
+    {
+     "week": 20,
+     "focus": "Statutory list 2",
+     "words": ["available", "average", "awkward", "bargain", "bruise", "category", "cemetery", "committee", "communicate", "community"]
+    },
+    {
+     "week": 21,
+     "focus": "Statutory list 3",
+     "words": ["competition", "conscience", "conscious", "controversy", "convenience", "correspond", "criticise", "curiosity", "definite", "desperate"]
+    },
+    {
+     "week": 22,
+     "focus": "Statutory list 4",
+     "words": ["determined", "develop", "dictionary", "disastrous", "embarrass", "environment", "equip", "especially", "exaggerate", "excellent"]
+    },
+    {
+     "week": 23,
+     "focus": "Statutory list 5",
+     "words": ["existence", "explanation", "familiar", "foreign", "forty", "frequently", "government", "guarantee", "harass", "hindrance"]
+    },
+    {
+     "week": 24,
+     "focus": "Words from French",
+     "words": ["ballet", "bouquet", "café", "chalet", "chef", "cuisine", "fiancé", "genre", "menu", "restaurant"]
+    },
+    {
+     "week": 25,
+     "focus": "Words from Greek",
+     "words": ["chaos", "chemist", "orchestra", "character", "scheme", "mechanic", "anchor", "architect", "echo", "ache"]
+    },
+    {
+     "week": 26,
+     "focus": "Words from Latin",
+     "words": ["aquatic", "audience", "auditorium", "construct", "dictionary", "educate", "equator", "manual", "spectator", "structure"]
+    },
+    {
+     "week": 27,
+     "focus": "Words from other languages",
+     "words": ["bungalow", "cheetah", "jungle", "pyjamas", "shampoo", "yoghurt", "tycoon", "tsunami", "safari", "algebra"]
+    },
+    {
+     "week": 28,
+     "focus": "Science words",
+     "words": ["gravity", "friction", "evaporation", "reproduction", "hibernation", "pollination", "orbit", "magnetic", "solution", "dissolve"]
+    },
+    {
+     "week": 29,
+     "focus": "History words",
+     "words": ["Tudor", "Victorian", "empire", "evidence", "invasion", "monarchy", "settlement", "artefact", "archaeology", "civilisation"]
+    },
+    {
+     "week": 30,
+     "focus": "Geography words",
+     "words": ["continent", "hemisphere", "latitude", "longitude", "meridian", "tropics", "tectonic", "erosion", "estuary", "population"]
+    },
+    {
+     "week": 31,
+     "focus": "Maths words",
+     "words": ["equivalent", "numerator", "denominator", "perimeter", "parallelogram", "quadrilateral", "symmetry", "reflection", "translation", "coordinates"]
+    },
+    {
+     "week": 32,
+     "focus": "Y5 rules revision",
+     "words": ["ambitious", "official", "tolerance", "patience", "reliable", "terrible", "preferred", "receive", "neighbour", "thorough"]
+    },
+    {
+     "week": 33,
+     "focus": "Statutory list revision (weeks 19 and 20)",
+     "words": ["accommodate", "aggressive", "appreciate", "bruise", "cemetery", "committee", "community", "conscience", "controversy", "criticise"]
+    },
+    {
+     "week": 34,
+     "focus": "Statutory list revision (weeks 21 and 22)",
+     "words": ["determined", "disastrous", "embarrass", "environment", "especially", "exaggerate", "excellent", "conscious", "correspond", "competition"]
+    },
+    {
+     "week": 35,
+     "focus": "Statutory list revision (week 23 and more)",
+     "words": ["existence", "explanation", "familiar", "forty", "frequently", "government", "guarantee", "harass", "hindrance", "foreign"]
+    },
+    {
+     "week": 36,
+     "focus": "Year 5 mixed revision",
+     "words": ["important", "innocent", "comfortable", "horrible", "official", "receive", "preferred", "rhythm", "ancient", "desperate"]
+    }
+   ]
+  },
+  {
+   "year": 6,
+   "wordsPerWeek": 10,
+   "intro": "Year 6 teaches the second 50 words of the Y5/6 statutory list (weeks 1 to 5), revises the full list (weeks 6 to 15), then covers word-building, commonly misspelt words, homophones and secondary-school vocabulary.",
+   "weeks": [
+    {
+     "week": 1,
+     "focus": "Statutory list 6",
+     "words": ["identity", "immediate", "individual", "interfere", "interrupt", "language", "leisure", "lightning", "marvellous", "mischievous"]
+    },
+    {
+     "week": 2,
+     "focus": "Statutory list 7",
+     "words": ["muscle", "necessary", "neighbour", "nuisance", "occupy", "occur", "opportunity", "parliament", "persuade", "physical"]
+    },
+    {
+     "week": 3,
+     "focus": "Statutory list 8",
+     "words": ["prejudice", "privilege", "profession", "programme", "pronunciation", "queue", "recognise", "recommend", "relevant", "restaurant"]
+    },
+    {
+     "week": 4,
+     "focus": "Statutory list 9",
+     "words": ["rhyme", "rhythm", "sacrifice", "secretary", "shoulder", "signature", "sincere", "soldier", "stomach", "sufficient"]
+    },
+    {
+     "week": 5,
+     "focus": "Statutory list 10",
+     "words": ["suggest", "symbol", "system", "temperature", "thorough", "twelfth", "variety", "vegetable", "vehicle", "yacht"]
+    },
+    {
+     "week": 6,
+     "focus": "Revision: list 1",
+     "words": ["accommodate", "accompany", "according", "achieve", "aggressive", "amateur", "ancient", "apparent", "appreciate", "attached"]
+    },
+    {
+     "week": 7,
+     "focus": "Revision: list 2",
+     "words": ["available", "average", "awkward", "bargain", "bruise", "category", "cemetery", "committee", "communicate", "community"]
+    },
+    {
+     "week": 8,
+     "focus": "Revision: list 3",
+     "words": ["competition", "conscience", "conscious", "controversy", "convenience", "correspond", "criticise", "curiosity", "definite", "desperate"]
+    },
+    {
+     "week": 9,
+     "focus": "Revision: list 4",
+     "words": ["determined", "develop", "dictionary", "disastrous", "embarrass", "environment", "equip", "especially", "exaggerate", "excellent"]
+    },
+    {
+     "week": 10,
+     "focus": "Revision: list 5",
+     "words": ["existence", "explanation", "familiar", "foreign", "forty", "frequently", "government", "guarantee", "harass", "hindrance"]
+    },
+    {
+     "week": 11,
+     "focus": "Revision: lists 6 and 7",
+     "words": ["identity", "individual", "interfere", "language", "lightning", "muscle", "necessary", "nuisance", "occur", "persuade"]
+    },
+    {
+     "week": 12,
+     "focus": "Revision: lists 6 and 7",
+     "words": ["immediate", "interrupt", "leisure", "marvellous", "mischievous", "neighbour", "occupy", "opportunity", "parliament", "physical"]
+    },
+    {
+     "week": 13,
+     "focus": "Revision: lists 8 and 9",
+     "words": ["prejudice", "profession", "pronunciation", "recognise", "relevant", "rhyme", "sacrifice", "secretary", "signature", "soldier"]
+    },
+    {
+     "week": 14,
+     "focus": "Revision: lists 8 and 9",
+     "words": ["privilege", "programme", "queue", "recommend", "restaurant", "rhythm", "shoulder", "sincere", "stomach", "sufficient"]
+    },
+    {
+     "week": 15,
+     "focus": "Revision: list 10",
+     "words": ["suggest", "system", "thorough", "variety", "vehicle", "symbol", "temperature", "twelfth", "vegetable", "yacht"]
+    },
+    {
+     "week": 16,
+     "focus": "Prefixes dis-, mis-, over-, under-",
+     "words": ["disobey", "disagree", "misunderstand", "misbehave", "overreact", "overlook", "overcome", "underestimate", "undercover", "underground"]
+    },
+    {
+     "week": 17,
+     "focus": "Prefixes pre-, post-, semi-, non-",
+     "words": ["prehistoric", "preview", "prepare", "preheat", "postpone", "postscript", "semicircle", "semicolon", "nonsense", "nonstop"]
+    },
+    {
+     "week": 18,
+     "focus": "Suffixes -ify, -ise, -ate, -en",
+     "words": ["simplify", "classify", "identify", "organise", "recognise", "apologise", "activate", "populate", "shorten", "lengthen"]
+    },
+    {
+     "week": 19,
+     "focus": "Suffixes -ity, -ism, -ist",
+     "words": ["ability", "activity", "curiosity", "reality", "humanity", "tourism", "criticism", "scientist", "specialist", "pianist"]
+    },
+    {
+     "week": 20,
+     "focus": "Suffixes -ive, -ative",
+     "words": ["active", "creative", "expensive", "attractive", "informative", "competitive", "imaginative", "impressive", "effective", "sensitive"]
+    },
+    {
+     "week": 21,
+     "focus": "Suffixes -ial, -ual",
+     "words": ["initial", "financial", "essential", "official", "serious", "obvious", "annual", "casual", "usual", "visual"]
+    },
+    {
+     "week": 22,
+     "focus": "Suffix -tion revision",
+     "words": ["competition", "definition", "education", "imagination", "information", "invitation", "nutrition", "pollution", "population", "preparation"]
+    },
+    {
+     "week": 23,
+     "focus": "Commonly misspelt words 1",
+     "words": ["separate", "definitely", "necessary", "receive", "believe", "embarrass", "accommodate", "occurred", "beginning", "until"]
+    },
+    {
+     "week": 24,
+     "focus": "Commonly misspelt words 2",
+     "words": ["whether", "weather", "quiet", "quite", "truly", "argument", "tomorrow", "writing", "written", "grammar"]
+    },
+    {
+     "week": 25,
+     "focus": "Homophones 1",
+     "words": ["accept", "except", "affect", "effect", "advice", "advise", "practice", "practise", "licence", "license"]
+    },
+    {
+     "week": 26,
+     "focus": "Homophones 2",
+     "words": ["passed", "past", "desert", "dessert", "principal", "principle", "stationary", "stationery", "complement", "compliment"]
+    },
+    {
+     "week": 27,
+     "focus": "Homophones 3",
+     "words": ["berry", "bury", "current", "currant", "draught", "draft", "council", "counsel", "medal", "meddle"]
+    },
+    {
+     "week": 28,
+     "focus": "Apostrophes",
+     "words": ["who's", "whose", "it's", "its", "children's", "teachers'", "James's", "ladies'", "oxen's", "people's"]
+    },
+    {
+     "week": 29,
+     "focus": "Science words",
+     "words": ["circulatory", "evolution", "adaptation", "offspring", "inherit", "classification", "microorganism", "refraction", "resistance", "voltage"]
+    },
+    {
+     "week": 30,
+     "focus": "History words",
+     "words": ["chronological", "democracy", "evacuee", "rationing", "civilisation", "conquest", "monarch", "propaganda", "artefact", "legacy"]
+    },
+    {
+     "week": 31,
+     "focus": "Geography words",
+     "words": ["atmosphere", "biodiversity", "climate", "compass", "economy", "equator", "habitat", "migration", "sustainable", "urban"]
+    },
+    {
+     "week": 32,
+     "focus": "Grammar words",
+     "words": ["adverbial", "conjunction", "determiner", "preposition", "pronoun", "subjunctive", "synonym", "antonym", "parenthesis", "clause"]
+    },
+    {
+     "week": 33,
+     "focus": "Secondary school subjects",
+     "words": ["laboratory", "geography", "mathematics", "technology", "literature", "chemistry", "biology", "geometry", "physics", "gymnasium"]
+    },
+    {
+     "week": 34,
+     "focus": "Secondary school skills",
+     "words": ["independent", "responsible", "organise", "achievement", "ambition", "concentrate", "confident", "diligent", "perseverance", "punctual"]
+    },
+    {
+     "week": 35,
+     "focus": "Full revision mix 1",
+     "words": ["accommodate", "conscience", "disastrous", "embarrass", "environment", "exaggerate", "mischievous", "necessary", "parliament", "pronunciation"]
+    },
+    {
+     "week": 36,
+     "focus": "Full revision mix 2",
+     "words": ["privilege", "queue", "rhythm", "secretary", "sufficient", "temperature", "thorough", "twelfth", "vegetable", "yacht"]
+    }
+   ]
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 # Vocabursters
 
-**Free weekly spelling games for Year 1 to Year 6 (ages 5 to 11).** Vocabursters turns the 216 weekly spelling and vocabulary tests (1,908 words, following the National Curriculum in England spelling appendix) into games, with a recorded British voice reading every word.
+**Free weekly spelling games for Year 1 to Year 6 (ages 5 to 11).** Vocabursters turns the 216 weekly spelling and vocabulary tests (1,908 words, following the National Curriculum in England spelling appendix) into games, with a recorded voice reading every word.
 
 There's no login and no adverts, and it works offline. Progress stays on your device.
 
@@ -61,6 +61,6 @@ After adding words or sentences, run `scripts/generate_voice.py` to record the n
 
 ## Credits and licences
 
-- **Voice:** [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M), voice `bf_emma` (Apache 2.0).
+- **Voice:** [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M), voice `af_heart` (Apache 2.0).
 - **Fonts:** Andika, Atkinson Hyperlegible, Grandstander and Lexend (SIL Open Font License 1.1).
 - **Word lists:** based on the National Curriculum in England spelling appendix.

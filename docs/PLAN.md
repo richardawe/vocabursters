@@ -162,9 +162,9 @@ Times Tables Rock Stars (TTRS) is the times-tables app many UK primary schools u
 
 **Audio first**
 - Every instruction and every word has a speaker button. A child who can't read can still play.
-- Words are read in a British English voice where the device has one, at a slower default speed (adjustable).
+- Words and sentences are read by one recorded voice for every child, at a slightly slower speed (adjustable). Instructions use the device's own voice (British English where the device has one).
 - The test reads word, sentence, word, as the PDF tells parents to do.
-- **Recorded voice (done):** all 1,338 words and every example sentence are recorded with Kokoro's British voice, so every child hears the same clear pronunciation. Words spelt the same but said differently are fixed by hand (for example *lead* the metal). The clips are about 40 kbps MP3, a few KB each. Device speech stays as the fallback.
+- **Recorded voice (done):** all 1,338 words and every example sentence are recorded with Kokoro's voice "Heart" (`af_heart`), so every child hears the same clear pronunciation. Heart was chosen by ear over all 8 British Kokoro voices, using 8 accent tests built from the word lists; the British voices sounded foreign (one was described as "Italian"). Heart has an American accent (short *a* in *bath*, a sounded *r*), but reads British spellings correctly (*draught* is said like *draft*, and *cheque*, *programme* and *pyjamas* come out right). Words spelt the same but said differently are fixed by hand (for example *lead* the metal). The clips are about 40 kbps MP3, a few KB each. Device speech stays as the fallback.
 
 **The on-screen keyboard**
 - A custom keyboard means **no autocorrect, predictive text or spell-check giving the answer away**. This is the most important integrity feature.
@@ -321,7 +321,7 @@ Some parents expect to find an app in the store, as they do for TTRS. The repo n
 |---|---|---|
 | **0. Mockup** (done) | Clickable prototype with every game working on real data for all 6 years, the parent zone, stickers and the pet. Version 2 adds coins and shop, Speller status, Speed round, Bubble Battle, Word map, Smart practice and the mobile layout | — |
 | **1. MVP** | Port to Vite + TypeScript. IndexedDB storage. Workbox offline. Self-hosted fonts. Sentences for every word. Unit tests for the spelling engine. Accessibility audit. Testing on real phones (cheap Android, older iPhone, iPad). Hosting and domain. Privacy notice | 5–7 weeks for one developer |
-| **2. Quality** | Recorded British voice. Illustrated avatars, pet and shop items (commissioned, original). Teacher content review. Word Builder and Rule Sorter. Spaced review of earlier weeks. **App Store and Google Play versions** via Capacitor, if wanted | 6–8 weeks |
+| **2. Quality** | A recorded British voice, if a better open-source one appears (a human recording is the other option). Illustrated avatars, pet and shop items (commissioned, original). Teacher content review. Word Builder and Rule Sorter. Spaced review of earlier weeks. **App Store and Google Play versions** via Capacitor, if wanted | 6–8 weeks |
 | **3. Delight** | Sentence Doctor, Word Class Detective, Apostrophe Factory, Boss Battle, Trace It. More pet accessories. Optional backup by QR code between devices | Ongoing |
 
 ---
@@ -341,7 +341,7 @@ There are no analytics, so success shows up on the device and in conversations w
 **Decided (November 2026)**
 
 1. **Name:** Vocabursters. Web address: https://richardawe.github.io/vocabursters/ (GitHub Pages, deployed on every push).
-2. **Voice:** recorded with **Kokoro** (open-source, Apache 2.0), British voice `bf_emma`, for every word and example sentence. Device voices are only a fallback, and still read instructions that contain a child's name.
+2. **Voice:** recorded with **Kokoro** (open-source, Apache 2.0), voice `af_heart` (American English, chosen by ear over the British voices), for every word and example sentence. Device voices are only a fallback, and still read instructions that contain a child's name.
 3. **Capital letters:** gentle. A wrong capital counts as right, with a reminder. Parents can switch to strict in Settings.
 4. **Price:** free.
 5. **Content:** word lists and sentences have been checked, so the lists ship as they are (including Y6 W21).

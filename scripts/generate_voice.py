@@ -1,9 +1,11 @@
 """Record every spelling word and example sentence with Kokoro (open-source text-to-speech).
 
 Output (committed, served with the app):
-  app/public/audio/w/<id>.mp3      one clip per word
-  app/public/audio/s/<id>.mp3      one clip per example sentence
-  app/public/audio/manifest.json   { voice, model, w: {word: path}, s: {word: path} }
+  app/public/audio/<voice>/w/<id>.mp3   one clip per word
+  app/public/audio/<voice>/s/<id>.mp3   one clip per example sentence
+  app/public/audio/manifest.json        { voice, model, w: {word: path}, s: {word: path} }
+Clips live in a folder named after the voice, so changing VOICE gives new file names and
+devices that saved the old voice download the new one instead of mixing the two.
 
 Kokoro-82M (https://huggingface.co/hexgrad/Kokoro-82M) is Apache-2.0 licensed. The model downloads
 from Hugging Face on first run (~330 MB).
@@ -31,11 +33,11 @@ from kokoro import KPipeline
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "app/public/audio"
-VOICE = "bf_emma"      # British English, female
+VOICE = "af_heart"     # Kokoro's highest-rated voice (American English, female); chosen by ear over the British voices
 SPEED = 0.9            # a little slower than conversational, for children
 
 # Words spelt the same but said differently: say them the way the word list means them.
-# Phonemes use Kokoro's (misaki) British notation.
+# Phonemes use Kokoro's (misaki) notation.
 OVERRIDES = {
     "lead": "[lead](/lˈɛd/)",   # the metal, paired with "led" in the Y3 homophone week
 }
@@ -70,17 +72,17 @@ def main():
 
     jobs = [("w", w, w + ".") for w in all_words] + [("s", w, t) for w, t in sorted(sentences.items())]
     for kind in "ws":
-        (OUT / kind).mkdir(parents=True, exist_ok=True)
+        (OUT / VOICE / kind).mkdir(parents=True, exist_ok=True)
     manifest = {"voice": VOICE, "model": "hexgrad/Kokoro-82M", "speed": SPEED, "w": {}, "s": {}}
     todo = []
     for kind, key, text in jobs:
-        rel = f"audio/{kind}/{clip_id(key)}.mp3"
+        rel = f"audio/{VOICE}/{kind}/{clip_id(key)}.mp3"
         manifest[kind][key] = rel
         if force or not (ROOT / "app/public" / rel).exists():
             todo.append((kind, key, text, ROOT / "app/public" / rel))
     print(f"{len(jobs)} clips in total, {len(todo)} to record")
 
-    pipe = KPipeline(lang_code="b", repo_id="hexgrad/Kokoro-82M")
+    pipe = KPipeline(lang_code=VOICE[0], repo_id="hexgrad/Kokoro-82M")   # "a" American, "b" British
     tmp = pathlib.Path(tempfile.mkdtemp())
     with cf.ThreadPoolExecutor(4) as pool:
         futures = []
@@ -97,7 +99,7 @@ def main():
         for f in futures:
             f.result()
     (OUT / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    size = sum(p.stat().st_size for p in OUT.rglob("*.mp3"))
+    size = sum(p.stat().st_size for p in (OUT / VOICE).rglob("*.mp3"))
     print(f"done: {len(manifest['w'])} words, {len(manifest['s'])} sentences, {size / 1e6:.1f} MB")
 
 

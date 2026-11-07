@@ -623,7 +623,8 @@ function voice() { return TTS.voices.find(v => v.name === S.settings.voice) || T
 const SENT_REV = {};
 Object.entries(SENT).forEach(([w, t]) => { SENT_REV[t] = w; });
 const VOICE = { ok: false, man: null, el: null, seq: 0 };
-const AUDIO_CACHE = "vocabursters-audio-v1";
+const AUDIO_CACHE = "vocabursters-audio-v2";
+const vyKey = y => (VOICE.man ? VOICE.man.voice : "") + ":" + y;   // saved years are remembered per voice
 async function loadVoice() {
   try { const r = await fetch("audio/manifest.json"); if (!r.ok) throw 0; VOICE.man = await r.json(); VOICE.ok = !!(VOICE.man && VOICE.man.w); } catch (e) { VOICE.ok = false; }
   return VOICE.ok;
@@ -701,12 +702,12 @@ async function downloadYear(y, onProgress) {
     }));
     onProgress && onProgress(done, urls.length);
   }
-  S.voiceYears = { ...(S.voiceYears || {}), [y]: true }; save();
+  S.voiceYears = { ...(S.voiceYears || {}), [vyKey(y)]: true }; save();
   return true;
 }
 function autoVoice() {
   const p = me();
-  if (!p || !VOICE.ok || !navigator.onLine || (S.voiceYears || {})[p.year]) return;
+  if (!p || !VOICE.ok || !navigator.onLine || (S.voiceYears || {})[vyKey(p.year)]) return;
   downloadYear(p.year).catch(() => { });
 }
 let AC;
@@ -1641,7 +1642,7 @@ const PARENT = {
       <div class="field"><span class="lbl">Letter style</span><div class="choice">${[["andika", "Andika (school letters)"], ["lexend", "Lexend"], ["atkinson", "Atkinson Hyperlegible"]].map(([k, l]) => `<button aria-pressed="${st.font === k}" data-font="${k}">${l}</button>`).join("")}</div><p class="muted small-text">Andika uses the single-storey “a” and “g” children learn to write.</p></div>
       <div class="field"><span class="lbl">Text size</span><div class="choice">${[[1, "Normal"], [1.15, "Large"], [1.3, "Extra large"]].map(([k, l]) => `<button aria-pressed="${st.size === k}" data-size="${k}">${l}</button>`).join("")}</div></div>
       <div class="field"><span class="lbl">Speaking speed</span><div class="choice">${[[.7, "Slow"], [.85, "Steady"], [1, "Normal"]].map(([k, l]) => `<button aria-pressed="${st.rate === k}" data-rate="${k}">${l}</button>`).join("")}<button data-sayword="there">▶ Test</button></div></div>
-      <div class="field"><label for="voice">Voice</label><select id="voice" class="input"><option value="">${VOICE.ok ? "Vocabursters voice (recorded, British English)" : "Automatic (British English if available)"}</option>${TTS.voices.map(v => `<option value="${esc(v.name)}" ${v.name === st.voice ? "selected" : ""}>Device voice: ${esc(v.name)}</option>`).join("")}</select>
+      <div class="field"><label for="voice">Voice</label><select id="voice" class="input"><option value="">${VOICE.ok ? "Vocabursters voice (recorded)" : "Automatic (British English if available)"}</option>${TTS.voices.map(v => `<option value="${esc(v.name)}" ${v.name === st.voice ? "selected" : ""}>Device voice: ${esc(v.name)}</option>`).join("")}</select>
         <p class="muted small-text">${VOICE.ok ? "Spelling words and sentences use the recorded voice. Instructions use this device's own voice." : TTS.ok ? "The recorded voice isn't available here, so the device's own voice is used." : "This browser cannot read words aloud. Try Safari or Chrome."}</p></div>
       <div class="field"><span class="lbl">Capital letters</span><div class="choice"><button aria-pressed="${st.capitals === "gentle"}" data-cap="gentle">Gentle: remind, still count as right</button><button aria-pressed="${st.capitals === "strict"}" data-cap="strict">Strict: must match</button></div></div>
       ${sw("sfx", "Sound effects", "Pops and chimes. Words are still read aloud when this is off.")}
@@ -1672,7 +1673,7 @@ const PARENT = {
       ${window.__installPrompt ? '<div class="row"><button class="btn primary" id="install">Install now</button></div>' : ""}</section>
     ${VOICE.ok && "caches" in window ? `<section class="panel"><h2>Voice for offline use</h2>
       <p class="muted">The recorded voice saves itself as your child plays, and each player's year downloads in the background. To be sure it works with no internet, save a year now (about 1 MB each).</p>
-      <div class="choice">${[1, 2, 3, 4, 5, 6].map(y => `<button data-dl="${y}" aria-pressed="${!!(S.voiceYears || {})[y]}">Year ${y}${(S.voiceYears || {})[y] ? " ✓" : ""}</button>`).join("")}</div>
+      <div class="choice">${[1, 2, 3, 4, 5, 6].map(y => `<button data-dl="${y}" aria-pressed="${!!(S.voiceYears || {})[vyKey(y)]}">Year ${y}${(S.voiceYears || {})[vyKey(y)] ? " ✓" : ""}</button>`).join("")}</div>
       <p id="dlmsg" class="muted small-text" aria-live="polite"></p></section>` : ""}
     <section class="panel"><h2>About</h2><p class="small-text">Vocabursters is free. Word lists follow the National Curriculum in England spelling appendix. The recorded voice was made with <b>Kokoro</b> (open-source text-to-speech, Apache 2.0 licence). Fonts: Andika, Atkinson Hyperlegible, Grandstander and Lexend (SIL Open Font Licence).</p></section>
     <section class="panel"><h2>Privacy</h2><p>Progress is stored only on this device. There are no accounts, adverts, in-app purchases, tracking or chat. Children's names never leave the device.</p></section>

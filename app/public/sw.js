@@ -2,7 +2,7 @@
 // __VERSION__ and __SHELL__ are filled in by scripts/build.py.
 const VERSION = "__VERSION__";
 const APP_CACHE = "vocabursters-app-" + VERSION;
-const AUDIO_CACHE = "vocabursters-audio-v1";   // the recorded voice, kept across app updates
+const AUDIO_CACHE = "vocabursters-audio-v2";   // the recorded voice, kept across app updates (new name = new voice)
 const SHELL = __SHELL__;
 
 self.addEventListener("install", e => {
@@ -12,7 +12,7 @@ self.addEventListener("install", e => {
 self.addEventListener("activate", e => {
   e.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k.startsWith("vocabursters-app-") && k !== APP_CACHE).map(k => caches.delete(k))))
+      .then(keys => Promise.all(keys.filter(k => (k.startsWith("vocabursters-app-") && k !== APP_CACHE) || (k.startsWith("vocabursters-audio-") && k !== AUDIO_CACHE)).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });

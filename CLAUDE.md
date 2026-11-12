@@ -42,7 +42,7 @@ npm run build:native && node scripts/store_screenshots.js          # retake stor
 - Never commit signing material. `.gitignore` blocks `*.jks`, `*.p8`, `*.p12`, `android/keystore.properties`. CI reads signing details from GitHub secrets (names in `docs/STORE_RELEASE.md`).
 - Generated folders that are not committed: `dist/`, `native-www/`, `node_modules/`, `android/app/src/main/assets/public`, `ios/App/App/public`.
 - Voice clips live in `audio/<voice>/`. Changing the voice means changing the folder and the cache name, so devices don't mix voices.
-- GitHub Pages (https://richardawe.github.io/vocabursters/) is the only site. It deploys from `main` and `claude/eager-faraday-o2i1u5` (`pages.yml`). There is no `main` branch yet. `claude/blissful-fermi-hmcnvp` is the most up-to-date branch but does not deploy. Changing which branch deploys redeploys the public site, so ask the owner first.
+- GitHub Pages (https://richardawe.github.io/vocabursters/) is the only site. It deploys **only from `main`** (`pages.yml`), so any push to `main` updates the public site. Do work on a feature branch and merge into `main` only when the owner asks.
 - No Mac and no Android emulator (no KVM) in cloud sessions:
   - iOS is checked by the `ios.yml` workflow on `macos-26`;
   - test native code paths in Playwright with a fake `window.Capacitor` + `window.androidBridge` (see `scripts/store_screenshots.js`).

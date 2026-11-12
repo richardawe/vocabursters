@@ -2,7 +2,7 @@ name: Deploy app to GitHub Pages
 
 on:
   push:
-    branches: [main, claude/eager-faraday-o2i1u5]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

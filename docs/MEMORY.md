@@ -22,11 +22,11 @@ _Last updated: 2026-11-12_
   - **iOS:** compiles in the `ios.yml` GitHub workflow (simulator build, Xcode 26.6 on `macos-26`). First run passed on 2026-11-12. Not yet signed or run on a device.
   - **CI:** the first `android.yml` and `ios.yml` runs both passed (2026-11-12).
   - **Store materials, all ready:** icons, splash screens, screenshots for every required size, the Play feature graphic, listing copy, form answers, and the privacy and support pages.
-- **Site:** GitHub Pages is the only site. It deploys from `claude/eager-faraday-o2i1u5` (at `20f0d07`, older); there is no `main` branch. So `privacy.html` and `support.html` are **not online yet** (404), and the stores need those URLs. **Awaiting the owner's OK** to either add `claude/blissful-fermi-hmcnvp` to the `pages.yml` branches, or create `main` from it and deploy only from `main`.
+- **Site:** GitHub Pages is the only site, and it deploys **only from `main`**. `main` was created on 2026-11-12 from `claude/blissful-fermi-hmcnvp`. `claude/eager-faraday-o2i1u5` is old and no longer deploys. The privacy and support pages go live with the first `main` deploy.
 
 ## Next steps
 
-1. Get the owner's OK to deploy Pages from the up-to-date branch (or from a new `main`). Then check https://richardawe.github.io/vocabursters/privacy.html and `/support.html` open.
+1. Check https://richardawe.github.io/vocabursters/privacy.html and `/support.html` open. On GitHub, set `main` as the default branch (Settings → General) and, if Pages complains, allow `main` under Settings → Environments → github-pages.
 2. Owner tasks (see `docs/STORE_RELEASE.md`):
    - **Apple:**
      - enrol in the Developer Program;
@@ -67,6 +67,7 @@ _Last updated: 2026-11-12_
 | 2026-11 | Word lists and sentences checked; they ship as they are |
 | 2026-11 | Delivered as an installable web app on GitHub Pages **and** on the App Store and Google Play |
 | 2026-11-12 | Store apps: Capacitor 8, one build per platform for phones and tablets. Phones are portrait-only, tablets can turn. Voice bundled for offline use. iOS uses Swift Package Manager |
+| 2026-11-12 | GitHub Pages deploys only from `main`; work happens on branches and is merged into `main` to publish |
 | 2026-11-12 | Package / bundle ID `app.vocabursters.spelling` (permanent once uploaded) |
 | 2026-11-12 | Store builds run in GitHub Actions, so no Mac is needed. Signing comes from repo secrets; build numbers come from the workflow run number |
 | 2026-11-12 | Listings: category Education; Apple "Data Not Collected", 4+, Kids Category optional (6–8); Google: all children's age groups (Families Policy), no data collected or shared |
@@ -80,7 +81,7 @@ _Last updated: 2026-11-12_
   - Added icons and splash screens, store screenshots and graphics, privacy and support pages, `store/LISTING.md`, `docs/STORE_RELEASE.md`, and the `android.yml` / `ios.yml` workflows.
   - Created `CLAUDE.md` and this memory file.
   - First CI runs passed: Android AAB/APKs, and the iOS simulator build on Xcode 26.6.
-  - Found that the privacy and support pages are not live, because Pages deploys from an older branch. Changing that is waiting for the owner's OK.
+  - Created `main` from `claude/blissful-fermi-hmcnvp` and made it the only branch Pages deploys from (owner's choice), which puts the privacy and support pages online.
 - **2026-11-07**: switched the recorded voice to Kokoro `af_heart`.
   - Re-recorded 1,338 words and 183 sentences.
   - Clips moved to `audio/<voice>/`; the service worker deletes old voice caches.

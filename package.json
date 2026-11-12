@@ -6,16 +6,23 @@
   "scripts": {
     "build": "python3 scripts/build.py",
     "serve": "python3 scripts/build.py && python3 -m http.server -d dist 8000",
-    "cap:sync": "npm run build && cap sync",
+    "cap:sync": "npm run build:native && cap sync",
     "android": "npm run cap:sync && cap open android",
-    "ios": "npm run cap:sync && cap open ios"
+    "ios": "npm run cap:sync && cap open ios",
+    "build:native": "python3 scripts/build.py --native",
+    "assets": "capacitor-assets generate --ios --android --iconBackgroundColor '#E6F3EF' --iconBackgroundColorDark '#0D1C22' --splashBackgroundColor '#E6F3EF' --splashBackgroundColorDark '#0D1C22'"
   },
   "dependencies": {
+    "@capacitor-community/text-to-speech": "8.0.2",
     "@capacitor/android": "8.6.0",
+    "@capacitor/app": "8.1.2",
     "@capacitor/core": "8.6.0",
-    "@capacitor/ios": "8.6.0"
+    "@capacitor/haptics": "8.0.2",
+    "@capacitor/ios": "8.6.0",
+    "@capacitor/splash-screen": "8.0.2"
   },
   "devDependencies": {
+    "@capacitor/assets": "3.0.5",
     "@capacitor/cli": "8.6.0"
   }
 }

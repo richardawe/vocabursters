@@ -615,10 +615,17 @@ function smartWords(p, n = 10) {
     .sort((a, b) => b.k - a.k).slice(0, n).map(x => x.w);
 }
 
+/* ---------- App Store / Google Play builds (Capacitor) ---------- */
+const CAP = window.Capacitor;
+const NATIVE = !!(CAP && CAP.isNativePlatform && CAP.isNativePlatform());
+const plugin = name => { try { return NATIVE && CAP.isPluginAvailable(name) ? CAP.registerPlugin(name) : null; } catch (e) { return null; } };
+const NTTS = plugin("TextToSpeech"), HAPTICS = plugin("Haptics");
+if (NATIVE) { document.documentElement.classList.add("native"); const sp = plugin("SplashScreen"); sp && setTimeout(() => sp.hide().catch(() => { }), 150); }
+
 /* ---------- speech: recorded Kokoro voice, device voice as fallback ---------- */
-const TTS = { ok: "speechSynthesis" in window, voices: [] };
-function loadVoices() { if (!TTS.ok) return; try { TTS.voices = speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang)); } catch (e) { } }
-if (TTS.ok) { loadVoices(); try { speechSynthesis.onvoiceschanged = loadVoices; } catch (e) { } }
+const TTS = { ok: !!NTTS || "speechSynthesis" in window, voices: [] };
+function loadVoices() { if (!TTS.ok || NTTS) return; try { TTS.voices = speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang)); } catch (e) { } }
+if (TTS.ok && !NTTS) { loadVoices(); try { speechSynthesis.onvoiceschanged = loadVoices; } catch (e) { } }
 function voice() { return TTS.voices.find(v => v.name === S.settings.voice) || TTS.voices.find(v => /en[-_]GB/i.test(v.lang)) || TTS.voices[0]; }
 const SENT_REV = {};
 Object.entries(SENT).forEach(([w, t]) => { SENT_REV[t] = w; });
@@ -634,6 +641,10 @@ const RATE = { 0.7: 0.82, 0.85: 1, 1: 1.12 };
 function stopSpeech() {
   VOICE.seq++;
   if (VOICE.el) try { VOICE.el.pause(); } catch (e) { }
+  cancelDevice();
+}
+function cancelDevice() {
+  if (NTTS) { NTTS.stop().catch(() => { }); return; }
   if (TTS.ok) try { speechSynthesis.cancel(); } catch (e) { }
 }
 function playClip(url) {
@@ -651,7 +662,7 @@ function playClip(url) {
 const pause = ms => new Promise(r => setTimeout(r, ms));
 async function playSeq(parts, fallbackText) {
   const id = ++VOICE.seq;
-  if (TTS.ok) try { speechSynthesis.cancel(); } catch (e) { }
+  cancelDevice();
   for (const part of parts) {
     if (id !== VOICE.seq) return;
     if (typeof part === "number") { await pause(part); continue; }
@@ -662,6 +673,11 @@ async function playSeq(parts, fallbackText) {
 function deviceSay(text) {
   if (!TTS.ok) { toast("Ask a grown-up to read this out loud."); return Promise.resolve(); }
   if (VOICE.el) try { VOICE.el.pause(); } catch (e) { }
+  if (NTTS) {
+    return NTTS.stop().catch(() => { })
+      .then(() => NTTS.speak({ text, lang: "en-GB", rate: S.settings.rate, pitch: 1.05, volume: 1, category: "ambient" }))
+      .catch(() => { });
+  }
   try { speechSynthesis.cancel(); } catch (e) { }
   return new Promise(res => {
     try {
@@ -692,7 +708,7 @@ function yearClips(y) {
   return uniq(yearData(y).weeks.flatMap(wk => wk.words).flatMap(w => [VOICE.man.w[w], VOICE.man.s[w]]).filter(Boolean));
 }
 async function downloadYear(y, onProgress) {
-  if (!VOICE.ok || !("caches" in window)) return false;
+  if (NATIVE || !VOICE.ok || !("caches" in window)) return false;
   const urls = yearClips(y), cache = await caches.open(AUDIO_CACHE);
   let done = 0;
   for (let i = 0; i < urls.length; i += 8) {
@@ -707,7 +723,7 @@ async function downloadYear(y, onProgress) {
 }
 function autoVoice() {
   const p = me();
-  if (!p || !VOICE.ok || !navigator.onLine || (S.voiceYears || {})[vyKey(p.year)]) return;
+  if (NATIVE || !p || !VOICE.ok || !navigator.onLine || (S.voiceYears || {})[vyKey(p.year)]) return;
   downloadYear(p.year).catch(() => { });
 }
 let AC;
@@ -719,7 +735,11 @@ function tone(freqs, dur = .1, type = "sine", vol = .07) {
     freqs.forEach((f, i) => { const o = AC.createOscillator(), g = AC.createGain(); o.type = type; o.frequency.value = f; g.gain.setValueAtTime(vol, t + i * dur); g.gain.exponentialRampToValueAtTime(.001, t + i * dur + dur); o.connect(g).connect(AC.destination); o.start(t + i * dur); o.stop(t + i * dur + dur + .02); });
   } catch (e) { }
 }
-const buzz = pattern => { if (!S.settings.sfx) return; try { navigator.vibrate && navigator.vibrate(pattern); } catch (e) { } };
+const buzz = pattern => {
+  if (!S.settings.sfx) return;
+  if (HAPTICS) { const ms = [].concat(pattern)[0]; (ms > 20 ? HAPTICS.notification({ type: "WARNING" }) : HAPTICS.impact({ style: ms > 10 ? "MEDIUM" : "LIGHT" })).catch(() => { }); return; }
+  try { navigator.vibrate && navigator.vibrate(pattern); } catch (e) { }
+};
 const COIN = '<svg class="coin" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5" fill="#FFC53D" stroke="#9A6A00" stroke-width="2"/><path d="M10 5.5v9" stroke="#9A6A00" stroke-width="2" stroke-linecap="round"/></svg>';
 const sfx = { pop: () => { tone([620, 930], .06); buzz(8); }, good: () => { tone([523, 659, 784], .09); buzz(15); }, oops: () => { tone([330, 280], .11, "triangle", .045); buzz([30, 40, 30]); }, win: () => tone([523, 659, 784, 1047], .12), tap: () => tone([440], .04, "sine", .03) };
 function announce(t) { const l = $("#live"); l.textContent = ""; setTimeout(() => { l.textContent = t; }, 30); }
@@ -826,7 +846,7 @@ function render() {
 const SCREENS = {}, AFTER = {};
 
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-const isInstalled = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const isInstalled = () => NATIVE || matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
 function installTip() {
   if (isInstalled() || window.self !== window.top) return "";
   const how = window.__installPrompt ? '<button class="btn small primary" id="install-now">Install Vocabursters</button>'
@@ -1596,7 +1616,7 @@ document.addEventListener("click", e => {
 });
 
 SCREENS.parent = () => {
-  const tabs = [["progress", "Progress"], ["players", "Players"], ["settings", "Settings"], ["printable", "Printable test"], ["device", "Install & backup"]];
+  const tabs = [["progress", "Progress"], ["players", "Players"], ["settings", "Settings"], ["printable", "Printable test"], ["device", NATIVE ? "About & backup" : "Install & backup"]];
   return `<div class="row no-print"><button class="btn small plain" data-go="${S.active ? "map" : "profiles"}">← Back to games</button></div>
     <section class="stack no-print"><p class="eyebrow">Grown-ups area</p><h1>Parent zone</h1>
     <div class="tabs" role="tablist">${tabs.map(([id, l]) => `<button role="tab" aria-selected="${R.tab === id}" data-tab="${id}">${l}</button>`).join("")}</div></section>
@@ -1654,24 +1674,25 @@ const PARENT = {
   printable: () => {
     const p = S.profiles.find(x => x.id === R.child) || S.profiles[0];
     const y = R.py || p?.year || 1, w = R.pw || p?.week || 1, wk = weekData(y, w);
-    const canPrint = window.self === window.top;
+    const canPrint = window.self === window.top && !NATIVE;
     return `<section class="panel no-print"><p class="muted">The paper version of the Friday test, for the dining table. Read each word, use it in a sentence, then say it again.</p>
       <div class="row"><select id="py" class="input" style="width:auto">${[1, 2, 3, 4, 5, 6].map(v => `<option value="${v}" ${v === y ? "selected" : ""}>Year ${v}</option>`).join("")}</select>
       <select id="pw" class="input" style="width:auto;flex:1">${yearData(y).weeks.map(x => `<option value="${x.week}" ${x.week === w ? "selected" : ""}>Week ${x.week}: ${esc(x.focus)}</option>`).join("")}</select>
-      ${canPrint ? '<button class="btn small primary" id="doprint">Print</button>' : ""}</div></section>
+      ${canPrint ? '<button class="btn small primary" id="doprint">Print</button>' : ""}</div>
+      ${NATIVE ? '<p class="muted small-text">To print this sheet, open the Vocabursters website on a computer and go to Grown-ups → Printable test.</p>' : ""}</section>
     <section class="sheet"><h2>Spelling test · Year ${y}, week ${w}</h2><p>Name: ______________________ &nbsp; Score: ____ / ${wk.words.length}</p><p><b>Focus:</b> ${esc(wk.focus)}</p>
       <ol>${wk.words.map(() => "<li></li>").join("")}</ol>
       <p class="key-line"><b>Answers (fold over):</b> ${wk.words.map(esc).join(", ")}</p></section>`;
   },
-  device: () => `<section class="panel"><h2>Put Vocabursters on the home screen</h2>
+  device: () => `${NATIVE ? "" : `<section class="panel"><h2>Put Vocabursters on the home screen</h2>
       <p class="muted">It works like an app, even offline, once added. No account, no app store.</p>
       <div class="install-grid">
         <div><h3>iPhone or iPad</h3><ol><li>Open this page in <b>Safari</b>.</li><li>Tap the <b>Share</b> button.</li><li>Choose <b>Add to Home Screen</b>.</li></ol></div>
         <div><h3>Android</h3><ol><li>Open this page in <b>Chrome</b>.</li><li>Tap <b>⋮</b> (top right).</li><li>Choose <b>Install app</b> or <b>Add to Home screen</b>.</li></ol></div>
         <div><h3>Computer or Chromebook</h3><ol><li>Open in <b>Chrome</b> or <b>Edge</b>.</li><li>Click the install icon in the address bar.</li><li>Pin it to the taskbar.</li></ol></div>
       </div>
-      ${window.__installPrompt ? '<div class="row"><button class="btn primary" id="install">Install now</button></div>' : ""}</section>
-    ${VOICE.ok && "caches" in window ? `<section class="panel"><h2>Voice for offline use</h2>
+      ${window.__installPrompt ? '<div class="row"><button class="btn primary" id="install">Install now</button></div>' : ""}</section>`}
+    ${VOICE.ok && "caches" in window && !NATIVE ? `<section class="panel"><h2>Voice for offline use</h2>
       <p class="muted">The recorded voice saves itself as your child plays, and each player's year downloads in the background. To be sure it works with no internet, save a year now (about 1 MB each).</p>
       <div class="choice">${[1, 2, 3, 4, 5, 6].map(y => `<button data-dl="${y}" aria-pressed="${!!(S.voiceYears || {})[vyKey(y)]}">Year ${y}${(S.voiceYears || {})[vyKey(y)] ? " ✓" : ""}</button>`).join("")}</div>
       <p id="dlmsg" class="muted small-text" aria-live="polite"></p></section>` : ""}
@@ -1739,6 +1760,13 @@ setInterval(() => {
 window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); window.__installPrompt = e; if (R.screen === "profiles") render(); });
 window.addEventListener("appinstalled", () => { window.__installPrompt = null; if (R.screen === "profiles") render(); });
 S = load();
+/* Android back button in the Google Play app: close a game or step back to Home instead of quitting */
+const APP = plugin("App");
+if (APP) APP.addListener("backButton", () => {
+  const q = $("#quit"); if (q) { q.click(); return; }
+  if (R.screen === "map" || (R.screen === "profiles" && !S.profiles.length)) { APP.minimizeApp().catch(() => { }); return; }
+  go(me() && R.screen !== "profiles" ? "map" : "profiles");
+});
 loadVoice().then(ok => { if (ok) { autoVoice(); if (R.screen === "parent") render(); } });
 if (S.active && me()) R = { screen: "map" };
 render();

@@ -1,5 +1,12 @@
 node_modules/
-android/
-ios/
 dist/
+native-www/
 .venv-voice/
+
+# store signing secrets: never commit
+*.jks
+*.keystore
+*.p12
+*.p8
+*.mobileprovision
+android/keystore.properties

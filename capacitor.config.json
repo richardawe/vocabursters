@@ -1,8 +1,28 @@
 {
   "appId": "app.vocabursters.spelling",
   "appName": "Vocabursters",
-  "webDir": "dist",
+  "webDir": "native-www",
   "backgroundColor": "#E6F3EF",
-  "android": { "allowMixedContent": false },
-  "ios": { "contentInset": "never" }
+  "loggingBehavior": "debug",
+  "android": {
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": false
+  },
+  "ios": {
+    "contentInset": "never",
+    "scrollEnabled": true,
+    "limitsNavigationsToAppBoundDomains": true
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "native",
+      "initialViewportFitValueHint": "cover"
+    },
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "launchAutoHide": false,
+      "backgroundColor": "#E6F3EF",
+      "showSpinner": false
+    }
+  }
 }

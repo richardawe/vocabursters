@@ -49,7 +49,11 @@ Then tap **Add a player**, type your child's name and choose their school year. 
 | `scripts/generate_voice.py` | Records words and sentences with [Kokoro](https://huggingface.co/hexgrad/Kokoro-82M) (see the file for setup) |
 | `scripts/fetch_fonts.py` | Downloads the fonts so the app never contacts Google |
 | `.github/workflows/pages.yml` | Builds and deploys to GitHub Pages on every push |
-| `package.json`, `capacitor.config.json` | Optional native iOS/Android shells via Capacitor |
+| `ios/`, `android/`, `capacitor.config.json` | Native App Store and Google Play apps (Capacitor); `npm run ios` / `npm run android` |
+| `app/site/` | Privacy policy and support pages (linked from the store listings) |
+| `store/` | Store listing copy, form answers, screenshots and graphics |
+| `.github/workflows/ios.yml`, `android.yml` | Build the apps on every push; run by hand to sign and upload |
+| `docs/STORE_RELEASE.md` | Step-by-step: submitting to the App Store and Google Play |
 | `docs/PLAN.md` | Product plan |
 
 ```sh

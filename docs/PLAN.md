@@ -276,21 +276,24 @@ Other mobile details:
 
 It installs from the browser (section 11) and works offline. Tested at iPhone size (390 × 844), iPad size (820 × 1180) and desktop size, in light and dark mode.
 
-### B. App Store and Google Play versions (optional, Phase 2)
+### B. App Store and Google Play versions (built, November 2026)
 
-Some parents expect to find an app in the store, as they do for TTRS. The repo now includes a **Capacitor** setup (`package.json`, `capacitor.config.json`) that wraps the same web app in native iOS and Android shells. No rewrite is needed.
+Some parents expect to find an app in the store, as they do for TTRS. The same app is wrapped in native iOS and Android projects with **Capacitor 8**, with no rewrite. The steps to sign, submit and list it are in [`STORE_RELEASE.md`](STORE_RELEASE.md), and the listing copy, form answers and screenshots are in [`store/`](../store/LISTING.md).
 
-- `npm install`, then `npm run android` or `npm run ios`. This needs Android Studio, or Xcode on a Mac.
-- `npx cap add android` was run here and generates a working Android project with the app inside. It has **not** been compiled or run on a device, because this environment has no Android SDK.
-- **Speech on Android:** Android's built-in web view doesn't support the browser speech API, but words and sentences now use the recorded Kokoro voice, which plays everywhere. Only the spoken instructions would need a native text-to-speech plugin.
-- **Fonts and audio** are already bundled in `dist/`, so the native shells work offline.
-- **Store rules for children's apps:**
-  - Apple's *Kids Category*: no third-party analytics or adverts, and a parental gate before any external link or purchase.
-  - Google Play's *Families Policy* (and optionally *Teacher Approved*).
-  - The no-data design already meets the hardest parts of both.
-- **Costs:** the Apple Developer Program is $99 a year and Google Play has a one-off $25 fee. Every update goes through store review, which the web app avoids.
-
-**Recommendation:** launch as the installable web app (now live). The recorded voice has removed the Android speech problem, so store versions only need building and submitting if parents ask for them.
+- **One build for each platform covers phones and tablets.** Phones are portrait-only, because games dock a keyboard at the bottom. iPads and Android tablets can turn either way.
+- **Fully offline.** `python3 scripts/build.py --native` builds `native-www/` with every voice clip bundled, no service worker and no install prompts.
+- **Native features** (in `app.html`, only active in the apps):
+  - instructions are spoken by the system text-to-speech engine, which fixes Android's web view having no speech;
+  - haptics on iPhone as well as Android;
+  - the Android back button closes a game or goes back to Home instead of quitting;
+  - the splash screen;
+  - printing is replaced by a note to print from the website.
+- **Builds:**
+  - `.github/workflows/android.yml` builds an AAB and APKs on every push; when run by hand it signs them and can upload to a Play testing track.
+  - `.github/workflows/ios.yml` builds for the simulator on every push; when run by hand it archives, signs and uploads to TestFlight. No Mac is needed.
+  - The Android release AAB has been compiled here. The iOS build is checked by the macOS workflow.
+- **Store rules for children's apps:** Apple's Kids Category and Google Play's Families Policy. There are no adverts, analytics, links out or purchases, and there is an adult check before the Grown-ups area. The listings declare **Data Not Collected** / no data collected.
+- **Costs:** the Apple Developer Program is $99 a year and Google Play has a one-off $25 fee. New personal Play accounts need a 14-day closed test with 12 testers before production. Every update goes through store review, which the web app avoids.
 
 ---
 
@@ -346,10 +349,10 @@ There are no analytics, so success shows up on the device and in conversations w
 4. **Price:** free.
 5. **Content:** word lists and sentences have been checked, so the lists ship as they are (including Y6 W21).
 6. **Delivery:** an installable web app from GitHub Pages, working on all devices.
+7. **App stores:** also ship on the App Store and Google Play, for phones and tablets (section 10 and `STORE_RELEASE.md`).
 
 **Still open**
 
-7. **App stores:** add App Store and Google Play versions later, or stay web-only (section 10).
 8. **Timed games on or off by default.** The mockup has them on, and a parent can switch them off.
 9. **Family leaderboard:** keep it, or make it opt-in per player. Some families prefer siblings not to compare.
 
@@ -357,6 +360,6 @@ There are no analytics, so success shows up on the device and in conversations w
 
 ## 16. Current status
 
-**Working:** the phone layout (bottom tabs, full-screen games, docked keyboard, vibration) and tablet/desktop layout (top tabs); player profiles; the 36-week trail for each year with locking; all 7 weekly game modes on the real word lists for every week of every year; Smart practice; the Speed round with Speller status and certificates; Bubble Battle against computer rivals; the Word map heat map; coins and a 14-item shop; the family leaderboard; stars, the pet, the sticker book and the weekly goal; bounce-back words; the recorded Kokoro voice for every word and sentence, downloadable for offline use, with the device voice as a fallback; sound effects; the custom keyboard (and a physical keyboard); the parent zone (progress, players, settings, printable test, install steps, backup/restore); brain-break reminders; light and dark mode; calm mode; font and text-size options; an installable PWA on GitHub Pages with an offline service worker, self-hosted fonts and automatic updates.
+**Working:** the phone layout (bottom tabs, full-screen games, docked keyboard, vibration) and tablet/desktop layout (top tabs); player profiles; the 36-week trail for each year with locking; all 7 weekly game modes on the real word lists for every week of every year; Smart practice; the Speed round with Speller status and certificates; Bubble Battle against computer rivals; the Word map heat map; coins and a 14-item shop; the family leaderboard; stars, the pet, the sticker book and the weekly goal; bounce-back words; the recorded Kokoro voice for every word and sentence, downloadable for offline use, with the device voice as a fallback; sound effects; the custom keyboard (and a physical keyboard); the parent zone (progress, players, settings, printable test, install steps, backup/restore); brain-break reminders; light and dark mode; calm mode; font and text-size options; an installable PWA on GitHub Pages with an offline service worker, self-hosted fonts and automatic updates; native iOS and Android apps (phone and tablet) with store icons, screenshots, a privacy policy, listing copy and build/upload workflows, ready to submit (not yet submitted).
 
-**Simplified:** the app starts with no players. Example players "Mia" and "Leo" (with made-up history) appear only if a parent taps *Look around with example players*, and can be deleted in Grown-ups → Players. Bubble Battle rivals are computer players, not real children. The native app shells are set up but not compiled. Emoji stand in for commissioned illustrations. Only 182 of the 1,338 words have example sentences (all words in homophone and apostrophe weeks, plus Year 1 weeks 1–4). The grown-ups check is basic. Printing works in the app but not inside the claude.ai preview, which blocks printing.
+**Simplified:** the app starts with no players. Example players "Mia" and "Leo" (with made-up history) appear only if a parent taps *Look around with example players*, and can be deleted in Grown-ups → Players. Bubble Battle rivals are computer players, not real children. Emoji stand in for commissioned illustrations. Only 182 of the 1,338 words have example sentences (all words in homophone and apostrophe weeks, plus Year 1 weeks 1–4). The grown-ups check is basic. Printing works in the app but not inside the claude.ai preview, which blocks printing.

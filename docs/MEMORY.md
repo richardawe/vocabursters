@@ -19,15 +19,15 @@ _Last updated: 2026-11-12_
 - **Store apps:** built on branch `claude/blissful-fermi-hmcnvp`, **not yet submitted**.
   - **Projects:** iOS (iPhone + iPad) and Android (phones + tablets) Capacitor 8 projects are committed.
   - **Android:** the release AAB and debug APK compiled in a cloud session. They have not been run on a device or emulator.
-  - **iOS:** compiled only by the `ios.yml` GitHub workflow (simulator build). The first run was in progress at the time of writing.
+  - **iOS:** compiles in the `ios.yml` GitHub workflow (simulator build, Xcode 26.6 on `macos-26`). First run passed on 2026-11-12. Not yet signed or run on a device.
+  - **CI:** the first `android.yml` and `ios.yml` runs both passed (2026-11-12).
   - **Store materials, all ready:** icons, splash screens, screenshots for every required size, the Play feature graphic, listing copy, form answers, and the privacy and support pages.
 - **Not merged:** the store-app branch is not merged into `main` or the Pages branch. So `privacy.html` and `support.html` are **not online yet**, and the stores need those URLs.
 
 ## Next steps
 
-1. Check the first `ios.yml` and `android.yml` runs passed (Actions tab); fix if not.
-2. Merge `claude/blissful-fermi-hmcnvp` into the branch Pages deploys from, so the privacy and support pages go live. Check both URLs open.
-3. Owner tasks (see `docs/STORE_RELEASE.md`):
+1. Merge `claude/blissful-fermi-hmcnvp` into the branch Pages deploys from, so the privacy and support pages go live. Check both URLs open.
+2. Owner tasks (see `docs/STORE_RELEASE.md`):
    - **Apple:**
      - enrol in the Developer Program;
      - register the bundle ID;
@@ -44,13 +44,13 @@ _Last updated: 2026-11-12_
      - run internal testing, then a closed test (12 testers × 14 days for new personal accounts);
      - release to production.
    - Choose a public support email (optionally add it to `app/site/support.html` at `SUPPORT_CONTACT`).
-4. Test on real devices: a cheap Android phone, an Android tablet, an older iPhone and an iPad. Check:
+3. Test on real devices: a cheap Android phone, an Android tablet, an older iPhone and an iPad. Check:
    - sound with the silent switch;
    - the native text-to-speech fallback;
    - the back button;
    - rotation on tablets;
    - backup/restore.
-5. Then Phase 1 of the roadmap (PLAN.md §13):
+4. Then Phase 1 of the roadmap (PLAN.md §13):
    - Vite + TypeScript;
    - IndexedDB;
    - unit tests for the spelling engine;
@@ -79,6 +79,7 @@ _Last updated: 2026-11-12_
   - Added the native projects, the `--native` build, and the native-only code in `app.html` (TTS, haptics, back button, splash, hidden install/print).
   - Added icons and splash screens, store screenshots and graphics, privacy and support pages, `store/LISTING.md`, `docs/STORE_RELEASE.md`, and the `android.yml` / `ios.yml` workflows.
   - Created `CLAUDE.md` and this memory file.
+  - First CI runs passed: Android AAB/APKs, and the iOS simulator build on Xcode 26.6.
 - **2026-11-07**: switched the recorded voice to Kokoro `af_heart`.
   - Re-recorded 1,338 words and 183 sentences.
   - Clips moved to `audio/<voice>/`; the service worker deletes old voice caches.

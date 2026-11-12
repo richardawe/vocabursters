@@ -22,11 +22,11 @@ _Last updated: 2026-11-12_
   - **iOS:** compiles in the `ios.yml` GitHub workflow (simulator build, Xcode 26.6 on `macos-26`). First run passed on 2026-11-12. Not yet signed or run on a device.
   - **CI:** the first `android.yml` and `ios.yml` runs both passed (2026-11-12).
   - **Store materials, all ready:** icons, splash screens, screenshots for every required size, the Play feature graphic, listing copy, form answers, and the privacy and support pages.
-- **Site:** GitHub Pages is the only site, and it deploys **only from `main`**. `main` was created on 2026-11-12 from `claude/blissful-fermi-hmcnvp`. `claude/eager-faraday-o2i1u5` is old and no longer deploys. The privacy and support pages go live with the first `main` deploy.
+- **Site:** live at https://richardawe.github.io/vocabursters/ and deploying **only from `main`**, which is the default branch. The Pages source must stay **GitHub Actions**: "Deploy from a branch" shows the README instead of the game. The `github-pages` environment allows `main`. The game, `privacy.html` and `support.html` were all checked live on 2026-11-12. `claude/eager-faraday-o2i1u5` is old and unused.
 
 ## Next steps
 
-1. Check https://richardawe.github.io/vocabursters/privacy.html and `/support.html` open. On GitHub, set `main` as the default branch (Settings → General) and, if Pages complains, allow `main` under Settings → Environments → github-pages.
+1. Owner: start the store steps in `docs/STORE_RELEASE.md` (Apple and Google accounts, then add signing secrets, then run the workflows on `main`).
 2. Owner tasks (see `docs/STORE_RELEASE.md`):
    - **Apple:**
      - enrol in the Developer Program;
@@ -81,7 +81,7 @@ _Last updated: 2026-11-12_
   - Added icons and splash screens, store screenshots and graphics, privacy and support pages, `store/LISTING.md`, `docs/STORE_RELEASE.md`, and the `android.yml` / `ios.yml` workflows.
   - Created `CLAUDE.md` and this memory file.
   - First CI runs passed: Android AAB/APKs, and the iOS simulator build on Xcode 26.6.
-  - Created `main` from `claude/blissful-fermi-hmcnvp` and made it the only branch Pages deploys from (owner's choice), which puts the privacy and support pages online.
+  - Created `main` from `claude/blissful-fermi-hmcnvp` and made it the only branch Pages deploys from (owner's choice). The owner set the default branch, the environment rule and the Pages source (GitHub Actions). Live site checked: the game plays on phone and tablet sizes, and the privacy and support pages are up.
 - **2026-11-07**: switched the recorded voice to Kokoro `af_heart`.
   - Re-recorded 1,338 words and 183 sentences.
   - Clips moved to `audio/<voice>/`; the service worker deletes old voice caches.

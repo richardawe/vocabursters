@@ -94,6 +94,8 @@ _Last updated: 2026-11-12 (pre-submission polish)_
   - iOS `WKAppBoundDomains = [localhost]` added to match `limitsNavigationsToAppBoundDomains: true`.
   - Support email TODO added.
   - Android rebuilt and checked; native and web smoke tests passed.
+  - CI on `2f3ad4a`: Android passed; iOS simulator build passed on the second attempt (the first was cancelled while waiting for a macOS runner).
+  - Android signing secrets (B2/B3) not set up yet: this cloud session can't show the password prompt or log in to `gh`, so the owner will run them on their own computer.
 - **2026-11-12**: built the App Store and Google Play apps (commit `3a659c6`).
   - Added the native projects, the `--native` build, and the native-only code in `app.html` (TTS, haptics, back button, splash, hidden install/print).
   - Added icons and splash screens, store screenshots and graphics, privacy and support pages, `store/LISTING.md`, `docs/STORE_RELEASE.md`, and the `android.yml` / `ios.yml` workflows.

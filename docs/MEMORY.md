@@ -26,6 +26,7 @@ _Last updated: 2026-11-12 (pre-submission polish)_
     - Android backup is off (`allowBackup="false"`, `fullBackupContent="false"`, data-extraction rules excluding cloud backup and device transfer).
     - iOS App-Bound Domains are declared (`WKAppBoundDomains = [localhost]`).
     - The support page has a TODO for the real support email.
+  - **Android signing:** the upload key exists (alias `upload`, RSA 4096, kept outside the repo on the owner's Mac and backed up by the owner). The four `ANDROID_*` repo secrets are set. The signed Android workflow has not been run yet.
   - **Store materials, all ready:** icons, splash screens, screenshots for every required size, the Play feature graphic, listing copy, form answers, and the privacy and support pages.
 - **Site:** live at https://richardawe.github.io/vocabursters/ and deploying **only from `main`**, which is the default branch. The Pages source must stay **GitHub Actions**: "Deploy from a branch" shows the README instead of the game. The `github-pages` environment allows `main`. The game, `privacy.html` and `support.html` were all checked live on 2026-11-12. `claude/eager-faraday-o2i1u5` is old and unused.
 
@@ -48,7 +49,7 @@ _Last updated: 2026-11-12 (pre-submission polish)_
      - fill in the listing and submit.
    - **Google:**
      - create the developer account;
-     - make the upload key and add the secrets;
+     - ~~make the upload key and add the secrets~~ (done 2026-11-12);
      - run the Android workflow;
      - set up the app and fill in the forms;
      - run internal testing, then a closed test (12 testers × 14 days for new personal accounts);
@@ -88,6 +89,7 @@ _Last updated: 2026-11-12 (pre-submission polish)_
 
 ## Log
 
+- **2026-11-12**: Android release signing set up (STORE_RELEASE.md B2/B3). The owner generated the upload key with Homebrew OpenJDK's keytool (`/opt/homebrew/opt/openjdk/bin/keytool`; `/usr/bin/keytool` is a stub because Java isn't linked) and set `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD` with `gh secret set`. No app code or workflow changed, and the Android workflow was not run.
 - **2026-11-12**: pre-submission polish (no app ID change, no cap init, no new platforms, no IAP or accounts).
   - `loggingBehavior` set to `none`.
   - Android Auto Backup and device-to-device transfer turned off, so nicknames in `localStorage` stay on the device. This makes the Play Data safety answer "no data collected" unambiguous.

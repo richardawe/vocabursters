@@ -2,7 +2,7 @@
 
 The running record of where the project is. Update it at the end of every working session (newest log entry first). For the full product thinking see [`PLAN.md`](PLAN.md); for how to work in the repo see [`../CLAUDE.md`](../CLAUDE.md).
 
-_Last updated: 2026-11-12_
+_Last updated: 2026-11-12 (pre-submission polish)_
 
 ## Current state
 
@@ -21,11 +21,21 @@ _Last updated: 2026-11-12_
   - **Android:** the release AAB and debug APK compiled in a cloud session. They have not been run on a device or emulator.
   - **iOS:** compiles in the `ios.yml` GitHub workflow (simulator build, Xcode 26.6 on `macos-26`). First run passed on 2026-11-12. Not yet signed or run on a device.
   - **CI:** the first `android.yml` and `ios.yml` runs both passed (2026-11-12).
+  - **Pre-submission polish (branch `claude/blissful-fermi-hmcnvp`, not merged into `main`):**
+    - Capacitor `loggingBehavior` is `none`.
+    - Android backup is off (`allowBackup="false"`, `fullBackupContent="false"`, data-extraction rules excluding cloud backup and device transfer).
+    - iOS App-Bound Domains are declared (`WKAppBoundDomains = [localhost]`).
+    - The support page has a TODO for the real support email.
   - **Store materials, all ready:** icons, splash screens, screenshots for every required size, the Play feature graphic, listing copy, form answers, and the privacy and support pages.
 - **Site:** live at https://richardawe.github.io/vocabursters/ and deploying **only from `main`**, which is the default branch. The Pages source must stay **GitHub Actions**: "Deploy from a branch" shows the README instead of the game. The `github-pages` environment allows `main`. The game, `privacy.html` and `support.html` were all checked live on 2026-11-12. `claude/eager-faraday-o2i1u5` is old and unused.
 
 ## Next steps
 
+0. Before submitting:
+   - Owner decides whether to merge the polish branch into `main`. That republishes the site; only `support.html`'s hidden comment changes on the web.
+   - Owner chooses the support email (TODO in `app/site/support.html`).
+   - On the first TestFlight build, check that the app loads with App-Bound Domains on.
+   - Decide whether iOS should also be excluded from iCloud device backup. WKWebView `localStorage` lives in `Library/WebKit`, which iCloud backs up by default. That is not yet changed, and the privacy policy says data stays "only on the device".
 1. Owner: start the store steps in `docs/STORE_RELEASE.md` (Apple and Google accounts, then add signing secrets, then run the workflows on `main`).
 2. Owner tasks (see `docs/STORE_RELEASE.md`):
    - **Apple:**
@@ -71,11 +81,19 @@ _Last updated: 2026-11-12_
 | 2026-11-12 | Package / bundle ID `app.vocabursters.spelling` (permanent once uploaded) |
 | 2026-11-12 | Store builds run in GitHub Actions, so no Mac is needed. Signing comes from repo secrets; build numbers come from the workflow run number |
 | 2026-11-12 | Listings: category Education; Apple "Data Not Collected", 4+, Kids Category optional (6–8); Google: all children's age groups (Families Policy), no data collected or shared |
+| 2026-11-12 | Device backups off on Android (Auto Backup and device transfer); the in-app backup code is the only way to move progress |
+| 2026-11-12 | iOS web view limited to App-Bound Domains, with `localhost` (bundled app) as the only domain |
 | Open | Timed games on or off by default |
 | Open | Family leaderboard for everyone, or opt-in per player |
 
 ## Log
 
+- **2026-11-12**: pre-submission polish (no app ID change, no cap init, no new platforms, no IAP or accounts).
+  - `loggingBehavior` set to `none`.
+  - Android Auto Backup and device-to-device transfer turned off, so nicknames in `localStorage` stay on the device. This makes the Play Data safety answer "no data collected" unambiguous.
+  - iOS `WKAppBoundDomains = [localhost]` added to match `limitsNavigationsToAppBoundDomains: true`.
+  - Support email TODO added.
+  - Android rebuilt and checked; native and web smoke tests passed.
 - **2026-11-12**: built the App Store and Google Play apps (commit `3a659c6`).
   - Added the native projects, the `--native` build, and the native-only code in `app.html` (TTS, haptics, back button, splash, hidden install/print).
   - Added icons and splash screens, store screenshots and graphics, privacy and support pages, `store/LISTING.md`, `docs/STORE_RELEASE.md`, and the `android.yml` / `ios.yml` workflows.

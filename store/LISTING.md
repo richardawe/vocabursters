@@ -133,7 +133,7 @@ All content (216 weekly word lists, over 1,300 words and sentences, and their au
 | Ads | **No**, the app does not contain ads |
 | Content rating (IARC) | Category: **Reference, News, or Educational**. Answer **No** to everything. Expected: PEGI 3 / Everyone / USK 0 |
 | Target audience and content | Age groups: **5 and under**, **6–8** and **9–12** (Years 1 to 6 are ages 5 to 11). Appeal to children: yes. This puts the app under the **Families Policy**, which it already meets |
-| Data safety | **Does your app collect or share any of the required user data types?** → **No**. Data encrypted in transit: not applicable (no data sent). Way to request deletion: not applicable (nothing collected; deleting the app deletes everything) |
+| Data safety | **Does your app collect or share any of the required user data types?** → **No**. Android backup is turned off (`allowBackup="false"` plus data-extraction rules), so nicknames and progress don't leave the device through Google Auto Backup or device-to-device transfer either. Data encrypted in transit: not applicable (no data sent). Way to request deletion: not applicable (nothing collected; deleting the app deletes everything) |
 | News app | No |
 | Government app | No |
 | Financial features | None |

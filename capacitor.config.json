@@ -3,7 +3,7 @@
   "appName": "Vocabursters",
   "webDir": "native-www",
   "backgroundColor": "#E6F3EF",
-  "loggingBehavior": "debug",
+  "loggingBehavior": "none",
   "android": {
     "allowMixedContent": false,
     "webContentsDebuggingEnabled": false

@@ -39,6 +39,10 @@ npm run build:native && node scripts/store_screenshots.js          # retake stor
   - progress lives in `localStorage` only.
   - The store listings declare "Data Not Collected", and Apple's Kids Category and Google's Families Policy depend on it.
 - Bundle ID / package name `app.vocabursters.spelling` is permanent once uploaded to a store.
+- Keep these native privacy settings:
+  - **Android:** `allowBackup="false"` + `res/xml/data_extraction_rules.xml`, so progress never goes to Google backup or device transfer.
+  - **iOS:** `ios.limitsNavigationsToAppBoundDomains: true` with `WKAppBoundDomains = [localhost]` in `Info.plist`. The bundled app (`capacitor://localhost`) is the only bound domain. Adding a remote domain would need both lists changing.
+  - **Config:** `loggingBehavior: "none"`.
 - Never commit signing material. `.gitignore` blocks `*.jks`, `*.p8`, `*.p12`, `android/keystore.properties`. CI reads signing details from GitHub secrets (names in `docs/STORE_RELEASE.md`).
 - Generated folders that are not committed: `dist/`, `native-www/`, `node_modules/`, `android/app/src/main/assets/public`, `ios/App/App/public`.
 - Voice clips live in `audio/<voice>/`. Changing the voice means changing the folder and the cache name, so devices don't mix voices.

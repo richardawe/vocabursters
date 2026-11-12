@@ -55,6 +55,7 @@ Then tap **Add a player**, type your child's name and choose their school year. 
 | `.github/workflows/ios.yml`, `android.yml` | Build the apps on every push; run by hand to sign and upload |
 | `docs/STORE_RELEASE.md` | Step-by-step: submitting to the App Store and Google Play |
 | `docs/PLAN.md` | Product plan |
+| `docs/MEMORY.md`, `CLAUDE.md` | Project memory (state, decisions, log) and working notes for Claude |
 
 ```sh
 python3 scripts/build.py                      # build dist/

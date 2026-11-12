@@ -22,11 +22,11 @@ _Last updated: 2026-11-12_
   - **iOS:** compiles in the `ios.yml` GitHub workflow (simulator build, Xcode 26.6 on `macos-26`). First run passed on 2026-11-12. Not yet signed or run on a device.
   - **CI:** the first `android.yml` and `ios.yml` runs both passed (2026-11-12).
   - **Store materials, all ready:** icons, splash screens, screenshots for every required size, the Play feature graphic, listing copy, form answers, and the privacy and support pages.
-- **Not merged:** the store-app branch is not merged into `main` or the Pages branch. So `privacy.html` and `support.html` are **not online yet**, and the stores need those URLs.
+- **Site:** GitHub Pages is the only site. It deploys from `claude/eager-faraday-o2i1u5` (at `20f0d07`, older); there is no `main` branch. So `privacy.html` and `support.html` are **not online yet** (404), and the stores need those URLs. **Awaiting the owner's OK** to either add `claude/blissful-fermi-hmcnvp` to the `pages.yml` branches, or create `main` from it and deploy only from `main`.
 
 ## Next steps
 
-1. Merge `claude/blissful-fermi-hmcnvp` into the branch Pages deploys from, so the privacy and support pages go live. Check both URLs open.
+1. Get the owner's OK to deploy Pages from the up-to-date branch (or from a new `main`). Then check https://richardawe.github.io/vocabursters/privacy.html and `/support.html` open.
 2. Owner tasks (see `docs/STORE_RELEASE.md`):
    - **Apple:**
      - enrol in the Developer Program;
@@ -80,6 +80,7 @@ _Last updated: 2026-11-12_
   - Added icons and splash screens, store screenshots and graphics, privacy and support pages, `store/LISTING.md`, `docs/STORE_RELEASE.md`, and the `android.yml` / `ios.yml` workflows.
   - Created `CLAUDE.md` and this memory file.
   - First CI runs passed: Android AAB/APKs, and the iOS simulator build on Xcode 26.6.
+  - Found that the privacy and support pages are not live, because Pages deploys from an older branch. Changing that is waiting for the owner's OK.
 - **2026-11-07**: switched the recorded voice to Kokoro `af_heart`.
   - Re-recorded 1,338 words and 183 sentences.
   - Clips moved to `audio/<voice>/`; the service worker deletes old voice caches.
